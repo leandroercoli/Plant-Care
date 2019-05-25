@@ -15,6 +15,12 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -30,7 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new RNDeviceInfo(),
             new ANPackage(),
-            new AsyncStoragePackage()
+            new AsyncStoragePackage(),
+              new AlarmSetterPackage()
       );
     }
 
