@@ -16,7 +16,7 @@ const options = {
 };
 const diasRiego = ["D", "L", "M", "M", "J", "V", "S"]
 const hoy = (new Date()).getDay() // retorna un numero entre 0 y 6 (Domingo, Lunes, ...)
-const plantas = [
+const plantasDebug = [
 	{ name: 'Monstera', image: require("./img/plantas/monstera.jpg"), diasRiego: [3, 4, 5], diasAlimento: [0, 3, 5], hora: 10, minutos: 15, alarma: true, vasosAgua: '2', vasosAlimento: '1' },
 	{ name: 'Aloe Vera', image: require("./img/plantas/aloe-vera.jpg"), diasRiego: [2, 5], diasAlimento: [1, 3, 4], hora: 12, minutos: 45, alarma: false, vasosAgua: '1.5', vasosAlimento: '1.5' },
 	{ name: 'Philodendron', image: require("./img/plantas/philodendron.jpg"), diasRiego: [1, 5, 6], diasAlimento: [4, 5], hora: 15, minutos: 25, alarma: true, vasosAgua: '4', vasosAlimento: '2' },

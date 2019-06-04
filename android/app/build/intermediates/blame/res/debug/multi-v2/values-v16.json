@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\Leandro\\Desktop\\ReactNative\\Plants\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\5af344dc708f74f6baefc424bcc4f6b5\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\b418cffec564bdf4d2502016e88e552e\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\9b683e035ac10eeacbd06c816fbf7e63\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\7c35c7fcfc7993c25229c1aba1ccaa37\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

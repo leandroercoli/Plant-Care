@@ -9,48 +9,48 @@ MERGED from [:react-native-image-picker] C:\Users\Leandro\Desktop\ReactNative\Pl
 MERGED from [:react-native-device-info] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-device-info\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
 MERGED from [:react-native-alarm-notification] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-alarm-notification\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:@react-native-community_async-storage] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\22721f28b0909c7b151328a7287576d5\AndroidManifest.xml:2:1-13:12
-MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\9b683e035ac10eeacbd06c816fbf7e63\AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:17:1-28:12
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:17:1-28:12
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\a962428ea2762b77352feb7af9e49d45\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\60d7ba5898c11f6efda98eba5cbc0826\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\94f3da2df0b075acfc82fce7e2a3b6dc\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\9ae9fd2d83625262ef8c7cbb4f215d56\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d325c2dd9870fcba16c99ae7aa350f20\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\4bfd917e6938657d37306dc455e894d4\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\9645876edd6866fa96b0a0cec151bc88\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\aa6b8c9eec6f127933b0567907f290ff\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\d0d4e098a058e9c6d1065cc91fbc9a77\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\83e9634a9812ae4a986cc0840c94d4d2\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\b17de9b89613f0875108c7c45307a8e7\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\099ad2e2bc8fd0994cfb253ee58277ff\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\20aa0d53dcb764f543b2d69ef7817fb6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\a2d48085dc4593d2af5122a438a1e340\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\0fb08dcb78d7cf67a7fd9c261ba84b87\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\14388269d51d31c8bc5d8b5165484c60\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\7a9ea33184f3db5e42cb44d43c9b30c9\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\ed9c61a1fc700b1e097edb8d0e7a439e\AndroidManifest.xml:17:1-25:12
-MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\d2016802c50ff8720a6fa2e9f1feecca\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7aa13608f6f68287b288eab04de52648\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\7105d611a30813ad3f6bd1ec927345ec\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\ada4a4674e30252a7a08b74faf988470\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\37301b0845985b1ac3ae1fa236c5ffee\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\174c6358e32d8d2f4a02809f9ec25064\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\d1c71428917ca833d108794a60126b1e\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\c4a0f0ccb17500e69ff084b2ef1ee2b3\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\5b8a7d51e26e190221a2dc877be7c8e3\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\94be2883367374947fe7c313ce85b207\AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\ec817888e3d57f11b2c1a5a4a40d176c\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\325e9d38725ae7a3fa18a1b0fefab04d\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\208d4326a419d335b09474ad8d36d628\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c86bb26d8af4d3c692bc9561afdd846f\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\7c64b060e35d16116d3f5de95f1b77d7\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\fbfb34d9766ab9e74118b0ddac1b398b\AndroidManifest.xml:2:1-13:12
-MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\e2a7dac235dc9079a7de7c63b5cefa95\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fb707ffbf5be1e88345d79186bc1f8d1\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\7c35c7fcfc7993c25229c1aba1ccaa37\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\479634f54cafa707e6ee09061fd1137f\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0155aa128d2836ab757083f36ab874bf\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\226c01629149164bce2ac3244d42966b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5df43936310341453190c3308af393df\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d31bd4dbf6c12e8227554c204f0d95df\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b2c85072c387279fc86b66f370c35e53\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4b68cb9e6b65035acc3b800ab6e0e35f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\6d1bfc7cec309ec02df0960f20aed13e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\f7f786418356d3e39cc2d1016f8aa52d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2c790efe252c89ecdc59e8e04ff2934d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0a280c9f8a9485cced8c7fd7017b7f5a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e315041f14caa11df8b2ca9d7ea8b48c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\07e48b67f81590e5382bcc2c9dda8d28\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\ce42708c1756af3510fc505d57e0d6a2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3914201dc15f6a4b3085c8428339216b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f4bb11d33e59f963e674808bbb4a465\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0cb880b04a752747cc369fca3ea8fd80\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\516b14a442ff8f371c94ce895f28dedb\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2fa83ba425e9889bf2761dc14ca2cf28\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\beb1d43ba3e6e8a4bea21d1f5c8b95d2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cf4981dfc6436e6a0fda60667810a4b7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\eba8c43449294d2cb93bf9a2210cc01a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\148b6d361d67197602581ae89f553408\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\43d1fd4bb878e85a5c488997372ef9fe\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d79e9bee4a2632a329fac0076e06ae68\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b10915cdc15f48f1d4ba8d7dac7676a6\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\21fd82f0e8cc70c416afd07fc89ff1b1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\636ae798b8e604c8b23d920335ad69f5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f87c9a4914fe26dce37b51a17f34975\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fdb5a3f233ae9e3810fbd3d2b68911fc\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5045e3a1cc41d54aadc0d77bdaad440a\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e56a3fc9a38f66a470a93d0d32a81096\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a9df8337647fa837e335347429324a3d\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a4cb04f37a74896ed9779d61ce909722\AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b7921291b158c0d9d342f67e81f42f02\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\AndroidManifest.xml:2:1-8:12
 INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\AndroidManifest.xml:2:1-8:12
 INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\AndroidManifest.xml:2:1-8:12
@@ -73,10 +73,10 @@ INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\
 		ADDED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\main\AndroidManifest.xml:4:5-67
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\main\AndroidManifest.xml:4:22-64
 uses-permission#android.permission.CAMERA
@@ -95,28 +95,28 @@ MERGED from [:react-native-image-picker] C:\Users\Leandro\Desktop\ReactNative\Pl
 MERGED from [:react-native-image-picker] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [:react-native-device-info] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-device-info\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-20:19
 MERGED from [:react-native-device-info] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-device-info\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-20:19
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\22721f28b0909c7b151328a7287576d5\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\22721f28b0909c7b151328a7287576d5\AndroidManifest.xml:11:5-20
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\a962428ea2762b77352feb7af9e49d45\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\a962428ea2762b77352feb7af9e49d45\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\60d7ba5898c11f6efda98eba5cbc0826\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\60d7ba5898c11f6efda98eba5cbc0826\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\ed9c61a1fc700b1e097edb8d0e7a439e\AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\ed9c61a1fc700b1e097edb8d0e7a439e\AndroidManifest.xml:22:5-23:19
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\fbfb34d9766ab9e74118b0ddac1b398b\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\fbfb34d9766ab9e74118b0ddac1b398b\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fb707ffbf5be1e88345d79186bc1f8d1\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fb707ffbf5be1e88345d79186bc1f8d1\AndroidManifest.xml:11:5-20
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\479634f54cafa707e6ee09061fd1137f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\479634f54cafa707e6ee09061fd1137f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0155aa128d2836ab757083f36ab874bf\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0155aa128d2836ab757083f36ab874bf\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\516b14a442ff8f371c94ce895f28dedb\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\516b14a442ff8f371c94ce895f28dedb\AndroidManifest.xml:22:5-23:19
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a4cb04f37a74896ed9779d61ce909722\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a4cb04f37a74896ed9779d61ce909722\AndroidManifest.xml:11:5-20
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:22:18-91
 	android:label
 		ADDED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\main\AndroidManifest.xml:10:7-39
 		ADDED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\main\AndroidManifest.xml:10:7-39
@@ -177,90 +177,90 @@ MERGED from [:react-native-alarm-notification] C:\Users\Leandro\Desktop\ReactNat
 MERGED from [:react-native-alarm-notification] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-alarm-notification\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\22721f28b0909c7b151328a7287576d5\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\22721f28b0909c7b151328a7287576d5\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\9b683e035ac10eeacbd06c816fbf7e63\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\9b683e035ac10eeacbd06c816fbf7e63\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\a962428ea2762b77352feb7af9e49d45\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\a962428ea2762b77352feb7af9e49d45\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\60d7ba5898c11f6efda98eba5cbc0826\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\60d7ba5898c11f6efda98eba5cbc0826\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\94f3da2df0b075acfc82fce7e2a3b6dc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\94f3da2df0b075acfc82fce7e2a3b6dc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\9ae9fd2d83625262ef8c7cbb4f215d56\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\9ae9fd2d83625262ef8c7cbb4f215d56\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d325c2dd9870fcba16c99ae7aa350f20\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\d325c2dd9870fcba16c99ae7aa350f20\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\4bfd917e6938657d37306dc455e894d4\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\4bfd917e6938657d37306dc455e894d4\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\9645876edd6866fa96b0a0cec151bc88\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\9645876edd6866fa96b0a0cec151bc88\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\aa6b8c9eec6f127933b0567907f290ff\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\aa6b8c9eec6f127933b0567907f290ff\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\d0d4e098a058e9c6d1065cc91fbc9a77\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\d0d4e098a058e9c6d1065cc91fbc9a77\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\83e9634a9812ae4a986cc0840c94d4d2\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\83e9634a9812ae4a986cc0840c94d4d2\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\b17de9b89613f0875108c7c45307a8e7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\b17de9b89613f0875108c7c45307a8e7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\099ad2e2bc8fd0994cfb253ee58277ff\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\099ad2e2bc8fd0994cfb253ee58277ff\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\20aa0d53dcb764f543b2d69ef7817fb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\20aa0d53dcb764f543b2d69ef7817fb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\a2d48085dc4593d2af5122a438a1e340\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\a2d48085dc4593d2af5122a438a1e340\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\0fb08dcb78d7cf67a7fd9c261ba84b87\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\0fb08dcb78d7cf67a7fd9c261ba84b87\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\14388269d51d31c8bc5d8b5165484c60\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\14388269d51d31c8bc5d8b5165484c60\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\7a9ea33184f3db5e42cb44d43c9b30c9\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\7a9ea33184f3db5e42cb44d43c9b30c9\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\5af344dc708f74f6baefc424bcc4f6b5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\ed9c61a1fc700b1e097edb8d0e7a439e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\ed9c61a1fc700b1e097edb8d0e7a439e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\d2016802c50ff8720a6fa2e9f1feecca\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\d2016802c50ff8720a6fa2e9f1feecca\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7aa13608f6f68287b288eab04de52648\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7aa13608f6f68287b288eab04de52648\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\7105d611a30813ad3f6bd1ec927345ec\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\7105d611a30813ad3f6bd1ec927345ec\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\ada4a4674e30252a7a08b74faf988470\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\ada4a4674e30252a7a08b74faf988470\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\37301b0845985b1ac3ae1fa236c5ffee\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\37301b0845985b1ac3ae1fa236c5ffee\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\174c6358e32d8d2f4a02809f9ec25064\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\174c6358e32d8d2f4a02809f9ec25064\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\d1c71428917ca833d108794a60126b1e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\d1c71428917ca833d108794a60126b1e\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\c4a0f0ccb17500e69ff084b2ef1ee2b3\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\c4a0f0ccb17500e69ff084b2ef1ee2b3\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\5b8a7d51e26e190221a2dc877be7c8e3\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\5b8a7d51e26e190221a2dc877be7c8e3\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\94be2883367374947fe7c313ce85b207\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\94be2883367374947fe7c313ce85b207\AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\ec817888e3d57f11b2c1a5a4a40d176c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\ec817888e3d57f11b2c1a5a4a40d176c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\325e9d38725ae7a3fa18a1b0fefab04d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\325e9d38725ae7a3fa18a1b0fefab04d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\208d4326a419d335b09474ad8d36d628\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\208d4326a419d335b09474ad8d36d628\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c86bb26d8af4d3c692bc9561afdd846f\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c86bb26d8af4d3c692bc9561afdd846f\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\7c64b060e35d16116d3f5de95f1b77d7\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\7c64b060e35d16116d3f5de95f1b77d7\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\fbfb34d9766ab9e74118b0ddac1b398b\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\fbfb34d9766ab9e74118b0ddac1b398b\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\e2a7dac235dc9079a7de7c63b5cefa95\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\e2a7dac235dc9079a7de7c63b5cefa95\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fb707ffbf5be1e88345d79186bc1f8d1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fb707ffbf5be1e88345d79186bc1f8d1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\7c35c7fcfc7993c25229c1aba1ccaa37\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\7c35c7fcfc7993c25229c1aba1ccaa37\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\479634f54cafa707e6ee09061fd1137f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\479634f54cafa707e6ee09061fd1137f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0155aa128d2836ab757083f36ab874bf\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0155aa128d2836ab757083f36ab874bf\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\226c01629149164bce2ac3244d42966b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\226c01629149164bce2ac3244d42966b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5df43936310341453190c3308af393df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5df43936310341453190c3308af393df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d31bd4dbf6c12e8227554c204f0d95df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d31bd4dbf6c12e8227554c204f0d95df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b2c85072c387279fc86b66f370c35e53\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b2c85072c387279fc86b66f370c35e53\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4b68cb9e6b65035acc3b800ab6e0e35f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4b68cb9e6b65035acc3b800ab6e0e35f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\6d1bfc7cec309ec02df0960f20aed13e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\6d1bfc7cec309ec02df0960f20aed13e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\f7f786418356d3e39cc2d1016f8aa52d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\f7f786418356d3e39cc2d1016f8aa52d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2c790efe252c89ecdc59e8e04ff2934d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2c790efe252c89ecdc59e8e04ff2934d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0a280c9f8a9485cced8c7fd7017b7f5a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0a280c9f8a9485cced8c7fd7017b7f5a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e315041f14caa11df8b2ca9d7ea8b48c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e315041f14caa11df8b2ca9d7ea8b48c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\07e48b67f81590e5382bcc2c9dda8d28\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\07e48b67f81590e5382bcc2c9dda8d28\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\ce42708c1756af3510fc505d57e0d6a2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\ce42708c1756af3510fc505d57e0d6a2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3914201dc15f6a4b3085c8428339216b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3914201dc15f6a4b3085c8428339216b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f4bb11d33e59f963e674808bbb4a465\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f4bb11d33e59f963e674808bbb4a465\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0cb880b04a752747cc369fca3ea8fd80\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\0cb880b04a752747cc369fca3ea8fd80\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b418cffec564bdf4d2502016e88e552e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\516b14a442ff8f371c94ce895f28dedb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\516b14a442ff8f371c94ce895f28dedb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2fa83ba425e9889bf2761dc14ca2cf28\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\2fa83ba425e9889bf2761dc14ca2cf28\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\beb1d43ba3e6e8a4bea21d1f5c8b95d2\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\beb1d43ba3e6e8a4bea21d1f5c8b95d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cf4981dfc6436e6a0fda60667810a4b7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cf4981dfc6436e6a0fda60667810a4b7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\eba8c43449294d2cb93bf9a2210cc01a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\eba8c43449294d2cb93bf9a2210cc01a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\148b6d361d67197602581ae89f553408\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\148b6d361d67197602581ae89f553408\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\43d1fd4bb878e85a5c488997372ef9fe\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\43d1fd4bb878e85a5c488997372ef9fe\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d79e9bee4a2632a329fac0076e06ae68\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\d79e9bee4a2632a329fac0076e06ae68\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b10915cdc15f48f1d4ba8d7dac7676a6\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b10915cdc15f48f1d4ba8d7dac7676a6\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\21fd82f0e8cc70c416afd07fc89ff1b1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\21fd82f0e8cc70c416afd07fc89ff1b1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\636ae798b8e604c8b23d920335ad69f5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\636ae798b8e604c8b23d920335ad69f5\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f87c9a4914fe26dce37b51a17f34975\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\3f87c9a4914fe26dce37b51a17f34975\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fdb5a3f233ae9e3810fbd3d2b68911fc\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\fdb5a3f233ae9e3810fbd3d2b68911fc\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5045e3a1cc41d54aadc0d77bdaad440a\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\5045e3a1cc41d54aadc0d77bdaad440a\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e56a3fc9a38f66a470a93d0d32a81096\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\e56a3fc9a38f66a470a93d0d32a81096\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a9df8337647fa837e335347429324a3d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a9df8337647fa837e335347429324a3d\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a4cb04f37a74896ed9779d61ce909722\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\a4cb04f37a74896ed9779d61ce909722\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b7921291b158c0d9d342f67e81f42f02\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\b7921291b158c0d9d342f67e81f42f02\AndroidManifest.xml:5:5-7:41
 INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\AndroidManifest.xml
 INJECTED from C:\Users\Leandro\Desktop\ReactNative\Plants\android\app\src\debug\AndroidManifest.xml
 	android:targetSdkVersion
@@ -304,22 +304,22 @@ ADDED from [:react-native-device-info] C:\Users\Leandro\Desktop\ReactNative\Plan
 	android:name
 		ADDED from [:react-native-device-info] C:\Users\Leandro\Desktop\ReactNative\Plants\node_modules\react-native-device-info\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:25-76
 uses-permission#com.google.android.c2dm.permission.RECEIVE
-ADDED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:23:5-82
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:23:5-82
-MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-iid-16.0.1.aar\af1e58518cb6d66165605c8266646dca\AndroidManifest.xml:23:5-82
+ADDED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\1ce85ed47ec5fe3ba5139798b6deb129\AndroidManifest.xml:23:5-82
 	android:name
-		ADDED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-gcm-16.1.0.aar\fd2bb258a81406973c2ff898ffd969d2\AndroidManifest.xml:23:22-79
+		ADDED from [com.google.android.gms:play-services-gcm:16.1.0] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\cde833961ad81c5a6d8ec5660475e668\AndroidManifest.xml:23:22-79
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:23:9-26:75
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:23:9-26:75
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:25:13-37
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:25:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\74e95d4a1061e19bb8bc64fc778fc7bc\AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\4ed22be8be07e722c802df28dc23dd2e\AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\a7a2bcb3eefb91f43ef0a1370b9dad23\AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Leandro\.gradle\caches\transforms-2\files-2.1\654b5ff9efd11db53188bc997317abb0\AndroidManifest.xml:24:13-58

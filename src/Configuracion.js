@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { Dimensions, Text, View, ScrollView, TouchableOpacity, Alert,ToastAndroid } from 'react-native';
 import { Spinner, Icon, Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components'
@@ -82,6 +82,7 @@ export default class Configuracion extends React.Component {
 			// TODO: set notificaciones on/off
 			this.setState({ config: config })
 		}
+		this.onCancelAlarm()
 	}
 
 	reset = async () => {
@@ -114,10 +115,19 @@ export default class Configuracion extends React.Component {
 		)
 	}
 
+	onSetAlarm = () => {
+		NativeAlarmSetter.setAlarm("1","potus","1","10","35")
+		NativeAlarmSetter.setAlarm("2","cactus","1","10","35")
+	}
+
+	onCancelAlarm = () => {
+		NativeAlarmSetter.cancelAlarm("1")
+	}
+
 	async componentDidMount() {
 		this.reloadConfig()
 
-		NativeAlarmSetter.setAlarm("potus","l","12:45")
+		this.onSetAlarm()
 	}
 
 	render() {
