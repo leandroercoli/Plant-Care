@@ -1,10 +1,12 @@
 import React from 'react';
-import { Dimensions, Text, View, FlatList, Image, TouchableOpacity, TouchableHighlight, Modal, TimePickerAndroid, Switch, TextInput, Alert } from 'react-native';
+import { Dimensions, Text, View, FlatList, Image, TouchableOpacity, TouchableHighlight, Modal, TimePickerAndroid, Switch, TextInput, Alert, ToastAndroid } from 'react-native';
 import { Container, Header, Left, Body, Right, Content, Spinner, Icon, Button } from 'native-base';
 import NuevaPlanta from './NuevaPlanta'
 import Configuracion from './Configuracion'
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
+
+import NativeAlarmSetter from './NativeAlarmSetter'
 
 const options = {
 	title: 'Elija una foto para la nueva planta',
@@ -17,9 +19,9 @@ const options = {
 const diasRiego = ["D", "L", "M", "M", "J", "V", "S"]
 const hoy = (new Date()).getDay() // retorna un numero entre 0 y 6 (Domingo, Lunes, ...)
 const plantasDebug = [
-	{ name: 'Monstera', image: require("./img/plantas/monstera.jpg"), diasRiego: [3, 4, 5], diasAlimento: [0, 3, 5], hora: 10, minutos: 15, alarma: true, vasosAgua: '2', vasosAlimento: '1' },
-	{ name: 'Aloe Vera', image: require("./img/plantas/aloe-vera.jpg"), diasRiego: [2, 5], diasAlimento: [1, 3, 4], hora: 12, minutos: 45, alarma: false, vasosAgua: '1.5', vasosAlimento: '1.5' },
-	{ name: 'Philodendron', image: require("./img/plantas/philodendron.jpg"), diasRiego: [1, 5, 6], diasAlimento: [4, 5], hora: 15, minutos: 25, alarma: true, vasosAgua: '4', vasosAlimento: '2' },
+	{ name: 'Monstera', image: require("./img/plantas/monstera.jpg"), diasRiego: [3, 4, 5], diasAlimento: [0, 3, 5], hora: 10, minutos: 15, alarma: true, alarmasID: [], vasosAgua: '2', vasosAlimento: '1' },
+	{ name: 'Aloe Vera', image: require("./img/plantas/aloe-vera.jpg"), diasRiego: [2, 5], diasAlimento: [1, 3, 4], hora: 12, minutos: 45, alarma: false, alarmasID: [], vasosAgua: '1.5', vasosAlimento: '1.5' },
+	{ name: 'Philodendron', image: require("./img/plantas/philodendron.jpg"), diasRiego: [1, 5, 6], diasAlimento: [4, 5], hora: 15, minutos: 25, alarma: true, alarmasID: [], vasosAgua: '4', vasosAlimento: '2' },
 	{ name: null }
 ]
 
@@ -32,7 +34,7 @@ export default class App extends React.Component {
 		this.state = {
 			isRefreshing: true,
 			showModalHoraVasos: false,
-			showConfiguracion: true,
+			showConfiguracion: false,
 			selectedHour: null,
 			selectedMinutes: null,
 			selectedVasosAgua: 0,
@@ -50,7 +52,7 @@ export default class App extends React.Component {
 	onReset = () => {
 		this.reloadPlantas()
 	}
-	
+
 	reloadPlantas = () => {
 		this.setState({ isRefreshing: true }, async () => {
 			try {
@@ -148,6 +150,31 @@ export default class App extends React.Component {
 		this.setState({ selectedVasosAlimento: value })
 	}
 
+	setAlarmCurrentPlant = () => {
+		var { data, currentIndex } = this.state
+		let currentPlanta = data[currentIndex]
+		currentPlanta.diasRiego.map((dia) => {
+			let idAlarma = NativeAlarmSetter.setAlarm(currentPlanta.name, 0, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
+			data[currentIndex].alarmasID.push(idAlarma)
+			//ToastAndroid.show("nueva idalarma: " + idAlarma);
+		})
+		currentPlanta.diasAlimento.map((dia) => {
+			let idAlarma = NativeAlarmSetter.setAlarm(currentPlanta.name, 1, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
+			data[currentIndex].alarmasID.push(idAlarma)
+			//ToastAndroid.show("nueva idalarma: " + idAlarma);
+		})
+		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data))  })
+	}
+
+	cancelAlarmsCurrentPlant = () => {
+		var { data, currentIndex } = this.state
+		const currentPlanta = data[currentIndex]
+		currentPlanta.alarmasID.map((idalarma) => {
+			console.log("ALARMA ID " + idalarma)
+			//NativeAlarmSetter.cancelAlarm(idalarma)
+		})
+	}
+
 	onSaveModalHoraVasos = () => {
 		var { data, currentIndex, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosAlimento } = this.state
 		data[currentIndex].hora = selectedHour
@@ -155,7 +182,11 @@ export default class App extends React.Component {
 		data[currentIndex].alarma = alarmOn
 		data[currentIndex].vasosAgua = selectedVasosAgua
 		data[currentIndex].vasosAlimento = selectedVasosAlimento
-		this.setState({ data: data, showModalHoraVasos: false }, () => AsyncStorage.setItem('Plantas', JSON.stringify(data)))
+		this.setState({ data: data, showModalHoraVasos: false },
+			() => {
+				AsyncStorage.setItem('Plantas', JSON.stringify(data))
+				this.state.alarmOn ? this.setAlarmCurrentPlant() : this.cancelAlarmsCurrentPlant()
+			})
 	}
 
 	onCurrentPlantStartNameChange = () => {
@@ -226,6 +257,7 @@ export default class App extends React.Component {
 			hora: 0,
 			minutos: 0,
 			alarma: false,
+			alarmasID: [],
 			vasosAgua: 0,
 			vasosAlimento: 0
 		}
@@ -259,6 +291,7 @@ export default class App extends React.Component {
 						this.setState({ isRefreshing: true }, async () => {
 							var { data, currentIndex } = this.state
 							data.splice(currentIndex, 1)
+							this.cancelAlarmsCurrentPlant()
 							try {
 								await AsyncStorage.setItem('Plantas', JSON.stringify(data));
 							} catch (error) {
@@ -305,7 +338,7 @@ export default class App extends React.Component {
 								transparent={false}
 								visible={this.state.showConfiguracion}
 								onRequestClose={this.onConfiguracionClose} >
-								<Configuracion onReset={this.onReset} onClose={this.onConfiguracionClose}/>
+								<Configuracion onReset={this.onReset} onClose={this.onConfiguracionClose} />
 							</Modal>
 							<Modal
 								animationType="slide"

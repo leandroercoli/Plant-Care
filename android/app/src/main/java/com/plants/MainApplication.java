@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.emekalites.react.alarm.notification.ANPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -35,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ImagePickerPackage(),
             new RNDeviceInfo(),
-            new ANPackage(),
             new AsyncStoragePackage(),
               new AlarmSetterPackage()
       );

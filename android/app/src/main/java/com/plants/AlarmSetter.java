@@ -33,38 +33,37 @@ public class AlarmSetter extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setAlarm(String idPlanta, String planta, String dia, String hora, String minutos){
-        Toast.makeText(this.getReactApplicationContext(), "SET ALARM " + planta, Toast.LENGTH_SHORT).show();
+    public int setAlarm(String planta, int accion, int dia, int hora, int minutos){
+        int idPlanta= (int) Calendar.getInstance().getTimeInMillis();
         Intent myIntent = new Intent(this.getReactApplicationContext(), NotificationPublisher.class);
         myIntent.putExtra("planta", planta);
-        myIntent.putExtra("dia", dia);
-        myIntent.putExtra("hora", hora);
-        myIntent.putExtra("minutos", minutos);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getReactApplicationContext(), Integer.parseInt(idPlanta), myIntent, 0);
+        myIntent.putExtra("accion", accion == 0 ? "regar" : "alimentar"); // 0 agua, 1 alimento
+        myIntent.putExtra("dia", ""+dia);
+        myIntent.putExtra("hora", ""+hora);
+        myIntent.putExtra("minutos", ""+minutos);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getReactApplicationContext(), idPlanta, myIntent, 0);
         AlarmManager alarmManager = (AlarmManager) this.getReactApplicationContext().getSystemService(ALARM_SERVICE);
 
         Calendar calendar=Calendar.getInstance();
-        int diaInt = Integer.parseInt(dia); // domingo: 1 ... sabado: 7
-        int horaInt = Integer.parseInt(hora);
-        int minutosInt = Integer.parseInt(minutos);
-        //calendar.set(Calendar.DAY_OF_WEEK,diaInt);
-        //calendar.set(Calendar.HOUR,horaInt);
-        //calendar.set(Calendar.MINUTE, minutosInt);
-        // Calendar.set(int year, int month, int day, int hourOfDay, int minute, int second)
+        calendar.set(Calendar.DAY_OF_WEEK,dia); // domingo: 1 ... sabado: 7
+        calendar.set(Calendar.HOUR_OF_DAY,hora);
+        calendar.set(Calendar.MINUTE, minutos);
+        Toast.makeText(this.getReactApplicationContext(), "SET ALARM " + planta + ": " + calendar.getTime(), Toast.LENGTH_SHORT).show();
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), 2*1000, // 2 segundos
-                //AlarmManager.INTERVAL_DAY * 7, // todos los X dias a la misma hora
+                calendar.getTimeInMillis(), //2*1000, // 2 segundos
+                AlarmManager.INTERVAL_DAY * 7, // todos los X dias a la misma hora
                  pendingIntent);
+
+        return idPlanta;
     }
 
     @ReactMethod
-    public void cancelAlarm(String id){
+    public void cancelAlarm(int alarmID){
+        Toast.makeText(this.getReactApplicationContext(), "ALARM CANCELLED " + alarmID, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this.getReactApplicationContext(), NotificationPublisher.class);
-        int alarmID = Integer.parseInt(id);
         PendingIntent sender = PendingIntent.getBroadcast(this.getReactApplicationContext(), alarmID, intent, 0);
         AlarmManager alarmManager = (AlarmManager)  this.getReactApplicationContext().getSystemService(ALARM_SERVICE);
 
         alarmManager.cancel(sender);
-        Toast.makeText(this.getReactApplicationContext(), "ALARM CANCELLED ", Toast.LENGTH_LONG).show();
     }
 }

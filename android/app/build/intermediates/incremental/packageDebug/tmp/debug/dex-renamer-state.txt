@@ -1,4 +1,4 @@
-#Mon Jun 03 20:31:26 ART 2019
-base.0=C\:\\Users\\Leandro\\Desktop\\ReactNative\\Plants\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Wed Jun 05 12:19:32 ART 2019
+base.0=/Users/tomasgimenez/Desktop/React/dv/Plants/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

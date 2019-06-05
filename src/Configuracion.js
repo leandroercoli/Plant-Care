@@ -5,8 +5,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components'
 import DeviceInfo from 'react-native-device-info';
 
-import NativeAlarmSetter from './NativeAlarmSetter'
-
 const configDefault = {
 	notificationsOn: true
 }
@@ -82,7 +80,6 @@ export default class Configuracion extends React.Component {
 			// TODO: set notificaciones on/off
 			this.setState({ config: config })
 		}
-		this.onCancelAlarm()
 	}
 
 	reset = async () => {
@@ -115,19 +112,8 @@ export default class Configuracion extends React.Component {
 		)
 	}
 
-	onSetAlarm = () => {
-		NativeAlarmSetter.setAlarm("1","potus","1","10","35")
-		NativeAlarmSetter.setAlarm("2","cactus","1","10","35")
-	}
-
-	onCancelAlarm = () => {
-		NativeAlarmSetter.cancelAlarm("1")
-	}
-
 	async componentDidMount() {
 		this.reloadConfig()
-
-		this.onSetAlarm()
 	}
 
 	render() {

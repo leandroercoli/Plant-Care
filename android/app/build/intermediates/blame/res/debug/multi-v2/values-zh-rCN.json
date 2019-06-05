@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Leandro\\Desktop\\ReactNative\\Plants\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rCN\\values-zh-rCN.xml",
+            "outputFile": "/Users/tomasgimenez/Desktop/React/dv/Plants/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\654b5ff9efd11db53188bc997317abb0\\res\\values-zh-rCN\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "251",
-                        "endColumns": "157",
-                        "endOffsets": "408"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3686",
-                        "endColumns": "157",
-                        "endOffsets": "3839"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\7c35c7fcfc7993c25229c1aba1ccaa37\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "source": "/Users/tomasgimenez/.gradle/caches/transforms-2/files-2.1/5246077501a59cfed4f5838f1431f0e7/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\cde833961ad81c5a6d8ec5660475e668\\res\\values-zh-rCN\\values.xml",
+                    "source": "/Users/tomasgimenez/.gradle/caches/transforms-2/files-2.1/89e068775519654373f3a9bf8c794ba5/res/values-zh-rCN/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "251",
+                        "endColumns": "157",
+                        "endOffsets": "408"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "3686",
+                        "endColumns": "157",
+                        "endOffsets": "3839"
+                    }
+                },
+                {
+                    "source": "/Users/tomasgimenez/.gradle/caches/transforms-2/files-2.1/7bd5a6801b551a0b1c7b82e4ac94d075/res/values-zh-rCN/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\4ed22be8be07e722c802df28dc23dd2e\\res\\values-zh-rCN\\values.xml",
+                    "source": "/Users/tomasgimenez/.gradle/caches/transforms-2/files-2.1/ce008076c8815a2563e7a81c177a8b74/res/values-zh-rCN/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -72,7 +72,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Leandro\\.gradle\\caches\\transforms-2\\files-2.1\\b418cffec564bdf4d2502016e88e552e\\res\\values-zh-rCN\\values-zh-rCN.xml",
+                    "source": "/Users/tomasgimenez/.gradle/caches/transforms-2/files-2.1/3c0d2e10dbdc41b6e7be936facc319bd/res/values-zh-rCN/values-zh-rCN.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
