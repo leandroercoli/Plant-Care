@@ -100,7 +100,7 @@ export default class Configuracion extends React.Component {
 					text: 'Sí', onPress: () => {
 						this.setState({ isRefreshing: true },
 							async () => {
-								await this.reset()
+								//await this.reset()
 								this.props.onReset()
 								this.setState({ isRefreshing: false })
 							}
@@ -133,7 +133,7 @@ export default class Configuracion extends React.Component {
 
 				<ScrollView style={{ width: screenWidth, padding: 15, backgroundColor: '#f1f1f1' }}>
 					<ConfiguracionSection>
-						<ConfiguracionItem style={{
+						{/*<ConfiguracionItem style={{
 							shadowColor: "#fff",
 							shadowOffset: {
 								width: 1,
@@ -147,7 +147,8 @@ export default class Configuracion extends React.Component {
 							<ConfiguracionItemIcon onPress={this.onSwitchNotifications}>
 								<Icon type="Feather" name={config && config.notificationsOn ? "award" : "bar-chart"} style={{ fontSize: 28, color: config && config.notificationsOn ? '#616161' : '#a1a1a1' }} />
 							</ConfiguracionItemIcon>
-						</ConfiguracionItem>
+						</ConfiguracionItem> 
+					*/}
 						<ConfiguracionItem style={{
 							shadowColor: "#fff",
 							shadowOffset: {

@@ -10,6 +10,8 @@ import NativeAlarmSetter from './NativeAlarmSetter'
 
 const options = {
 	title: 'Elija una foto para la nueva planta',
+	takePhotoButtonTitle: 'Tomar una foto',
+	chooseFromLibraryButtonTitle: 'Elegir foto desde el teléfono ...',
 	customButtons: [],
 	storageOptions: {
 		skipBackup: true,
@@ -49,10 +51,6 @@ export default class App extends React.Component {
 		};
 	}
 
-	onReset = () => {
-		this.reloadPlantas()
-	}
-
 	reloadPlantas = () => {
 		this.setState({ isRefreshing: true }, async () => {
 			try {
@@ -79,22 +77,6 @@ export default class App extends React.Component {
 	onForwardPress = () => {
 		if (this.state.currentIndex < this.state.data.length - 1)
 			this.setState({ currentIndex: this.state.currentIndex + 1 }, () => this.PlantList.scrollToIndex({ animated: true, index: "" + this.state.currentIndex }))
-	}
-
-	onDiaPress = (index) => {
-		var { data, currentIndex } = this.state
-
-		if (data[currentIndex].diasRiego.includes(index) && data[currentIndex].diasAlimento.includes(index)) {
-			delete data[currentIndex].diasRiego[data[currentIndex].diasRiego.indexOf(index)]
-		} else if (data[currentIndex].diasRiego.includes(index))
-			data[currentIndex].diasAlimento.push(index)
-		else if (data[currentIndex].diasAlimento.includes(index))
-			delete data[currentIndex].diasAlimento[data[currentIndex].diasAlimento.indexOf(index)]
-		else {
-			data[currentIndex].diasRiego.push(index)
-		}
-
-		this.setState({ data: data }, () => AsyncStorage.setItem('Plantas', JSON.stringify(data)))
 	}
 
 	onModalHoraVasosPress = () => {
@@ -152,27 +134,30 @@ export default class App extends React.Component {
 
 	setAlarmCurrentPlant = () => {
 		var { data, currentIndex } = this.state
+		this.cancelAlarmsCurrentPlant() // cancelar todas las alarmas de la planta antes de agregar nuevas (para que no queden repetidas)
 		let currentPlanta = data[currentIndex]
-		currentPlanta.diasRiego.map((dia) => {
-			let idAlarma = NativeAlarmSetter.setAlarm(currentPlanta.name, 0, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
-			data[currentIndex].alarmasID.push(idAlarma)
+		currentPlanta.diasRiego.map(async (dia) => {
+			const idAlarmaRiego = await NativeAlarmSetter.setAlarm(currentPlanta.name, 0, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
+			data[currentIndex].alarmasID.push(idAlarmaRiego.alarmId)
 			//ToastAndroid.show("nueva idalarma: " + idAlarma);
 		})
-		currentPlanta.diasAlimento.map((dia) => {
-			let idAlarma = NativeAlarmSetter.setAlarm(currentPlanta.name, 1, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
-			data[currentIndex].alarmasID.push(idAlarma)
+		currentPlanta.diasAlimento.map(async (dia) => {
+			const idAlarmaAlimento = await NativeAlarmSetter.setAlarm(currentPlanta.name, 1, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
+			data[currentIndex].alarmasID.push(idAlarmaAlimento.alarmId)
 			//ToastAndroid.show("nueva idalarma: " + idAlarma);
 		})
-		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data))  })
+		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)) })
 	}
 
 	cancelAlarmsCurrentPlant = () => {
 		var { data, currentIndex } = this.state
 		const currentPlanta = data[currentIndex]
-		currentPlanta.alarmasID.map((idalarma) => {
-			console.log("ALARMA ID " + idalarma)
-			//NativeAlarmSetter.cancelAlarm(idalarma)
-		})
+		const alarmasID = currentPlanta.alarmasID
+		for (var i = 0; i < alarmasID.length; i++) {
+			NativeAlarmSetter.cancelAlarm("" + alarmasID[i])
+		}
+		data[currentIndex].alarmasID = []
+		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)) })
 	}
 
 	onSaveModalHoraVasos = () => {
@@ -187,6 +172,22 @@ export default class App extends React.Component {
 				AsyncStorage.setItem('Plantas', JSON.stringify(data))
 				this.state.alarmOn ? this.setAlarmCurrentPlant() : this.cancelAlarmsCurrentPlant()
 			})
+	}
+
+	onDiaPress = (index) => {
+		var { data, currentIndex } = this.state
+
+		if (data[currentIndex].diasRiego.includes(index) && data[currentIndex].diasAlimento.includes(index)) {
+			delete data[currentIndex].diasRiego[data[currentIndex].diasRiego.indexOf(index)]
+		} else if (data[currentIndex].diasRiego.includes(index))
+			data[currentIndex].diasAlimento.push(index)
+		else if (data[currentIndex].diasAlimento.includes(index))
+			delete data[currentIndex].diasAlimento[data[currentIndex].diasAlimento.indexOf(index)]
+		else {
+			data[currentIndex].diasRiego.push(index)
+		}
+
+		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); if (this.state.alarmOn) this.setAlarmCurrentPlant() })
 	}
 
 	onCurrentPlantStartNameChange = () => {
@@ -290,8 +291,8 @@ export default class App extends React.Component {
 					text: 'Sí', onPress: () => {
 						this.setState({ isRefreshing: true }, async () => {
 							var { data, currentIndex } = this.state
-							data.splice(currentIndex, 1)
 							this.cancelAlarmsCurrentPlant()
+							data.splice(currentIndex, 1)
 							try {
 								await AsyncStorage.setItem('Plantas', JSON.stringify(data));
 							} catch (error) {
@@ -306,12 +307,34 @@ export default class App extends React.Component {
 		)
 	}
 
-	async componentDidMount() {
+	cancelAllAlarms = async () => {
+		var { data } = this.state
+		var currentPlanta, alarmasID
+		for (var i = 0; i < data.length; i++) {
+			currentPlanta = data[i]
+			alarmasID = currentPlanta.alarmasID ? currentPlanta.alarmasID : [] // el ultimo elemento es dummy, no tiene alarmas
+			for (var j = 0; j < alarmasID.length; j++) {
+				await NativeAlarmSetter.cancelAlarm("" + alarmasID[j])
+			}
+		}
+		data = [{ name: null }]
+		this.setState({ data: data, currentIndex: 0 }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); this.reloadPlantas() })
+
+	}
+
+	onReset = () => {
+		this.setState({ showConfiguracion: false, isRefreshing: true }, async () => {
+			await this.cancelAllAlarms()
+			this.setState({ isRefreshing: true }, () => this.reloadPlantas())
+		})
+	}
+
+	componentDidMount = async () => {
 		//this.reset()
 		this.reloadPlantas()
 	}
 
-	render() {
+	render = () => {
 		const { data, currentIndex, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosAlimento, currentPlantaName, nuevaPlantaName, nuevaPlantaFoto, isRefreshing } = this.state
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
@@ -351,7 +374,7 @@ export default class App extends React.Component {
 											<Text style={{ fontFamily: "DosisLight", fontSize: 56, color: '#2b2b2b' }}>{selectedHour < 10 ? "0" + selectedHour : selectedHour}:{selectedMinutes < 10 ? "0" + selectedMinutes : selectedMinutes} hs</Text>
 										</TouchableOpacity>
 										<TouchableOpacity onPress={this.onAlarmSwitch} style={{ margin: 15 }}>
-											<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 32, color: alarmOn ? '#2b2b2b' : '#616161', marginRight: 10 }} />
+											<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 32, color: alarmOn ? '#ff5722' : '#616161', marginRight: 10 }} />
 										</TouchableOpacity>
 									</View>
 									<View style={{ flex: 1, width: screenWidth * 0.85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>

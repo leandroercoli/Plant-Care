@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
+import android.app.PendingIntent;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -21,8 +22,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     public static String NOTIFICATION = "notification";
 
     public void onReceive(Context context, Intent intent) {
-
-        Toast.makeText(context, "ON RECEIVE " + intent.getStringExtra("planta"), Toast.LENGTH_LONG).show();
+        // Toast.makeText(context, "ON RECEIVE " + intent.getStringExtra("planta"), Toast.LENGTH_LONG).show();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
@@ -45,7 +45,7 @@ public class NotificationPublisher extends BroadcastReceiver {
             notificationChannel.setVibrationPattern(new long[]{
                     500,
                     500,
-                    500,
+                    250,
                     500,
                     500
             });
@@ -53,17 +53,29 @@ public class NotificationPublisher extends BroadcastReceiver {
             notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             notificationManager.createNotificationChannel(notificationChannel);
         }
+        
+        Intent intentNotification = null;
+        try {
+                intentNotification = new Intent(context, Class.forName("com.plants.MainActivity"));
+                intentNotification.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+        }       
+        PendingIntent pendingIntentNotification = PendingIntent.getActivity(context, 0, intentNotification, 0);
 
         //Notification Channel ID passed as a parameter here will be ignored for all the Android versions below 8.0
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle("Plants");
         builder.setContentText("Hora de " + intent.getStringExtra("accion") + " tu " + intent.getStringExtra("planta") + "!");
+        builder.setContentIntent(pendingIntentNotification);
+        builder.setAutoCancel(true);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setVibrate(new long[] {
                 500,
                 500,
+                250,
                 500,
                 500
         });
