@@ -98,7 +98,7 @@ public class AlarmSetter extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void cancelAlarm(String alarmID, Promise promise){
-        Toast.makeText(this.getReactApplicationContext(), "Alarma cancelada " + Integer.parseInt(alarmID), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this.getReactApplicationContext(), "Alarma cancelada " + Integer.parseInt(alarmID), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this.getReactApplicationContext(), NotificationPublisher.class);
         PendingIntent sender = PendingIntent.getBroadcast(this.getReactApplicationContext(), Integer.parseInt(alarmID), intent, 0);
         AlarmManager alarmManager = (AlarmManager)  this.getReactApplicationContext().getSystemService(ALARM_SERVICE);

@@ -224,6 +224,7 @@ export default class App extends React.Component {
 	}
 
 	onChooseNuevaPlantaFoto = () => {
+		var { data, currentIndex } = this.state
 		ImagePicker.showImagePicker(options, (response) => {
 			console.log('Response = ', response);
 
@@ -236,11 +237,14 @@ export default class App extends React.Component {
 			} else {
 				const source = { uri: response.uri };
 
-				// You can also display the image using data:
-				// const source = { uri: 'data:image/jpeg;base64,' + response.data };
-				this.setState({
-					nuevaPlantaFoto: source,
-				});
+				if (data[currentIndex].name) {// si la planta ya existe, cambiar la foto, si no es una nueva y hay que hacer submit
+					data[currentIndex].image = source
+					this.setState({ data: data }, () => {
+						AsyncStorage.setItem('Plantas', JSON.stringify(data))
+					});
+				} else {
+					this.setState({ nuevaPlantaFoto: source });
+				}
 			}
 		});
 	}
@@ -339,7 +343,7 @@ export default class App extends React.Component {
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
 		const currentPlanta = data[currentIndex]
-		const nuevaPlantaReadyToAdd = nuevaPlantaFoto && nuevaPlantaName != ''
+		const nuevaPlantaReadyToAdd = nuevaPlantaName != '' // && nuevaPlantaFoto 
 		return (
 			<Container>
 				<Header transparent>
@@ -443,7 +447,11 @@ export default class App extends React.Component {
 												}}>
 													{
 														item.name ?
-															<Image source={item.image} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
+															item.image ?
+																<Image source={item.image} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
+																: <TouchableOpacity onPress={this.onChooseNuevaPlantaFoto} style={{ margin: 15 }}>
+																	<Icon type="EvilIcons" name="plus" style={{ fontSize: 82, color: '#c1c1c1' }} />
+																</TouchableOpacity>
 															: nuevaPlantaFoto ?
 																<Image source={this.state.nuevaPlantaFoto} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
 																: <TouchableOpacity onPress={this.onChooseNuevaPlantaFoto} style={{ margin: 15 }}>
@@ -451,13 +459,17 @@ export default class App extends React.Component {
 																</TouchableOpacity>
 													}
 													{
-														item.name ?
-															<View style={{ position: 'absolute', bottom: 5, right: 5, backgroundColor: 'rgba(255,255,255,0.7)', width: 40, height: 40, borderRadius: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-																<TouchableOpacity onPress={this.deleteCurrentPlant}>
-																	<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
-																</TouchableOpacity>
-															</View>
-															: null
+														item.name
+														&& [<View key={"btnDelete"+index} style={{ position: 'absolute', bottom: 5, right: 5, backgroundColor: 'rgba(255,255,255,0.7)', width: 40, height: 40, borderRadius: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+															<TouchableOpacity onPress={this.deleteCurrentPlant}>
+																<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
+															</TouchableOpacity>
+														</View>,
+														 <View key={"btnChangePhoto"+index} style={{ position: 'absolute', top: 5, right: 5, backgroundColor: 'rgba(255,255,255,0.7)', width: 40, height: 40, borderRadius: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+															<TouchableOpacity onPress={this.onChooseNuevaPlantaFoto}>
+																<Icon type="EvilIcons" name="camera" style={{ fontSize: 34, color: '#2b2b2b' }} />
+															</TouchableOpacity>
+														</View>]
 													}
 												</View>
 												<View style={{ width: '95%', height: '18%', backgroundColor: 'rgba(0,0,0,0)', flexDirection: 'row', justifyContent: item.name ? 'center' : 'space-between', alignItems: 'center' }}>
@@ -490,7 +502,7 @@ export default class App extends React.Component {
 									currentPlanta.name ?
 										<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', width: screenWidth * 0.85 }}>
 											<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-												<Icon type="EvilIcons" name="calendar" style={{ fontSize: 28, color: '#616161' }} />
+												<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: '#616161', paddingTop:10 }} />
 												{
 													diasRiego.map((dia, index) =>
 														<TouchableOpacity key={"dia" + index} onPress={() => this.onDiaPress(index)}
@@ -498,12 +510,12 @@ export default class App extends React.Component {
 															<View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
 																{
 																	(currentPlanta.diasRiego.includes(index) || !currentPlanta.diasRiego.includes(index) && !currentPlanta.diasAlimento.includes(index)) ?
-																		<Icon type="Entypo" name="drop" style={{ fontSize: 16, color: '#a1a1a1', opacity: currentPlanta.diasRiego.includes(index) ? 1 : 0 }} />
+																		<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: '#a1a1a1', opacity: currentPlanta.diasRiego.includes(index) ? 1 : 0 }} />
 																		: null
 																}
 																{
 																	currentPlanta.diasAlimento.includes(index) ?
-																		<Icon type="Entypo" name="cup" style={{ fontSize: 16, color: '#a1a1a1' }} />
+																		<Icon type="Entypo" name="cup" style={{ fontSize: 22, color: '#a1a1a1' }} />
 																		: null
 																}
 															</View>
@@ -526,26 +538,59 @@ export default class App extends React.Component {
 													<TouchableOpacity onPress={this.onModalHoraVasosPress}
 														style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
 														<Text style={{ fontFamily: "DosisLight", fontSize: 18, color: '#2b2b2b' }}>{currentPlanta.vasosAgua} {currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'}</Text>
-														<Icon type="Entypo" name="drop" style={{ fontSize: 18, color: '#616161', marginLeft: 5, marginRight: 15 }} />
+														<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: '#616161', marginLeft: 5, marginRight: 15 }} />
 													</TouchableOpacity>
 													<TouchableOpacity onPress={this.onModalHoraVasosPress}
 														style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
 														<Text style={{ fontFamily: "DosisLight", fontSize: 18, color: '#2b2b2b' }}>{currentPlanta.vasosAlimento} {currentPlanta.vasosAlimento == 1 ? 'vaso' : 'vasos'}</Text>
-														<Icon type="Entypo" name="cup" style={{ fontSize: 18, color: '#616161', marginLeft: 5 }} />
+														<Icon type="Entypo" name="cup" style={{ fontSize: 22, color: '#616161', marginLeft: 5 }} />
 													</TouchableOpacity>
 												</View>
 											</View>
 										</View>
 										: <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '95%' }}>
-											<TextInput
+											<View style={{
+												flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'center',
+												alignItems: 'center',
+												backgroundColor: '#fff',
+												paddingLeft: 10,
+												paddingRight: 10
+											}}>
+												<TextInput
+													style={{
+														flex: 1,
+														paddingTop: 10,
+														paddingRight: 10,
+														paddingBottom: 10,
+														paddingLeft: 0,
+														backgroundColor: '#fff',
+														color: '#424242',
+														fontFamily: "DosisLight",
+														fontSize: 22,
+													}}
+													autoFocus
+													placeholder="Nombre de la planta"
+													onChangeText={this.nuevaPlantaTextChange}
+													autoCapitalize={'words'}
+													underlineColorAndroid="transparent"
+												/>
+												{nuevaPlantaReadyToAdd &&
+													<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
+														<Icon style={{ padding: 10, fontSize: 34, color: '#ff5722' }} type="Feather" name="box" />
+													</TouchableOpacity>
+												}
+											</View>
+											{/*<TextInput
 												style={{ height: '30%', width: '65%', paddingTop: 0, paddingBottom: 0, paddingLeft: 5, fontFamily: "DosisLight", fontSize: 22, borderColor: '#c1c1c1', borderWidth: 1 }}
-												onChangeText={this.nuevaPlantaTextChange}
+											
 												placeholder={"Nueva planta"}
-												autoCapitalize={'words'}
+											
 											/>
 											<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
-												<Icon type="Feather" name="box" style={{ fontSize: 26, color: nuevaPlantaReadyToAdd ? '#ff5722' : '#c1c1c1' }} />
-											</TouchableOpacity>
+												<Icon  style={{  }} />
+											</TouchableOpacity> */}
 										</View>
 								}
 							</View>
