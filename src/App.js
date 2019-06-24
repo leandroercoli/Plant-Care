@@ -26,10 +26,15 @@ const plantasDebug = [
 	{ name: 'Philodendron', image: require("./img/plantas/philodendron.jpg"), diasRiego: [1, 5, 6], diasAlimento: [4, 5], hora: 15, minutos: 25, alarma: true, alarmasID: [], vasosAgua: '4', vasosAlimento: '2' },
 	{ name: null }
 ]
-const topColor = '#2b2b2b'
+/*
+const topColor = '#0b0b0b'
 const mainColor = '#004d40'
 const controlColor = '#237051'
-const nameControlColor = '#10654A'
+const nameControlColor = '#10654A' */
+const topColor = '#1b5020'
+const mainColor = '#2e7d32'
+const controlColor = '#388e3c'
+const nameControlColor = '#43a047'
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -51,7 +56,8 @@ export default class App extends React.Component {
 			nuevaPlantaFoto: null,
 			nuevaPlantaName: "",
 			data: [{ name: null }], // dummy plant para agregar una nueva
-			currentIndex: 0
+			currentIndex: 0,
+			viewableItem:0
 		};
 	}
 
@@ -69,6 +75,7 @@ export default class App extends React.Component {
 		})
 	}
 
+	/*
 	handleScroll = (event) => { console.log(event.nativeEvent.contentOffset.x) }
 
 	getIndexOffset = (index) => { return index * Dimensions.get('window').width }
@@ -82,6 +89,7 @@ export default class App extends React.Component {
 		if (this.state.currentIndex < this.state.data.length - 1)
 			this.setState({ currentIndex: this.state.currentIndex + 1 }, () => this.PlantList.scrollToIndex({ animated: true, index: "" + this.state.currentIndex }))
 	}
+	*/
 
 	onThumbPress = (index) => {
 		var { currentIndex } = this.state
@@ -205,28 +213,30 @@ export default class App extends React.Component {
 	}
 
 	onCurrentPlantFinishNameChange = () => {
-		Alert.alert(
-			'Cambiar nombre',
-			'¿Está seguro que desea cambiar el nombre de esta planta a \"' + this.state.currentPlantaName + '\"?',
-			[
-				{ text: 'Cancelar', onPress: () => this.setState({ currentPlantaName: "", currentPlantaNameChanging: false }) },
-				{
-					text: 'Sí', onPress: () => {
-						this.setState({ isRefreshing: true }, async () => {
-							var { data, currentIndex } = this.state
-							data[currentIndex].name = this.state.currentPlantaName
-							try {
-								await AsyncStorage.setItem('Plantas', JSON.stringify(data));
-							} catch (error) {
-								// Error retrieving data
-							}
-							this.setState({ data: data, isRefreshing: false, currentPlantaNameChanging: false })
-						})
-					}
-				},
-			],
-			{ cancelable: true }
-		)
+		if (this.state.currentPlantaName != "")
+			Alert.alert(
+				'Cambiar nombre',
+				'¿Está seguro que desea cambiar el nombre de esta planta a \"' + this.state.currentPlantaName + '\"?',
+				[
+					{ text: 'Cancelar', onPress: () => this.setState({ currentPlantaName: "", currentPlantaNameChanging: false }) },
+					{
+						text: 'Sí', onPress: () => {
+							this.setState({ isRefreshing: true }, async () => {
+								var { data, currentIndex } = this.state
+								data[currentIndex].name = this.state.currentPlantaName
+								try {
+									await AsyncStorage.setItem('Plantas', JSON.stringify(data));
+								} catch (error) {
+									// Error retrieving data
+								}
+								this.setState({ data: data, isRefreshing: false, currentPlantaNameChanging: false })
+							})
+						}
+					},
+				],
+				{ cancelable: true }
+			)
+		else this.setState({ currentPlantaNameChanging: false })
 	}
 
 	onCurrentPlantNameChanging = (text) => {
@@ -343,8 +353,21 @@ export default class App extends React.Component {
 		})
 	}
 
+	onPlantListPageChange = ({ viewableItems }) => {
+		const { currentIndex } = this.state
+		const firstViewableItem = viewableItems[0].key;
+		if (firstViewableItem != currentIndex)
+			this.setState({ viewableItem: firstViewableItem })
+	}
+
+	onPlantListMomentumEnd = () => {
+		const { currentIndex, viewableItem } = this.state
+		if (viewableItem != currentIndex)
+			this.setState({ currentIndex: viewableItem }, () => this.PlantList.scrollToIndex({ animated: true, index: "" + this.state.currentIndex }))
+	}
+
 	componentDidMount = async () => {
-		//this.reset()
+		//AsyncStorage.setItem('Plantas', JSON.stringify([{ name: null }]))
 		this.reloadPlantas()
 	}
 
@@ -366,55 +389,58 @@ export default class App extends React.Component {
 						</TouchableOpacity>
 					</Right>
 				</Header>
-				<View style={{ height: 65, width:'100%' }}>
+				{
+					data.length > 1 &&
+					<View style={{ height: 65, width: '100%' }}>
 						<FlatList
 							ref={(r) => this.ThumbPlantList = r}
 							horizontal
 							scrollEnabled={true}
 							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={{ paddingHorizontal: 10 }}
 							data={data}
 							initialScrollIndex={0}
-							extraData={[this.state.isRefreshing]}
+							extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto, currentPlantaName]}
 							keyExtractor={(item, index) => 'plant' + index}
 							renderItem={({ item, index }) => (
 								<View style={{ width: screenWidth * 0.15, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-									<View style={{
-										width: 54, height: 54,
-										borderRadius: 27,
-										overflow: 'hidden',
-										justifyContent: 'center',
-										alignItems: 'center',
-										backgroundColor: item.name ? '#d1d1d1' : 'transparent',
-										opacity: index == currentIndex || !item.name ? 1 : 0.2
-									}}>
-										<TouchableOpacity onPress={() => this.onThumbPress(index)}>
-											<View style={{
-												width: 50, height: 50,
-												borderRadius: 25,
-												overflow: 'hidden',
-												justifyContent: 'center',
-												alignItems: 'center',
-												backgroundColor: item.name ?  '#fff' : 'transparent',
-											}}>
-												{
-													item.name ?
-													<Image source={item.image ? item.image : require("./img/logo-leaf.png")}
-														style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-													: <Icon type="EvilIcons" name="plus" style={{ fontSize: 44, color: '#d1d1d1' }} />
-												}
-											</View>
-										</TouchableOpacity>
-									</View>
-								</View> 
+									<TouchableOpacity onPress={() => this.onThumbPress(index)}>
+										{
+											item.name ?
+												<View style={{
+													width: 50, height: 50,
+													borderRadius: 25,
+													borderWidth: 2,
+													borderColor: item.name ? controlColor : 'transparent',
+													overflow: 'hidden',
+													justifyContent: 'center',
+													alignItems: 'center',
+													backgroundColor: item.name ? 'rgba(255,255,255,0)' : 'transparent',
+													opacity: index == currentIndex || !item.name ? 1 : 0.4
+												}}>
+													{
+														item.image ?
+															<Image source={item.image}
+																style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
+															: <Text style={{ fontFamily: "DosisLight", fontSize: 30, color: '#d1d1d1' }}>{item.name.substring(0, 1)}</Text>
+													}
+												</View>
+												: <Icon type="EvilIcons" name="plus" style={{ fontSize: 44, color: '#d1d1d1' }} />
+										}
+									</TouchableOpacity>
+								</View>
 							)}
 						/>
 					</View>
+				}
 				{
 					isRefreshing ?
 						<View style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.5)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}><Spinner color="#ff5722" /></View>
-						: <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' , 
-						backgroundColor:mainColor,
-						borderTopLeftRadius: 50, borderTopRightRadius: 50,}}>
+						: <View style={{
+							flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+							backgroundColor: mainColor,
+							borderTopLeftRadius: 50, borderTopRightRadius: 50,
+						}}>
 							<Modal
 								animationType="slide"
 								transparent={false}
@@ -467,24 +493,32 @@ export default class App extends React.Component {
 							</Modal >
 							<View style={{
 								flex: 3,
-								flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+								flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
 								width: screenWidth
 							}}>
-								<TouchableOpacity onPress={this.onBackPress} disabled={currentIndex === 0}>
+								{/*<TouchableOpacity onPress={this.onBackPress} disabled={currentIndex === 0}>
 									<Icon type="EvilIcons" name="chevron-left" style={{ fontSize: 58, color: '#d1d1d1', opacity: currentIndex > 0 ? 1 : 0.3 }} />
-								</TouchableOpacity>
-								<View style={{ width: screenWidth * 0.7, height: '100%' }}>
+						</TouchableOpacity>*/}
+								<View style={{ width: screenWidth * 0.8, height: '100%' }}>
 									<FlatList
 										ref={(r) => this.PlantList = r}
 										horizontal
-										scrollEnabled={false}
+										scrollEnabled={true}
+										bounces={false}
+										pagingEnabled={true}
+
+										decelerationRate='fast'
+										snapToAlignment="center"
+										snapToInterval={ screenWidth * 0.8}
+										onMomentumScrollEnd={this.onPlantListMomentumEnd}
+										onViewableItemsChanged={this.onPlantListPageChange}
 										showsHorizontalScrollIndicator={false}
 										data={data}
 										initialScrollIndex={0}
 										extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto, currentPlantaName]}
-										keyExtractor={(item, index) => 'plant' + index}
+										keyExtractor={(item, index) => "" + index}
 										renderItem={({ item, index }) => (
-											<View style={{ width: screenWidth * 0.7, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+											<View style={{ width: screenWidth * 0.8, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 												<View style={{
 													width: '95%', height: '95%',
 													borderRadius: 5,
@@ -532,14 +566,14 @@ export default class App extends React.Component {
 										)}
 									/>
 								</View>
-								<TouchableOpacity onPress={this.onForwardPress} disabled={currentIndex === data.length - 1}>
+								{/*<TouchableOpacity onPress={this.onForwardPress} disabled={currentIndex === data.length - 1}>
 									<Icon type="EvilIcons" name="chevron-right" style={{ fontSize: 58, color: '#d1d1d1', opacity: (currentIndex < data.length - 1) ? 1 : 0.3 }} />
-								</TouchableOpacity>
+												</TouchableOpacity>*/}
 							</View>
 							{
 								currentPlanta.name &&
 								<View style={{
-									flex: 0.5, width: '100%', backgroundColor: 'rgba(0,0,0,0)', flexDirection: 'row', justifyContent: currentPlanta.name ? 'center' : 'space-between', alignItems: 'center',
+									flex: this.state.currentPlantaNameChanging ? 1 : 0.5, width: '100%', backgroundColor: 'rgba(0,0,0,0)', flexDirection: 'row', justifyContent: currentPlanta.name ? 'center' : 'space-between', alignItems: 'center',
 									paddingLeft: '8%', paddingRight: '8%',
 									backgroundColor: nameControlColor,
 									borderTopLeftRadius: 50, borderTopRightRadius: 50,
@@ -559,7 +593,7 @@ export default class App extends React.Component {
 									/>
 								</View>
 							}
-							<View style={{ flex: 1, backgroundColor: nameControlColor }}  >
+							<View style={{ flex: 1, backgroundColor: currentPlanta.name ? nameControlColor : mainColor }}  >
 								{
 									currentPlanta.name ?
 										<View style={{
@@ -616,40 +650,37 @@ export default class App extends React.Component {
 												</View>
 											</View>
 										</View>
-										: <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '95%' }}>
-											<View style={{
-												flex: 1,
-												flexDirection: 'row',
-												justifyContent: 'center',
-												alignItems: 'center',
-												backgroundColor: '#fff',
-												paddingLeft: 10,
-												paddingRight: 10
-											}}>
-												<TextInput
-													style={{
-														flex: 1,
-														paddingTop: 10,
-														paddingRight: 10,
-														paddingBottom: 10,
-														paddingLeft: 0,
-														backgroundColor: '#fff',
-														color: '#424242',
-														fontFamily: "DosisLight",
-														fontSize: 22,
-													}}
-													autoFocus
-													placeholder="Nombre de la planta"
-													onChangeText={this.nuevaPlantaTextChange}
-													autoCapitalize={'words'}
-													underlineColorAndroid="transparent"
-												/>
-												{nuevaPlantaReadyToAdd &&
-													<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
-														<Icon style={{ padding: 10, fontSize: 34, color: '#ff5722' }} type="Feather" name="box" />
-													</TouchableOpacity>
-												}
-											</View>
+										: <View style={{
+											flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+											width: screenWidth, backgroundColor: controlColor,
+											borderTopLeftRadius: 50, borderTopRightRadius: 50,
+											paddingLeft: '5%',
+											paddingRight: '5%',
+										}}>
+											<TextInput
+												style={{
+													flex: 1,
+													paddingTop: 10,
+													paddingRight: 10,
+													paddingBottom: 10,
+													paddingLeft: 0,
+													backgroundColor: 'transparent',
+													color: '#d1d1d1',
+													fontFamily: "DosisLight",
+													fontSize: 22,
+												}}
+												autoFocus
+												placeholder="Nombre de la planta"
+												placeholderTextColor={'#b1b1b1'}
+												onChangeText={this.nuevaPlantaTextChange}
+												autoCapitalize={'words'}
+												underlineColorAndroid="transparent"
+											/>
+											{nuevaPlantaReadyToAdd &&
+												<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
+													<Icon style={{ padding: 10, fontSize: 34, color: '#fff' }} type="Feather" name="box" />
+												</TouchableOpacity>
+											}
 											{/*<TextInput
 												style={{ height: '30%', width: '65%', paddingTop: 0, paddingBottom: 0, paddingLeft: 5, fontFamily: "DosisLight", fontSize: 22, borderColor: '#c1c1c1', borderWidth: 1 }}
 											
