@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, View, ScrollView, TouchableOpacity, Alert,ToastAndroid } from 'react-native';
+import { Dimensions, Text, View, ScrollView, TouchableOpacity, Alert, ToastAndroid, Modal } from 'react-native';
 import { Spinner, Icon, Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ const configDefault = {
 }
 const version = DeviceInfo.getVersion()
 
-const ConfiguracionHeader = styled(View) `
+const ConfiguracionHeader = styled(View)`
 	width: 100%;
 	height:10%;
 	display:flex;
@@ -18,7 +18,7 @@ const ConfiguracionHeader = styled(View) `
 	justify-content: flex-start;
 	align-items: center;
 `
-const ConfiguracionSection = styled(View) `
+const ConfiguracionSection = styled(View)`
 	padding:10px;
 	margin-bottom:20px;
 	display:flex;
@@ -26,7 +26,7 @@ const ConfiguracionSection = styled(View) `
 	justify-content: space-evenly;
 	align-items: center;
 `
-const ConfiguracionItem = styled(View) `
+const ConfiguracionItem = styled(View)`
 	width: 100%;
 	display:flex;
 	flex-direction:row;
@@ -37,7 +37,7 @@ const ConfiguracionItem = styled(View) `
 	background-color:#fff;
 	border-radius: 5;
 `
-const ConfiguracionItemIcon = styled(TouchableOpacity) `
+const ConfiguracionItemIcon = styled(TouchableOpacity)`
 	width:50px;
 	flex-direction: row;
 	justify-content: center;
@@ -50,9 +50,18 @@ export default class Configuracion extends React.Component {
 		super(props);
 
 		this.state = {
+			show: false,
 			isRefreshing: false,
 			config: null
 		};
+	}
+
+	show = () => {
+		this.setState({ show: true })
+	}
+
+	hide = () => {
+		this.setState({ show: false })
 	}
 
 	reloadConfig = () => {
@@ -119,21 +128,25 @@ export default class Configuracion extends React.Component {
 	render() {
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
-		const { config } = this.state
+		const { show, config } = this.state
 		return (
-			<View style={{
-				flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'
-			}}>
-				<ConfiguracionHeader>
-					<ConfiguracionItemIcon onPress={this.props.onClose} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-						<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: '#2b2b2b' }} />
-					</ConfiguracionItemIcon>
-					<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b', paddingRight: 10 }}>Configuración</Text>
-				</ConfiguracionHeader>
-
-				<ScrollView style={{ width: screenWidth, padding: 15, backgroundColor: '#f1f1f1' }}>
-					<ConfiguracionSection>
-						{/*<ConfiguracionItem style={{
+			<Modal
+				animationType="slide"
+				transparent={false}
+				visible={show}
+				onRequestClose={this.hide} >
+				<View style={{
+					flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'
+				}}>
+					<View style={{ width: '100%', height: '10%',  flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft:10, paddingRight:10 }}>
+												<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b', paddingRight: 10 }}>Configuración</Text>
+						<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+							<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: '#2b2b2b' }} />
+						</TouchableOpacity>
+					</View>
+					<ScrollView style={{ width: screenWidth, padding: 15, backgroundColor: '#f1f1f1' }}>
+						<ConfiguracionSection>
+							{/*<ConfiguracionItem style={{
 							shadowColor: "#fff",
 							shadowOffset: {
 								width: 1,
@@ -149,42 +162,43 @@ export default class Configuracion extends React.Component {
 							</ConfiguracionItemIcon>
 						</ConfiguracionItem> 
 					*/}
-						<ConfiguracionItem style={{
-							shadowColor: "#fff",
-							shadowOffset: {
-								width: 1,
-								height: 1,
-							},
-							shadowOpacity: 0.15,
-							shadowRadius: 1,
-							elevation: 3
-						}}>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Limpiar</Text>
-							<ConfiguracionItemIcon onPress={this.onReset}>
-								<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
-							</ConfiguracionItemIcon>
-						</ConfiguracionItem>
-					</ConfiguracionSection>
+							<ConfiguracionItem style={{
+								shadowColor: "#fff",
+								shadowOffset: {
+									width: 1,
+									height: 1,
+								},
+								shadowOpacity: 0.15,
+								shadowRadius: 1,
+								elevation: 3
+							}}>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Limpiar</Text>
+								<ConfiguracionItemIcon onPress={this.onReset}>
+									<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
+								</ConfiguracionItemIcon>
+							</ConfiguracionItem>
+						</ConfiguracionSection>
 
-					<ConfiguracionSection>
-						<ConfiguracionItem style={{
-							shadowColor: "#fff",
-							shadowOffset: {
-								width: 1,
-								height: 1,
-							},
-							shadowOpacity: 0.15,
-							shadowRadius: 1,
-							elevation: 3
-						}}>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Versión</Text>
-							<ConfiguracionItemIcon onPress={this.onSwitchNotifications}>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#414141' }}>{version}</Text>
-							</ConfiguracionItemIcon>
-						</ConfiguracionItem>
-					</ConfiguracionSection>
-				</ScrollView>
-			</View>
+						<ConfiguracionSection>
+							<ConfiguracionItem style={{
+								shadowColor: "#fff",
+								shadowOffset: {
+									width: 1,
+									height: 1,
+								},
+								shadowOpacity: 0.15,
+								shadowRadius: 1,
+								elevation: 3
+							}}>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Versión</Text>
+								<ConfiguracionItemIcon onPress={this.onSwitchNotifications}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#414141' }}>{version}</Text>
+								</ConfiguracionItemIcon>
+							</ConfiguracionItem>
+						</ConfiguracionSection>
+					</ScrollView>
+				</View>
+			</Modal>
 		)
 	}
 }

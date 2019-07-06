@@ -3,10 +3,13 @@ import { StatusBar, Dimensions, Text, View, FlatList, Image, TouchableOpacity, T
 import { Container, Header, Left, Body, Right, Content, Spinner, Icon, Button } from 'native-base';
 import NuevaPlanta from './NuevaPlanta'
 import Configuracion from './Configuracion'
+import EditarNombre from './EditarNombre'
+import CalendarioComponent from './CalendarioComponent'
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
 import styled from 'styled-components'
 import NativeAlarmSetter from './NativeAlarmSetter'
+import { Colors } from './Const'
 
 const options = {
 	title: 'Elija una foto para la nueva planta',
@@ -26,13 +29,14 @@ const plantasDebug = [
 	{ name: 'Philodendron', image: require("./img/plantas/philodendron.jpg"), diasRiego: [1, 5, 6], diasAlimento: [4, 5], hora: 15, minutos: 25, alarma: true, alarmasID: [], vasosAgua: '4', vasosAlimento: '2' },
 	{ name: null }
 ]
+const logo = require("./img/logo-leaf.png")
 /*
 const topColor = '#0b0b0b'
 const mainColor = '#004d40'
 const controlColor = '#237051'
 const nameControlColor = '#10654A' */
-const topColor = '#1b5020'
-const mainColor = '#2e7d32'
+const topColor = '#fff'// '#1b5020'
+const mainColor = '#f1f1f1' //'#2e7d32'
 const controlColor = '#388e3c'
 const nameControlColor = '#43a047'
 
@@ -41,23 +45,23 @@ export default class App extends React.Component {
 		super(props);
 
 		this.PlantList = React.createRef()
+		this.NuevaPlantaModal = React.createRef()
+		this.ConfiguracionModal = React.createRef()
+		this.EditarNombreModal = React.createRef()
 
 		this.state = {
 			isRefreshing: true,
 			showModalHoraVasos: false,
-			showConfiguracion: false,
 			selectedHour: null,
 			selectedMinutes: null,
 			selectedVasosAgua: 0,
 			selectedVasosAlimento: 0,
 			alarmOn: false,
-			currentPlantaName: "",
-			currentPlantaNameChanging: false,
 			nuevaPlantaFoto: null,
 			nuevaPlantaName: "",
-			data: [{ name: null }], // dummy plant para agregar una nueva
+			data: [], // dummy plant para agregar una nueva
 			currentIndex: 0,
-			viewableItem:0
+			viewableItem: 0,
 		};
 	}
 
@@ -91,6 +95,18 @@ export default class App extends React.Component {
 	}
 	*/
 
+	onNewPlantPress = () => {
+		this.NuevaPlantaModal.show()
+	}
+
+	onConfiguracionPress = () => {
+		this.ConfiguracionModal.show()
+	}
+
+	onEditNombrePress = () => {
+		this.EditarNombreModal.show()
+	}
+
 	onThumbPress = (index) => {
 		var { currentIndex } = this.state
 		if (currentIndex != index)
@@ -111,14 +127,6 @@ export default class App extends React.Component {
 
 	onModalHoraVasosHide = () => {
 		this.setState({ showModalHoraVasos: false })
-	}
-
-	onConfiguracionOpen = () => {
-		this.setState({ showConfiguracion: true })
-	}
-
-	onConfiguracionClose = () => {
-		this.setState({ showConfiguracion: false })
 	}
 
 	onSelectTimePress = async () => {
@@ -192,6 +200,13 @@ export default class App extends React.Component {
 			})
 	}
 
+	onDiaPress = (diasRiego, diasAlimento) => {
+		var { data, currentIndex } = this.state
+		data[currentIndex].diasRiego = diasRiego
+		data[currentIndex].diasAlimento = diasAlimento
+		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); if (this.state.alarmOn) this.setAlarmCurrentPlant() })
+	}
+	/*
 	onDiaPress = (index) => {
 		var { data, currentIndex } = this.state
 
@@ -207,40 +222,25 @@ export default class App extends React.Component {
 
 		this.setState({ data: data }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); if (this.state.alarmOn) this.setAlarmCurrentPlant() })
 	}
-
-	onCurrentPlantStartNameChange = () => {
-		this.setState({ currentPlantaNameChanging: true })
-	}
-
-	onCurrentPlantFinishNameChange = () => {
-		if (this.state.currentPlantaName != "")
-			Alert.alert(
-				'Cambiar nombre',
-				'¿Está seguro que desea cambiar el nombre de esta planta a \"' + this.state.currentPlantaName + '\"?',
-				[
-					{ text: 'Cancelar', onPress: () => this.setState({ currentPlantaName: "", currentPlantaNameChanging: false }) },
-					{
-						text: 'Sí', onPress: () => {
-							this.setState({ isRefreshing: true }, async () => {
-								var { data, currentIndex } = this.state
-								data[currentIndex].name = this.state.currentPlantaName
-								try {
-									await AsyncStorage.setItem('Plantas', JSON.stringify(data));
-								} catch (error) {
-									// Error retrieving data
-								}
-								this.setState({ data: data, isRefreshing: false, currentPlantaNameChanging: false })
-							})
-						}
-					},
-				],
-				{ cancelable: true }
-			)
-		else this.setState({ currentPlantaNameChanging: false })
-	}
-
-	onCurrentPlantNameChanging = (text) => {
-		this.setState({ currentPlantaName: text })
+*/
+	onFinishEditar = (plantaName, selectedHour, selectedMinutes, alarmOn,selectedVasosAgua,			selectedVasosFertilizante) => {
+		if (plantaName != "")
+			this.setState({ isRefreshing: true }, async () => {
+				var { data, currentIndex } = this.state
+				data[currentIndex].name = plantaName
+				data[currentIndex].hora = selectedHour
+				data[currentIndex].minutos = selectedMinutes
+				data[currentIndex].alarma = alarmOn
+				data[currentIndex].vasosAgua= selectedVasosAgua,
+				data[currentIndex].vasosAlimento = selectedVasosFertilizante
+				try {
+					await AsyncStorage.setItem('Plantas', JSON.stringify(data));
+					//RESETEAR LAS ALARMAS
+				} catch (error) {
+					// Error retrieving data
+				}
+				this.setState({ data: data, isRefreshing: false })
+			})
 	}
 
 	onChooseNuevaPlantaFoto = () => {
@@ -294,7 +294,6 @@ export default class App extends React.Component {
 			const planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto)
 			data.pop()
 			data.push(planta)
-			data.push({ name: null })
 			try {
 				await AsyncStorage.setItem('Plantas', JSON.stringify(data));
 			} catch (error) {
@@ -347,10 +346,15 @@ export default class App extends React.Component {
 	}
 
 	onReset = () => {
-		this.setState({ showConfiguracion: false, isRefreshing: true }, async () => {
+		this.setState({ isRefreshing: true }, async () => {
 			await this.cancelAllAlarms()
 			this.setState({ isRefreshing: true }, () => this.reloadPlantas())
 		})
+	}
+
+	onFinishSubmitting = () => {
+		if (this.NuevaPlantaModal) this.NuevaPlantaModal.hide()
+		this.reloadPlantas()
 	}
 
 	onPlantListPageChange = ({ viewableItems }) => {
@@ -369,64 +373,72 @@ export default class App extends React.Component {
 	componentDidMount = async () => {
 		//AsyncStorage.setItem('Plantas', JSON.stringify([{ name: null }]))
 		this.reloadPlantas()
+		//	if (this.NuevaPlantaModal) this.NuevaPlantaModal.show()
 	}
 
 	render = () => {
-		const { data, currentIndex, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosAlimento, currentPlantaName, nuevaPlantaName, nuevaPlantaFoto, isRefreshing } = this.state
+		const { data, currentIndex, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosAlimento, nuevaPlantaName, nuevaPlantaFoto, isRefreshing } = this.state
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
 		const currentPlanta = data[currentIndex]
 		const nuevaPlantaReadyToAdd = nuevaPlantaName != '' // && nuevaPlantaFoto 
 		return (
-			<Container style={{ backgroundColor: topColor }}>
+			<Container >
 				<Header transparent>
 					<Body>
-						<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#d1d1d1' }}>Plant Care</Text>
+						<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b' }}>Plant Care</Text>
 					</Body>
 					<Right>
-						<TouchableOpacity onPress={this.onConfiguracionOpen} style={{ margin: 10 }}>
-							<Icon type="EvilIcons" name="gear" style={{ fontSize: 34, color: '#d1d1d1' }} />
+						{data.length > 0 && <TouchableOpacity onPress={() => this.onNewPlantPress()} style={{ marginLeft: 10, marginRight: 10 }}>
+							<Icon type="EvilIcons" name="plus" style={{ fontSize: 38, color: '#414141' }} />
+						</TouchableOpacity>}
+						<TouchableOpacity onPress={this.onConfiguracionPress} style={{ marginLeft: 10, marginRight: 10, paddingBottom: 2 }}>
+							<Icon type="EvilIcons" name="gear" style={{ fontSize: 34, color: '#414141' }} />
 						</TouchableOpacity>
 					</Right>
 				</Header>
+				<NuevaPlanta ref={(r) => this.NuevaPlantaModal = r} onFinishSubmitting={this.onFinishSubmitting} />
+				<Configuracion ref={(r) => this.ConfiguracionModal = r} onReset={this.onReset} />
+				<EditarNombre ref={(r) => this.EditarNombreModal = r}
+					plantaName={currentPlanta ? currentPlanta.name : null}
+					selectedHour={currentPlanta ? currentPlanta.hora : null}
+					selectedMinutes={currentPlanta ? currentPlanta.minutos : null}
+					alarmOn={currentPlanta ? currentPlanta.alarmOn : null}
+					onFinishEditar={this.onFinishEditar} />
 				{
-					data.length > 1 &&
-					<View style={{ height: 65, width: '100%' }}>
+					data.length > 0 &&
+					<View style={{ height: 65, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 						<FlatList
 							ref={(r) => this.ThumbPlantList = r}
 							horizontal
 							scrollEnabled={true}
 							showsHorizontalScrollIndicator={false}
-							contentContainerStyle={{ paddingHorizontal: 10 }}
+							contentContainerStyle={{ flex: 1, paddingHorizontal: 10, }}
 							data={data}
 							initialScrollIndex={0}
-							extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto, currentPlantaName]}
+							extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto]}
 							keyExtractor={(item, index) => 'plant' + index}
 							renderItem={({ item, index }) => (
 								<View style={{ width: screenWidth * 0.15, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 									<TouchableOpacity onPress={() => this.onThumbPress(index)}>
-										{
-											item.name ?
-												<View style={{
-													width: 50, height: 50,
-													borderRadius: 25,
-													borderWidth: 2,
-													borderColor: item.name ? controlColor : 'transparent',
-													overflow: 'hidden',
-													justifyContent: 'center',
-													alignItems: 'center',
-													backgroundColor: item.name ? 'rgba(255,255,255,0)' : 'transparent',
-													opacity: index == currentIndex || !item.name ? 1 : 0.4
-												}}>
-													{
-														item.image ?
-															<Image source={item.image}
-																style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-															: <Text style={{ fontFamily: "DosisLight", fontSize: 30, color: '#d1d1d1' }}>{item.name.substring(0, 1)}</Text>
-													}
-												</View>
-												: <Icon type="EvilIcons" name="plus" style={{ fontSize: 44, color: '#d1d1d1' }} />
-										}
+										<View style={{
+											width: 50, height: 50,
+											borderRadius: 25,
+											borderWidth: 2,
+											borderColor: item.name ? controlColor : 'transparent',
+											overflow: 'hidden',
+											justifyContent: 'center',
+											alignItems: 'center',
+											backgroundColor: item.name ? 'rgba(255,255,255,0)' : 'transparent',
+											opacity: index == currentIndex || !item.name ? 1 : 0.4
+										}}>
+											{
+												item.image ?
+													<Image source={item.image}
+														style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
+													: <Text style={{ fontFamily: "DosisLight", fontSize: 30, color: '#2b2b2b' }}>{item.name.substring(0, 1)}</Text>
+											}
+										</View>
 									</TouchableOpacity>
 								</View>
 							)}
@@ -435,264 +447,161 @@ export default class App extends React.Component {
 				}
 				{
 					isRefreshing ?
-						<View style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.5)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}><Spinner color="#ff5722" /></View>
-						: <View style={{
+						<View style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.5)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}><Spinner color={Colors.accentColor} /></View>
+						:
+						<View style={{
 							flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
 							backgroundColor: mainColor,
-							borderTopLeftRadius: 50, borderTopRightRadius: 50,
 						}}>
-							<Modal
-								animationType="slide"
-								transparent={false}
-								visible={this.state.showConfiguracion}
-								onRequestClose={this.onConfiguracionClose} >
-								<Configuracion onReset={this.onReset} onClose={this.onConfiguracionClose} />
-							</Modal>
-							<Modal
-								animationType="slide"
-								transparent={false}
-								visible={this.state.showModalHoraVasos}
-								onRequestClose={this.onModalHoraVasosHide}>
-								<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-									<View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', margin: 10 }}>
-										<TouchableOpacity onPress={this.onSelectTimePress} style={{ margin: 15 }}>
-											<Text style={{ fontFamily: "DosisLight", fontSize: 56, color: '#2b2b2b' }}>{selectedHour < 10 ? "0" + selectedHour : selectedHour}:{selectedMinutes < 10 ? "0" + selectedMinutes : selectedMinutes} hs</Text>
-										</TouchableOpacity>
-										<TouchableOpacity onPress={this.onAlarmSwitch} style={{ margin: 15 }}>
-											<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 32, color: alarmOn ? '#ff5722' : '#616161', marginRight: 10 }} />
-										</TouchableOpacity>
-									</View>
-									<View style={{ flex: 1, width: screenWidth * 0.85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-										<TextInput
-											keyboardType='numeric'
-											onChangeText={(valor) => this.onSelectedVasosAguaChange(valor)}
-											value={"" + selectedVasosAgua}
-											maxLength={4}  //setting limit of input
-											style={{ padding: 10, fontSize: 56, textAlign: 'center', fontFamily: "DosisLight", color: '#2b2b2b' }}
-										/>
-										<Icon type="Entypo" name="drop" style={{ fontSize: 56, color: '#616161', padding: 10 }} />
-									</View>
-									<View style={{ flex: 1, width: screenWidth * 0.85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-										<TextInput
-											keyboardType='numeric'
-											onChangeText={(valor) => this.onSelectedVasosAlimentoChange(valor)}
-											value={"" + selectedVasosAlimento}
-											maxLength={4}  //setting limit of input
-											style={{ padding: 10, fontSize: 56, textAlign: 'center', fontFamily: "DosisLight", color: '#2b2b2b' }}
-										/>
-										<Icon type="Entypo" name="flash" style={{ fontSize: 56, color: '#616161', padding: 10 }} />
-									</View>
-									<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-										<TouchableOpacity onPress={this.onSaveModalHoraVasos}
-											style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: 'rgba(255,87,34,0.7)', padding: 10 }}>
-											<Icon type="Feather" name="box" style={{ fontSize: 22, color: '#fff', marginRight: 10 }} />
-											<Text style={{ fontFamily: "DosisLight", fontSize: 26, color: '#fff' }}>Guardar</Text>
-										</TouchableOpacity>
-									</View>
-								</View>
-							</Modal >
-							<View style={{
-								flex: 3,
-								flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-								width: screenWidth
-							}}>
-								{/*<TouchableOpacity onPress={this.onBackPress} disabled={currentIndex === 0}>
-									<Icon type="EvilIcons" name="chevron-left" style={{ fontSize: 58, color: '#d1d1d1', opacity: currentIndex > 0 ? 1 : 0.3 }} />
-						</TouchableOpacity>*/}
-								<View style={{ width: screenWidth * 0.8, height: '100%' }}>
-									<FlatList
-										ref={(r) => this.PlantList = r}
-										horizontal
-										scrollEnabled={true}
-										bounces={false}
-										pagingEnabled={true}
-
-										decelerationRate='fast'
-										snapToAlignment="center"
-										snapToInterval={ screenWidth * 0.8}
-										onMomentumScrollEnd={this.onPlantListMomentumEnd}
-										onViewableItemsChanged={this.onPlantListPageChange}
-										showsHorizontalScrollIndicator={false}
-										data={data}
-										initialScrollIndex={0}
-										extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto, currentPlantaName]}
-										keyExtractor={(item, index) => "" + index}
-										renderItem={({ item, index }) => (
-											<View style={{ width: screenWidth * 0.8, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-												<View style={{
-													width: '95%', height: '95%',
-													borderRadius: 5,
-													shadowColor: "#fff",
-													shadowOffset: {
-														width: 0,
-														height: 0,
-													},
-													shadowOpacity: 0.1,
-													shadowRadius: 5,
-													elevation: 5,
-													overflow: 'hidden',
-													justifyContent: 'center',
-													alignItems: 'center',
-													backgroundColor: '#0000'
-												}}>
-													{
-														item.name ?
-															item.image ?
-																<Image source={item.image} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-																: <TouchableOpacity onPress={this.onChooseNuevaPlantaFoto} style={{ margin: 15 }}>
-																	<Icon type="EvilIcons" name="plus" style={{ fontSize: 82, color: '#c1c1c1' }} />
-																</TouchableOpacity>
-															: nuevaPlantaFoto ?
-																<Image source={this.state.nuevaPlantaFoto} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-																: <TouchableOpacity onPress={this.onChooseNuevaPlantaFoto} style={{ margin: 15 }}>
-																	<Icon type="EvilIcons" name="plus" style={{ fontSize: 82, color: '#c1c1c1' }} />
-																</TouchableOpacity>
-													}
-													{
-														item.name
-														&& [<View key={"btnDelete" + index} style={{ position: 'absolute', bottom: 10, right: 10, backgroundColor: 'rgba(255,255,255,0.7)', width: 40, height: 40, borderRadius: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-															<TouchableOpacity onPress={this.deleteCurrentPlant}>
-																<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
-															</TouchableOpacity>
-														</View>,
-														<View key={"btnChangePhoto" + index} style={{ position: 'absolute', bottom: 10, right: 60, backgroundColor: 'rgba(255,255,255,0.7)', width: 40, height: 40, borderRadius: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-															<TouchableOpacity onPress={this.onChooseNuevaPlantaFoto}>
-																<Icon type="EvilIcons" name="camera" style={{ fontSize: 34, color: '#2b2b2b' }} />
-															</TouchableOpacity>
-														</View>]
-													}
+							{
+								data.length == 0 ?
+									<TouchableOpacity onPress={this.onNewPlantPress} style={{ margin: 15 }}>
+										<Icon type="EvilIcons" name="plus" style={{ fontSize: 82, color: Colors.accentColor, opacity: 0.8, }} />
+									</TouchableOpacity>
+									: <View style={{
+										flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
+									}}>
+										<Modal
+											animationType="slide"
+											transparent={false}
+											visible={this.state.showModalHoraVasos}
+											onRequestClose={this.onModalHoraVasosHide}>
+											<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+												<View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', margin: 10 }}>
+													<TouchableOpacity onPress={this.onSelectTimePress} style={{ margin: 15 }}>
+														<Text style={{ fontFamily: "DosisLight", fontSize: 56, color: '#2b2b2b' }}>{selectedHour < 10 ? "0" + selectedHour : selectedHour}:{selectedMinutes < 10 ? "0" + selectedMinutes : selectedMinutes} hs</Text>
+													</TouchableOpacity>
+													<TouchableOpacity onPress={this.onAlarmSwitch} style={{ margin: 15 }}>
+														<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 32, color: alarmOn ? '#ff5722' : '#616161', marginRight: 10 }} />
+													</TouchableOpacity>
+												</View>
+												<View style={{ flex: 1, width: screenWidth * 0.85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+													<TextInput
+														keyboardType='numeric'
+														onChangeText={(valor) => this.onSelectedVasosAguaChange(valor)}
+														value={"" + selectedVasosAgua}
+														maxLength={4}  //setting limit of input
+														style={{ padding: 10, fontSize: 56, textAlign: 'center', fontFamily: "DosisLight", color: '#2b2b2b' }}
+													/>
+													<Icon type="Entypo" name="drop" style={{ fontSize: 56, color: '#616161', padding: 10 }} />
+												</View>
+												<View style={{ flex: 1, width: screenWidth * 0.85, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+													<TextInput
+														keyboardType='numeric'
+														onChangeText={(valor) => this.onSelectedVasosAlimentoChange(valor)}
+														value={"" + selectedVasosAlimento}
+														maxLength={4}  //setting limit of input
+														style={{ padding: 10, fontSize: 56, textAlign: 'center', fontFamily: "DosisLight", color: '#2b2b2b' }}
+													/>
+													<Icon type="Entypo" name="flash" style={{ fontSize: 56, color: '#616161', padding: 10 }} />
+												</View>
+												<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+													<TouchableOpacity onPress={this.onSaveModalHoraVasos}
+														style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', backgroundColor: 'rgba(255,87,34,0.7)', padding: 10 }}>
+														<Icon type="Feather" name="box" style={{ fontSize: 22, color: '#fff', marginRight: 10 }} />
+														<Text style={{ fontFamily: "DosisLight", fontSize: 26, color: '#fff' }}>Guardar</Text>
+													</TouchableOpacity>
 												</View>
 											</View>
-										)}
-									/>
-								</View>
-								{/*<TouchableOpacity onPress={this.onForwardPress} disabled={currentIndex === data.length - 1}>
-									<Icon type="EvilIcons" name="chevron-right" style={{ fontSize: 58, color: '#d1d1d1', opacity: (currentIndex < data.length - 1) ? 1 : 0.3 }} />
-												</TouchableOpacity>*/}
-							</View>
-							{
-								currentPlanta.name &&
-								<View style={{
-									flex: this.state.currentPlantaNameChanging ? 1 : 0.5, width: '100%', backgroundColor: 'rgba(0,0,0,0)', flexDirection: 'row', justifyContent: currentPlanta.name ? 'center' : 'space-between', alignItems: 'center',
-									paddingLeft: '8%', paddingRight: '8%',
-									backgroundColor: nameControlColor,
-									borderTopLeftRadius: 50, borderTopRightRadius: 50,
-									//	elevation: 15
-								}}>
-									<TextInput
-										style={{
-											fontFamily: "DosisLight", fontSize: 22, borderColor: 'transparent', color: '#d1d1d1'
-										}}
-										onChangeText={this.onCurrentPlantNameChanging}
-										onFocus={this.onCurrentPlantStartNameChange}
-										onBlur={this.onCurrentPlantFinishNameChange}
-										value={this.state.currentPlantaNameChanging ? this.state.currentPlantaName : currentPlanta.name}
-										defaultValue={currentPlanta.name}
-										autoCapitalize={'words'}
-										maxLength={30}
-									/>
-								</View>
-							}
-							<View style={{ flex: 1, backgroundColor: currentPlanta.name ? nameControlColor : mainColor }}  >
-								{
-									currentPlanta.name ?
+										</Modal >
 										<View style={{
-											flex: 1, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center',
-											paddingLeft: '8%', paddingRight: '8%',
-											backgroundColor: controlColor,
-											borderTopLeftRadius: 50, borderTopRightRadius: 50,
-											elevation: 15
+											flex: 3,
+											flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+											width: screenWidth,
 										}}>
-											<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-												<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: '#c1c1c1', paddingTop: 10 }} />
-												{
-													diasRiego.map((dia, index) =>
-														<TouchableOpacity key={"dia" + index} onPress={() => this.onDiaPress(index)}
-															style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-															<View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+											<View style={{ width: screenWidth, height: '100%', }}>
+												<FlatList
+													ref={(r) => this.PlantList = r}
+													horizontal
+													scrollEnabled={true}
+													bounces={false}
+													pagingEnabled={true}
+
+													decelerationRate='fast'
+													snapToAlignment="center"
+													snapToInterval={screenWidth}
+													onMomentumScrollEnd={this.onPlantListMomentumEnd}
+													onViewableItemsChanged={this.onPlantListPageChange}
+													showsHorizontalScrollIndicator={false}
+													data={data}
+													initialScrollIndex={0}
+													extraData={[this.state.isRefreshing, this.state.nuevaPlantaFoto]}
+													keyExtractor={(item, index) => "" + index}
+													renderItem={({ item, index }) => (
+														<View style={{ width: screenWidth, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
+															<View style={{
+																width: '100%', height: '100%',
+																overflow: 'hidden',
+																justifyContent: 'center',
+																alignItems: 'center'
+															}}>
 																{
-																	(currentPlanta.diasRiego.includes(index) || !currentPlanta.diasRiego.includes(index) && !currentPlanta.diasAlimento.includes(index)) ?
-																		<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: '#c1c1c1', opacity: currentPlanta.diasRiego.includes(index) ? 1 : 0 }} />
-																		: null
+																	item.image ?
+																		<Image source={item.image} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
+																		: <Image source={logo} style={{ height: '50%', width: '50%', resizeMode: 'contain', opacity: 0.7 }} />
 																}
-																{
-																	currentPlanta.diasAlimento.includes(index) ?
-																		<Icon type="Entypo" name="flash" style={{ fontSize: 22, color: '#c1c1c1' }} />
-																		: null
-																}
+																<View style={{ position: 'absolute', bottom: 15, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+																	<View style={{ backgroundColor: 'rgba(255,255,255,0.9)', width: 40, height: 40, borderRadius: 20, borderColor: '#2b2b2b', borderWidth: 1, marginLeft: 15, marginRight: 15, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+																		<TouchableOpacity onPress={this.onChooseNuevaPlantaFoto}>
+																			<Icon type="EvilIcons" name="camera" style={{ fontSize: 34, color: '#2b2b2b' }} />
+																		</TouchableOpacity>
+																	</View>
+																	<View style={{ backgroundColor: 'rgba(255,255,255,0.9)', width: 40, height: 40, borderRadius: 20, borderColor: '#2b2b2b', borderWidth: 1, marginLeft: 15, marginRight: 15, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+																		<TouchableOpacity onPress={this.deleteCurrentPlant}>
+																			<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
+																		</TouchableOpacity>
+																	</View>
+																	<View style={{ backgroundColor: 'rgba(255,255,255,0.9)', width: 40, height: 40, borderRadius: 20, borderColor: '#2b2b2b', borderWidth: 1, marginLeft: 15, marginRight: 15, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+																		<TouchableOpacity onPress={this.onEditNombrePress}>
+																			<Icon type="EvilIcons" name="pencil" style={{ fontSize: 34, color: '#2b2b2b' }} />
+																		</TouchableOpacity>
+																	</View>
+																</View>
 															</View>
-															<Text style={{ fontFamily: "DosisLight", fontSize: 16, color: '#c1c1c1', opacity: currentPlanta.diasRiego.includes(index) ? 1 : 0.5 }}>{dia}</Text>
-															<Icon type="EvilIcons" name="chevron-up" style={{ fontSize: 18, color: '#c1c1c1', opacity: (index === hoy) ? 1 : 0 }} />
-															{/*<Icon type="Entypo" name="dot-single" style={{ fontSize: 18, color: '#ff5722', }} /> */}
-														</TouchableOpacity>
-													)
-												}
+															{
+																<View style={{
+																	position: 'absolute', top: 10, left: 0,
+																	width: '100%',
+																	flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+																}}>
+																	<View style={{
+																		flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+																		padding: 10,
+																		backgroundColor: nameControlColor,
+																		borderRadius: 15,
+																		//	elevation: 15
+																	}}>
+																		<Text style={{ fontFamily: "DosisLight", fontSize: 22, borderColor: 'transparent', color: '#f1f1f1' }}>{currentPlanta.name}</Text>
+																	</View>
+																</View>
+															}
+														</View>
+
+													)}
+												/>
 											</View>
-											<View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '100%' }}>
-												<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '50%' }}>
-													<TouchableOpacity onPress={this.onModalHoraVasosPress}
-														style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-														<Icon type="Feather" name={currentPlanta.alarma ? "award" : "bar-chart"} style={{ fontSize: 20, color: currentPlanta.alarma ? '#c1c1c1' : '#c1c1c1', marginRight: 10 }} />
-														<Text style={{ fontFamily: "DosisLight", fontSize: 18, color: '#c1c1c1' }}>{currentPlanta.hora < 10 ? "0" + currentPlanta.hora : currentPlanta.hora}:{currentPlanta.minutos < 10 ? "0" + currentPlanta.minutos : currentPlanta.minutos}</Text>
-													</TouchableOpacity>
+										</View>
+										<View style={{ flex: 1, backgroundColor: Colors.accentColor, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', }}  >
+											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+												<CalendarioComponent color={"#f1f1f1"} onDiaPress={this.onDiaPress} diasRiego={currentPlanta.diasRiego} diasAlimento={currentPlanta.diasAlimento} />
+											</View>
+											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft:3 }}>
+												<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
+													<Text style={{ fontFamily: "DosisLight", fontSize: 20, color: '#f1f1f1', marginRight: 5 }}>{currentPlanta.vasosAgua} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
+													<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: '#f1f1f1', marginLeft: 5 }} />
+												</View>
+												<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
+													<Text style={{ fontFamily: "DosisLight", fontSize: 20, color: '#f1f1f1', marginRight: 5 }}>{currentPlanta.vasosAlimento} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
+													<Icon type="Entypo" name="flash" style={{ fontSize: 22, color: '#f1f1f1', marginLeft: 5 }} />
 												</View>
 												<View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: '50%' }}>
-													<TouchableOpacity onPress={this.onModalHoraVasosPress}
-														style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-														<Text style={{ fontFamily: "DosisLight", fontSize: 18, color: '#c1c1c1' }}>{currentPlanta.vasosAgua} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
-														<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: '#c1c1c1', marginLeft: 5, marginRight: 15 }} />
-													</TouchableOpacity>
-													<TouchableOpacity onPress={this.onModalHoraVasosPress}
-														style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-														<Text style={{ fontFamily: "DosisLight", fontSize: 18, color: '#c1c1c1' }}>{currentPlanta.vasosAlimento} {/*currentPlanta.vasosAlimento == 1 ? 'vaso' : 'vasos'*/}</Text>
-														<Icon type="Entypo" name="flash" style={{ fontSize: 22, color: '#c1c1c1', marginLeft: 5 }} />
-													</TouchableOpacity>
+												<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#f1f1f1' }}>{currentPlanta.hora < 10 ? "0" + currentPlanta.hora : currentPlanta.hora}:{currentPlanta.minutos < 10 ? "0" + currentPlanta.minutos : currentPlanta.minutos}</Text>
+												<Icon type="EvilIcons" name={"bell"} style={{ fontSize: 27, color: currentPlanta.alarma ? '#f1f1f1' : '#a1a1a1' }} />
 												</View>
 											</View>
 										</View>
-										: <View style={{
-											flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-											width: screenWidth, backgroundColor: controlColor,
-											borderTopLeftRadius: 50, borderTopRightRadius: 50,
-											paddingLeft: '5%',
-											paddingRight: '5%',
-										}}>
-											<TextInput
-												style={{
-													flex: 1,
-													paddingTop: 10,
-													paddingRight: 10,
-													paddingBottom: 10,
-													paddingLeft: 0,
-													backgroundColor: 'transparent',
-													color: '#d1d1d1',
-													fontFamily: "DosisLight",
-													fontSize: 22,
-												}}
-												autoFocus
-												placeholder="Nombre de la planta"
-												placeholderTextColor={'#b1b1b1'}
-												onChangeText={this.nuevaPlantaTextChange}
-												autoCapitalize={'words'}
-												underlineColorAndroid="transparent"
-											/>
-											{nuevaPlantaReadyToAdd &&
-												<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
-													<Icon style={{ padding: 10, fontSize: 34, color: '#fff' }} type="Feather" name="box" />
-												</TouchableOpacity>
-											}
-											{/*<TextInput
-												style={{ height: '30%', width: '65%', paddingTop: 0, paddingBottom: 0, paddingLeft: 5, fontFamily: "DosisLight", fontSize: 22, borderColor: '#c1c1c1', borderWidth: 1 }}
-											
-												placeholder={"Nueva planta"}
-											
-											/>
-											<TouchableOpacity onPress={this.submitNuevaPlanta} style={{ margin: 15, marginRight: 0 }} disabled={!nuevaPlantaReadyToAdd}>
-												<Icon  style={{  }} />
-											</TouchableOpacity> */}
-										</View>
-								}
-							</View>
+									</View>
+							}
 						</View>
 				}
 			</Container>
