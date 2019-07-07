@@ -1,13 +1,11 @@
 import React from 'react';
-import { PermissionsAndroid, StatusBar, Dimensions, Text, View, ScrollView, Image, TouchableOpacity, TouchableHighlight, Modal, TimePickerAndroid, Switch, TextInput, Alert, ToastAndroid } from 'react-native';
-import { Container, Header, Left, Body, Right, Content, Spinner, Icon, Button } from 'native-base';
-import Configuracion from './Configuracion'
+import { PermissionsAndroid,  Dimensions, Text, View, ScrollView, Image, TouchableOpacity,  Modal, TextInput, Alert } from 'react-native';
+import { Container, Header,  Body, Right, Spinner, Icon,  } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
-import styled from 'styled-components'
-import NativeAlarmSetter from './NativeAlarmSetter'
 import CalendarioComponent from './CalendarioComponent'
 import TimePickerComponent from './TimePickerComponent'
+import NativeAlarmSetter from './NativeAlarmSetter'
 import { Colors, Labels } from './Const'
 
 const options = {
@@ -20,15 +18,6 @@ const options = {
 		path: 'images',
 	},
 };
-/*
-const topColor = '#0b0b0b'
-const mainColor = '#004d40'
-const controlColor = '#237051'
-const nameControlColor = '#10654A' */
-const topColor = '#1b5020'
-const mainColor = '#2e7d32'
-const controlColor = '#388e3c'
-const nameControlColor = '#43a047'
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -174,12 +163,12 @@ export default class NuevaPlanta extends React.Component {
 		this.setState({ selectedVasosFertilizante: value })
 	}
 
-	crearNuevaPlanta = (nombre, foto, hora, minutos, alarmOn, vasosAgua, vasosAlimento, ) => {
+	crearNuevaPlanta = (nombre, foto, diasRiego,diasAlimento, hora, minutos, alarmOn, vasosAgua, vasosAlimento, ) => {
 		return {
 			name: nombre,
 			image: foto,
-			diasRiego: [],
-			diasAlimento: [],
+			diasRiego: diasRiego,
+			diasAlimento:diasAlimento,
 			hora: hora,
 			minutos: minutos,
 			alarma: alarmOn,
@@ -189,10 +178,23 @@ export default class NuevaPlanta extends React.Component {
 		}
 	}
 
+	setPlantAlarms = async (planta) => {
+		var diasAlarma = planta.diasRiego.concat(planta.diasAlimento);
+		var diasUnique = diasAlarma.filter(function (item, pos) { return diasAlarma.indexOf(item) == pos });
+
+		diasUnique.map(async (dia) => {
+			const idAlarmaRiego = await NativeAlarmSetter.setAlarm(planta.name, 0, (dia + 1), planta.hora, planta.minutos)
+			planta.alarmasID.push(idAlarmaRiego.alarmId)
+		})
+		return planta
+	}
+
 	onSubmitPlanta = () => {
 		this.setState({ isRefreshing: true }, async () => {
-			const { nuevaPlantaName, nuevaPlantaFoto, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
-			var planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante)
+			const { nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
+			var planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante)
+			planta = await this.setPlantAlarms(planta)
+			console.log("onsubmitplanta planta", planta)
 			var data = await AsyncStorage.getItem('Plantas');
 			if (data != null) {
 				data = JSON.parse(data)

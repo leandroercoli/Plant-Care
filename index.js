@@ -7,20 +7,15 @@ import App from './src/App';
 
 class Main extends Component {
     state = {
-        isLoading: false
+        isLoading: true
     }
 
     render() {
-        if (this.state.isLoading) {
-            return (
-                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-                    <Text style={{ fontFamily: "DosisLight", fontSize: 42, color: '#2b2b2b' }}>PlantCare</Text>
-                    <Spinner color='rgb(179,15,59)' />
-                </View>
-            )
-        } else
             return <App />
     }
 }
+
+
+//<View style={{flex:1, backgroundColor:'red'}}/>
 
 AppRegistry.registerComponent(appName, () => Main);

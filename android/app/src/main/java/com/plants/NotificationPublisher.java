@@ -66,7 +66,7 @@ public class NotificationPublisher extends BroadcastReceiver {
         //Notification Channel ID passed as a parameter here will be ignored for all the Android versions below 8.0
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle("Plants");
-        builder.setContentText("Hora de " + intent.getStringExtra("accion") + " tu " + intent.getStringExtra("planta") + "!");
+        builder.setContentText("Hora de cuidar tu " + intent.getStringExtra("planta") + "!");
         builder.setContentIntent(pendingIntentNotification);
         builder.setAutoCancel(true);
         builder.setSmallIcon(R.mipmap.ic_launcher);

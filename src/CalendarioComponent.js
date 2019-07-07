@@ -1,20 +1,9 @@
 import React from 'react';
-import { StatusBar, Dimensions, Text, View, FlatList, Image, TouchableOpacity, TouchableHighlight, Modal, TimePickerAndroid, Switch, TextInput, Alert, ToastAndroid } from 'react-native';
-import { Container, Header, Left, Body, Right, Content, Spinner, Icon, Button } from 'native-base';
-import AsyncStorage from '@react-native-community/async-storage';
+import {  Text, View,  TouchableOpacity } from 'react-native';
+import {  Icon } from 'native-base';
 
 const dias = ["D", "L", "M", "M", "J", "V", "S"]
 const hoy = (new Date()).getDay() // retorna un numero entre 0 y 6 (Domingo, Lunes, ...)
-
-/*
-const topColor = '#0b0b0b'
-const mainColor = '#004d40'
-const controlColor = '#237051'
-const nameControlColor = '#10654A' */
-const topColor = '#1b5020'
-const mainColor = '#2e7d32'
-const controlColor = '#388e3c'
-const nameControlColor = '#43a047'
 
 export default class CalendarioComponent extends React.Component {
 	constructor(props) {
@@ -34,20 +23,20 @@ export default class CalendarioComponent extends React.Component {
 		}
 	}
 
-	onDiaPress = (index) => {
+	onDiaPress = (dianro) => {
 		var { diasRiego, diasAlimento } = this.state
 
-		if (diasRiego.includes(index) && diasAlimento.includes(index)) {
-			diasRiego = diasRiego.splice(index, 1);
-		} else if (diasRiego.includes(index))
-			diasAlimento.push(index)
-		else if (diasAlimento.includes(index))
-		diasAlimento =  diasAlimento.splice(index, 1);
+		if (diasRiego.includes(dianro) && diasAlimento.includes(dianro)) {
+			 diasRiego.splice(diasRiego.indexOf(dianro), 1);
+		} else if (diasRiego.includes(dianro))
+			diasAlimento.push(dianro)
+		else if (diasAlimento.includes(dianro))
+			 diasAlimento.splice(diasAlimento.indexOf(dianro), 1);
 		else {
-			diasRiego.push(index)
+			diasRiego.push(dianro)
 		}
 
-		this.setState({ diasRiego: diasRiego, diasAlimento: diasAlimento }, () => this.props.onDiaPress(diasRiego,diasAlimento))
+		this.setState({ diasRiego: diasRiego, diasAlimento: diasAlimento }, () => this.props.onDiaPress(diasRiego, diasAlimento))
 	}
 
 	render = () => {
@@ -55,7 +44,7 @@ export default class CalendarioComponent extends React.Component {
 		const { color } = this.props
 		return (
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-				<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color:color, paddingTop: 10 }} />
+				<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: color, paddingTop: 10 }} />
 				{
 					dias.map((dia, index) =>
 						<TouchableOpacity key={"dia" + index} onPress={() => this.onDiaPress(index)}
@@ -68,7 +57,7 @@ export default class CalendarioComponent extends React.Component {
 								}
 								{
 									diasAlimento.includes(index) ?
-										<Icon type="Entypo" name="flash" style={{ fontSize: 22, color:color }} />
+										<Icon type="Entypo" name="flash" style={{ fontSize: 22, color: color }} />
 										: null
 								}
 							</View>
