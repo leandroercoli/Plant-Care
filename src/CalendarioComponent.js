@@ -1,8 +1,8 @@
 import React from 'react';
-import {  Text, View,  TouchableOpacity } from 'react-native';
-import {  Icon } from 'native-base';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Icon } from 'native-base';
+import {  Labels } from './Const'
 
-const dias = ["D", "L", "M", "M", "J", "V", "S"]
 const hoy = (new Date()).getDay() // retorna un numero entre 0 y 6 (Domingo, Lunes, ...)
 
 export default class CalendarioComponent extends React.Component {
@@ -27,11 +27,11 @@ export default class CalendarioComponent extends React.Component {
 		var { diasRiego, diasAlimento } = this.state
 
 		if (diasRiego.includes(dianro) && diasAlimento.includes(dianro)) {
-			 diasRiego.splice(diasRiego.indexOf(dianro), 1);
+			diasRiego.splice(diasRiego.indexOf(dianro), 1);
 		} else if (diasRiego.includes(dianro))
 			diasAlimento.push(dianro)
 		else if (diasAlimento.includes(dianro))
-			 diasAlimento.splice(diasAlimento.indexOf(dianro), 1);
+			diasAlimento.splice(diasAlimento.indexOf(dianro), 1);
 		else {
 			diasRiego.push(dianro)
 		}
@@ -41,7 +41,8 @@ export default class CalendarioComponent extends React.Component {
 
 	render = () => {
 		const { diasRiego, diasAlimento } = this.state
-		const { color } = this.props
+		const { color, idioma } = this.props
+		const dias = Labels[idioma].dias
 		return (
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
 				<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: color, paddingTop: 10 }} />

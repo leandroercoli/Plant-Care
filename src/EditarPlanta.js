@@ -2,7 +2,7 @@ import React from 'react';
 import {  Dimensions, Text, View, TouchableOpacity, Modal, TextInput, Alert } from 'react-native';
 import {  Icon } from 'native-base';
 import TimePickerComponent from './TimePickerComponent'
-import { Colors } from './Const'
+import { Labels, Colors } from './Const'
 
 export default class EditarPlanta extends React.Component {
 	constructor(props) {
@@ -90,6 +90,7 @@ export default class EditarPlanta extends React.Component {
 	}
 
 	render = () => {
+		const { idioma} = this.props
 		const { show, plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const readyToSubmit = plantaName != ''  // && nuevaPlantaFoto 
 		return (
@@ -120,7 +121,7 @@ export default class EditarPlanta extends React.Component {
 								fontSize: 22,
 							}}
 							defaultValue={plantaName}
-							placeholder="Nombre"
+							placeholder={Labels[idioma].editarPlanta.lblPlaceholderNombre}
 							placeholderTextColor={'#616161'}
 							onChangeText={this.plantaTextChange}
 							autoCapitalize={'words'}
@@ -138,7 +139,7 @@ export default class EditarPlanta extends React.Component {
 						borderRadius: 20,
 						marginBottom: 30,
 					}}>
-						<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Hora de alarma</Text>
+						<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].editarPlanta.lblHoraAlarma}</Text>
 						<TimePickerComponent fontSize={22} onSelectTime={this.onSelectTime} selectedHour={selectedHour} selectedMinutes={selectedMinutes} />
 					</View>
 					<View style={{
@@ -151,7 +152,7 @@ export default class EditarPlanta extends React.Component {
 						borderRadius: 20,
 						marginBottom: 30,
 					}}>
-						<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Notificaciones</Text>
+						<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].editarPlanta.lblNotificaciones}</Text>
 						<TouchableOpacity onPress={this.onAlarmSwitch}>
 							<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 25, color: alarmOn ? Colors.accentColor : '#616161' }} />
 						</TouchableOpacity>
@@ -178,7 +179,7 @@ export default class EditarPlanta extends React.Component {
 							}}
 							defaultValue={selectedVasosAgua}
 							keyboardType='numeric'
-							placeholder="Vasos de agua"
+							placeholder={Labels[idioma].editarPlanta.lblVasosAgua}
 							placeholderTextColor={'#616161'}
 							onChangeText={this.onSelectedVasosAguaChange}
 							underlineColorAndroid={Colors.accentColor}
@@ -207,7 +208,7 @@ export default class EditarPlanta extends React.Component {
 							}}
 							defaultValue={selectedVasosFertilizante}
 							keyboardType='numeric'
-							placeholder="Vasos de fertilizante"
+							placeholder={Labels[idioma].editarPlanta.lblVasosFertilizante}
 							placeholderTextColor={'#616161'}
 							onChangeText={this.onSelectedVasosFertilizanteChange}
 							underlineColorAndroid={Colors.accentColor}

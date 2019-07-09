@@ -118,7 +118,8 @@ export default class App extends React.Component {
 
 	onChooseNuevaPlantaFoto = () => {
 		var { data, currentIndex } = this.state
-		ImagePicker.showImagePicker(Labels.optionsImagePicker, (response) => {
+		const { idioma } = this.props
+		ImagePicker.showImagePicker(Labels[idioma].optionsImagePicker, (response) => {
 			console.log('Response = ', response);
 
 			if (response.didCancel) {
@@ -216,6 +217,7 @@ export default class App extends React.Component {
 	}
 
 	render = () => {
+		const { idioma } = this.props
 		const { isLoading, data, currentIndex, nuevaPlantaFoto, isRefreshing } = this.state
 		const currentPlanta = data[currentIndex]
 		return (
@@ -233,9 +235,10 @@ export default class App extends React.Component {
 						</TouchableOpacity>
 					</Right>
 				</Header>
-				<NuevaPlanta ref={(r) => this.NuevaPlantaModal = r} onFinishSubmitting={this.onFinishSubmitting} />
-				<Configuracion ref={(r) => this.ConfiguracionModal = r} onReset={this.onReset} />
+				<NuevaPlanta ref={(r) => this.NuevaPlantaModal = r} idioma={idioma} onFinishSubmitting={this.onFinishSubmitting} />
+				<Configuracion ref={(r) => this.ConfiguracionModal = r} idioma={idioma} onReset={this.onReset} onSelectIdioma={this.props.onSelectIdioma} />
 				<EditarPlanta ref={(r) => this.EditarPlantaModal = r}
+				idioma={idioma}
 					plantaName={currentPlanta ? currentPlanta.name : null}
 					selectedHour={currentPlanta ? currentPlanta.hora : null}
 					selectedMinutes={currentPlanta ? currentPlanta.minutos : null}
@@ -374,7 +377,7 @@ export default class App extends React.Component {
 													</View>
 													<View style={{ flex: 1, backgroundColor: Colors.accentColor, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', }}  >
 														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-															<CalendarioComponent color={"#f1f1f1"} onDiaPress={this.onDiaPress} diasRiego={item.diasRiego} diasAlimento={item.diasAlimento} />
+															<CalendarioComponent color={"#f1f1f1"} idioma={idioma} onDiaPress={this.onDiaPress} diasRiego={item.diasRiego} diasAlimento={item.diasAlimento} />
 														</View>
 														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3 }}>
 															<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>

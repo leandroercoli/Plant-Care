@@ -22,10 +22,13 @@ export default class Loading extends React.Component {
 			this.spinValue,
 			{
 				toValue: 1,
-				duration: 3000,
-				easing: Easing.linear
+				duration: 500,
+				easing: Easing.ease
 			}
-		).start(() => this.spin())
+		).start(() => {
+			// Logic whenever an iteration finishes...
+			this.props.onAnimationDone()
+		  })
 	}
 
 	render = () => {
@@ -39,9 +42,41 @@ export default class Loading extends React.Component {
 		})
 		const opacitySmall = this.spinValue.interpolate({
 			inputRange: [0, 0.5, 1],
-			outputRange: [0.6,1,0.6]
+			outputRange: [0.6, 1, 0.6]
+		})
+		const scale = this.spinValue.interpolate({
+			inputRange: [0, 1],
+			outputRange: [1, 0]
+		})
+		const scaleBackground = this.spinValue.interpolate({
+			inputRange: [0, 1],
+			outputRange: [1, 10]
+		})
+		const scaleOpacity = this.spinValue.interpolate({
+			inputRange: [0, 1],
+			outputRange: [1,  0]
 		})
 		return (
+			<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor:'#fff' }}>
+				<Animated.View style={{
+					position:'absolute',
+					height: 160, width: 160, borderRadius: 80,
+					transform: [{ scale: scaleBackground }],
+					backgroundColor:'#089ace'
+			}}/>
+				<Animated.Image
+						style={{
+							position:'absolute',
+							height: 150, width: 150,
+							transform: [{ scale: scale }],
+							opacity:scaleOpacity
+							//transform: [{translateX:15},{ rotate: spinSmall }]
+						}}
+						source={Img.fullLogo}
+					/>
+			</View>
+		)
+		/*return (
 			<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 				<View style={{ width: screenWidth * 0.6, height: screenWidth * 0.6, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
 					<View style={{
@@ -69,6 +104,6 @@ export default class Loading extends React.Component {
 					</View>
 				</View>
 			</View>
-		)
+		) */
 	}
 }

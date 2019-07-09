@@ -44,7 +44,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	show = () => {
-		this.setState({ show: true })
+		this.setState({show: true, step: 0 }, () => this.NewPlantStepsList.scrollTo({ x: 0, animated: true }))
 	}
 
 	hide = () => {
@@ -67,6 +67,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	onChooseNuevaPlantaFotoCamara =async  () => {
+		const {idioma} = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
 		if(permisoGranted) ImagePicker.launchCamera(options, (response) => {
 			if (response.didCancel) {
@@ -81,8 +82,8 @@ export default class NuevaPlanta extends React.Component {
 			}
 		});
 		else Alert.alert(
-			Labels.permisosAlerta.titulo,
-			Labels.permisosAlerta.descripcion,
+			Labels[idioma].permisosAlerta.titulo,
+			Labels[idioma].permisosAlerta.descripcion,
 			[
 				{
 					text: 'Ok', onPress: () => null
@@ -93,6 +94,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	onChooseNuevaPlantaFotoGaleria = async() => {
+		const {idioma} = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
 		if(permisoGranted) ImagePicker.launchImageLibrary(options, (response) => {
 			if (response.didCancel) {
@@ -107,8 +109,8 @@ export default class NuevaPlanta extends React.Component {
 			}
 		});
 		else Alert.alert(
-			Labels.permisosAlerta.titulo,
-			Labels.permisosAlerta.descripcion,
+			Labels[idioma].permisosAlerta.titulo,
+			Labels[idioma].permisosAlerta.descripcion,
 			[
 				{
 					text: 'Ok', onPress: () => null
@@ -231,6 +233,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	render = () => {
+		const {idioma} = this.props
 		const { show, step, nuevaPlantaName, nuevaPlantaFoto, isRefreshing, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const nuevaPlantaReadyToAdd = nuevaPlantaName != '' // && nuevaPlantaFoto 
 		const viewableScreen = screenHeight * 0.9 // pantalla sin header
@@ -244,7 +247,7 @@ export default class NuevaPlanta extends React.Component {
 				<Container>
 					<Header transparent style={{ paddingTop: 0 }}>
 						<Body>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b' }}>Nueva planta</Text>
+							<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b' }}>{Labels[idioma].nuevaPlanta.title}</Text>
 						</Body>
 						<Right>
 							<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -327,13 +330,13 @@ export default class NuevaPlanta extends React.Component {
 												marginBottom: 30,
 												marginTop: 30
 											}}
-											placeholder="Nombre"
+											placeholder={Labels[idioma].nuevaPlanta.lblPlaceholderNombre}
 											placeholderTextColor={'#616161'}
 											onChangeText={this.nuevaPlantaTextChange}
 											autoCapitalize={'words'}
 											underlineColorAndroid={Colors.accentColor}
 										/>
-										<View style={{ marginBottom: 30 }}><CalendarioComponent color={"#2b2b2b"} onDiaPress={this.onDiaPress} /></View>
+										<View style={{ marginBottom: 30 }}><CalendarioComponent color={"#2b2b2b"} onDiaPress={this.onDiaPress} idioma={idioma}  /></View>
 										<View style={{
 											width: '100%',
 											flexDirection: 'row',
@@ -341,7 +344,7 @@ export default class NuevaPlanta extends React.Component {
 											alignItems: 'center',
 											marginBottom: 30,
 										}}>
-											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b', paddingRight: 10 }}>Hora de alarma</Text>
+											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b', paddingRight: 10 }}>{Labels[idioma].nuevaPlanta.lblHoraAlarma}</Text>
 											<TimePickerComponent fontSize={22} onSelectTime={this.onSelectTime} />
 										</View>
 										<View style={{
@@ -352,7 +355,7 @@ export default class NuevaPlanta extends React.Component {
 											marginBottom: 30,
 											paddingRight: 10
 										}}>
-											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Notificaciones</Text>
+											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].nuevaPlanta.lblNotificaciones}</Text>
 											<TouchableOpacity onPress={this.onAlarmSwitch}>
 												<Icon type="Feather" name={alarmOn ? "award" : "bar-chart"} style={{ fontSize: 25, color: alarmOn ? Colors.accentColor : '#616161' }} />
 											</TouchableOpacity>
@@ -376,7 +379,7 @@ export default class NuevaPlanta extends React.Component {
 													fontSize: 22,
 												}}
 												keyboardType='numeric'
-												placeholder="Vasos de agua"
+												placeholder={Labels[idioma].nuevaPlanta.lblVasosAgua}
 												placeholderTextColor={'#616161'}
 												onChangeText={this.onSelectedVasosAguaChange}
 												underlineColorAndroid={Colors.accentColor}
@@ -402,7 +405,7 @@ export default class NuevaPlanta extends React.Component {
 													fontSize: 22,
 												}}
 												keyboardType='numeric'
-												placeholder="Vasos de fertilizante"
+												placeholder={Labels[idioma].nuevaPlanta.lblVasosFertilizante}
 												placeholderTextColor={'#616161'}
 												onChangeText={this.onSelectedVasosFertilizanteChange}
 												underlineColorAndroid={Colors.accentColor}
@@ -420,18 +423,18 @@ export default class NuevaPlanta extends React.Component {
 							{
 								step == 1 && <TouchableOpacity onPress={this.onPrevStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
 									<Icon style={{ fontSize: 34, color: '#2b2b2b', paddingRight: 5 }} type="EvilIcons" name="chevron-left" />
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Volver</Text>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].nuevaPlanta.btnVolver}</Text>
 								</TouchableOpacity>
 							}
 							{
 								step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' ,  opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1}} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b', }}>Listo</Text>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b', }}>{Labels[idioma].nuevaPlanta.btnListo}</Text>
 									{isRefreshing ? <Spinner color={Colors.accentColor} style={{ marginLeft: 10 }} /> : <Icon style={{ fontSize: 34, color: '#2b2b2b', paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />}
 								</TouchableOpacity>
 							}
 							{
 								step == 0 && <TouchableOpacity onPress={this.onNextStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', }}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Siguiente</Text>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].nuevaPlanta.btnSiguiente}</Text>
 									<Icon style={{ fontSize: 34, color: '#2b2b2b', paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />
 								</TouchableOpacity>
 							}

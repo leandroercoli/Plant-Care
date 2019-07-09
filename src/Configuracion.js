@@ -4,6 +4,8 @@ import { Spinner, Icon, Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components'
 import DeviceInfo from 'react-native-device-info';
+import { Labels, Colors } from './Const'
+import ElegirIdioma from './ElegirIdioma';
 
 const configDefault = {
 	notificationsOn: true
@@ -48,6 +50,8 @@ const ConfiguracionItemIcon = styled(TouchableOpacity)`
 export default class Configuracion extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.ElegirIdiomaModal = React.createRef()
 
 		this.state = {
 			show: false,
@@ -100,13 +104,14 @@ export default class Configuracion extends React.Component {
 	}
 
 	onReset = () => {
+		const { idioma } = this.props
 		Alert.alert(
-			'Eliminar todo',
-			'¿Está seguro que desea eliminar todas las plantas? Esta operación no se puede revertir',
+			Labels[idioma].configuracion.alertLimpiar.title,
+			Labels[idioma].configuracion.alertLimpiar.descripcion,
 			[
-				{ text: 'Cancelar', onPress: null },
+				{ text: Labels[idioma].configuracion.alertLimpiar.btnCancelar, onPress: null },
 				{
-					text: 'Sí', onPress: () => {
+					text: Labels[idioma].configuracion.alertLimpiar.btnOk, onPress: () => {
 						this.setState({ isRefreshing: true },
 							async () => {
 								//await this.reset()
@@ -121,6 +126,15 @@ export default class Configuracion extends React.Component {
 		)
 	}
 
+	onSelectIdiomaPress = () => {
+		this.ElegirIdiomaModal.show()
+	}
+
+	onSelectIdioma = (idioma) => {
+		this.ElegirIdiomaModal.hide()
+		this.props.onSelectIdioma(idioma)
+	}
+
 	async componentDidMount() {
 		this.reloadConfig()
 	}
@@ -129,17 +143,19 @@ export default class Configuracion extends React.Component {
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
 		const { show, config } = this.state
+		const { idioma } = this.props
 		return (
 			<Modal
 				animationType="slide"
 				transparent={false}
 				visible={show}
 				onRequestClose={this.hide} >
+				<ElegirIdioma ref={(r) => this.ElegirIdiomaModal = r} onSelectIdioma={this.onSelectIdioma} canCancel={true} />
 				<View style={{
 					flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'
 				}}>
-					<View style={{ width: '100%', height: '10%',  flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft:10, paddingRight:10 }}>
-												<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b', paddingRight: 10 }}>Configuración</Text>
+					<View style={{ width: '100%', height: '10%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+						<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#2b2b2b', paddingRight: 10 }}>{Labels[idioma].configuracion.title}</Text>
 						<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 							<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: '#2b2b2b' }} />
 						</TouchableOpacity>
@@ -172,10 +188,24 @@ export default class Configuracion extends React.Component {
 								shadowRadius: 1,
 								elevation: 3
 							}}>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Limpiar</Text>
-								<ConfiguracionItemIcon onPress={this.onReset}>
+								<TouchableOpacity onPress={this.onSelectIdiomaPress} style={{ flex: 1 }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].configuracion.lblIdioma}</Text>
+								</TouchableOpacity>
+							</ConfiguracionItem>
+							<ConfiguracionItem style={{
+								shadowColor: "#fff",
+								shadowOffset: {
+									width: 1,
+									height: 1,
+								},
+								shadowOpacity: 0.15,
+								shadowRadius: 1,
+								elevation: 3,
+							}}>
+								<TouchableOpacity onPress={this.onReset} style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].configuracion.lblLimpiar}</Text>
 									<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: '#2b2b2b' }} />
-								</ConfiguracionItemIcon>
+								</TouchableOpacity>
 							</ConfiguracionItem>
 						</ConfiguracionSection>
 
@@ -190,11 +220,11 @@ export default class Configuracion extends React.Component {
 								shadowRadius: 1,
 								elevation: 3
 							}}>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Versión</Text>
-								<ConfiguracionItemIcon onPress={this.onSwitchNotifications}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#414141' }}>{version}</Text>
-								</ConfiguracionItemIcon>
-							</ConfiguracionItem>
+								<View  style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].configuracion.lblVersion}</Text>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#414141', paddingRight:10 }}>{version}</Text>
+							</View>
+								</ConfiguracionItem>
 						</ConfiguracionSection>
 					</ScrollView>
 				</View>
