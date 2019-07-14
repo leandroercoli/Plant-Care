@@ -73,16 +73,17 @@ export default class EditarPlanta extends React.Component {
 	}
 
 	onDonePress = () => {
+		const { idioma} = this.props
 		const { plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const vasosAgua = selectedVasosAgua != '' ? selectedVasosAgua : 0
 		const vasosFertilizante = selectedVasosFertilizante != '' ? selectedVasosFertilizante : 0
 		Alert.alert(
-			'Cambiar nombre',
-			'¿Está seguro que desea aplicar los cambios?',
+			Labels[idioma].editarPlantaDoneAlert.title,
+			Labels[idioma].editarPlantaDoneAlert.descripcion,
 			[
-				{ text: 'Cancelar', onPress: this.onCancelPress },
+				{ text: Labels[idioma].editarPlantaDoneAlert.btnCancelar, onPress: this.onCancelPress },
 				{
-					text: 'Sí', onPress: () => { 
+					text: Labels[idioma].editarPlantaDoneAlert.btnOk, onPress: () => { 
 						this.props.onFinishEditar(plantaName, selectedHour, selectedMinutes, alarmOn, Number(vasosAgua), Number(vasosFertilizante)); this.hide() }
 				},
 			],

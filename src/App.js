@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dimensions, Text, View, FlatList, Image, TouchableOpacity, Alert, } from 'react-native';
 import { Container, Header, Body, Right, Spinner, Icon } from 'native-base';
-import Loading from './Loading';
 import NuevaPlanta from './NuevaPlanta'
 import Configuracion from './Configuracion'
 import EditarPlanta from './EditarPlanta'
@@ -12,7 +11,6 @@ import NativeAlarmSetter from './NativeAlarmSetter'
 import { Labels, Colors, Img } from './Const'
 
 const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -120,8 +118,6 @@ export default class App extends React.Component {
 		var { data, currentIndex } = this.state
 		const { idioma } = this.props
 		ImagePicker.showImagePicker(Labels[idioma].optionsImagePicker, (response) => {
-			console.log('Response = ', response);
-
 			if (response.didCancel) {
 				console.log('User cancelled image picker');
 			} else if (response.error) {
@@ -144,13 +140,14 @@ export default class App extends React.Component {
 	}
 
 	deleteCurrentPlant = () => {
+		const { idioma } = this.props
 		Alert.alert(
-			'Eliminar planta',
-			'¿Está seguro que desea eliminar la planta de su colección?',
+			Labels[idioma].eliminarPlantaAlert.title,
+			Labels[idioma].eliminarPlantaAlert.descripcion,
 			[
-				{ text: 'Cancelar', onPress: () => null },
+				{ text: Labels[idioma].eliminarPlantaAlert.btnCancelar, onPress: () => null },
 				{
-					text: 'Sí', onPress: () => {
+					text: Labels[idioma].eliminarPlantaAlert.btnOk, onPress: () => {
 						this.setState({ isRefreshing: true }, async () => {
 							var { data, currentIndex } = this.state
 							this.cancelAlarmsCurrentPlant()

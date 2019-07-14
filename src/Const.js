@@ -46,6 +46,18 @@ export const Labels = {
 			lblVasosAgua:'Vasos de agua',
 			lblVasosFertilizante:'Vasos de fertilizante',
 		},
+		editarPlantaDoneAlert:{
+			title:'Editar planta',
+			descripcion:'¿Está seguro que desea aplicar los cambios?',
+			btnCancelar:'Cancelar',
+			btnOk:'Sí'
+		},
+		eliminarPlantaAlert:{
+			title:'Eliminar planta',
+			descripcion:'¿Está seguro que desea eliminar la planta de su colección?',
+			btnCancelar:'Cancelar',
+			btnOk:'Sí'
+		},
 		dias: ["D", "L", "M", "M", "J", "V", "S"],
 		permisoCamera: {
 			title: 'Permiso para acceder a la cámara',
@@ -66,9 +78,9 @@ export const Labels = {
 			descripcion: 'Plant Care necesita permisos para acceder a la cámara y a la galería de fotos para elegir una foto para tu planta.'
 		},
 		optionsImagePicker: {
-			title: 'Elija una foto para la nueva planta',
-			takePhotoButtonTitle: 'Tomar una foto',
-			chooseFromLibraryButtonTitle: 'Elegir foto desde el teléfono ...',
+			title: 'Subir una foto',
+			takePhotoButtonTitle: 'Desde la cámara...',
+			chooseFromLibraryButtonTitle: 'Desde el teléfono...',
 			customButtons: [],
 			storageOptions: {
 				skipBackup: true,
@@ -80,11 +92,11 @@ export const Labels = {
 		test:'english',
 		configuracion:{
 			title:'Settings',
-			lblLimpiar:'Clean',
+			lblLimpiar:'Reset',
 			lblIdioma:'Language',
 			lblVersion:'Version',
 			alertLimpiar:{
-				title:'Clean all',
+				title:'Reset',
 				descripcion:'Are you sure you want to delete every plant? This action cannot be reversed.',
 				btnCancelar:'Cancel',
 				btnOk:'Yes'
@@ -99,38 +111,50 @@ export const Labels = {
 			lblHoraAlarma:'Alarm',
 			lblNotificaciones:'Notifications',
 			lblVasosAgua:'Water cups',
-			lblVasosFertilizante:'Fertiliz....',
+			lblVasosFertilizante:'Fertilizer cups',
 		},
 		editarPlanta:{
 			lblPlaceholderNombre:'Name',
 			lblHoraAlarma:'Alarm',
 			lblNotificaciones:'Notifications',
 			lblVasosAgua:'Water cups',
-			lblVasosFertilizante:'Fertiliz....',
+			lblVasosFertilizante:'Fertilizer cups',
+		},
+		eliminarPlantaAlert:{
+			title:'Delete plant',
+			descripcion:'Are you sure you want to delete the plant from your collection?',
+			btnCancelar:'Cancel',
+			btnOk:'Yes'
 		},
 		dias: ["S", "M", "T", "W", "T", "F", "S"],
+		editarPlantaDoneAlert:{
+			title:'Edit plant',
+			descripcion:'Are you sure you want to apply the changes?',
+			btnCancelar:'Cancel',
+			btnOk:'Yes'
+		},
 		permisoCamera: {
-			title: 'Permiso para acceder a la cámara',
+			title: 'Plant Care camera permission',
 			message:
-				'Plant Care necesita permiso para acceder a la cámara.',
-			buttonNegative: 'Ahora no',
+				'Plant Care needs access to your camera so you can take awesome pictures.',
+			buttonNegative: 'Ask me later',
 			buttonPositive: 'OK',
 		},
 		permisoGaleria: {
-			title: 'Permiso para acceder a los archivos multimedia',
+			title: 'Plant Care file access permission',
 			message:
-				'Plant Care necesita permiso para acceder a los archivos multimedia de tu dispositivo.',
-			buttonNegative: 'Ahora no',
+				'Plant Care needs access to your multimedia files so you can choose a great picture for your plant.',
+			buttonNegative: 'Ask me later',
 			buttonPositive: 'OK',
 		},
 		permisosAlerta: {
-			titulo: 'Error al elegir una foto',
-			descripcion: 'Plant Care necesita permisos para acceder a la cámara y a la galería de fotos para elegir una foto para tu planta.'
+			titulo: 'Error uploading a photo',
+			descripcion: 'Plant Care needs access to the camera and your multimedia files so you can choose a great picture for your plant.'
 		},
 		optionsImagePicker: {
-			title: 'Elija una foto para la nueva planta',
-			takePhotoButtonTitle: 'Tomar una foto',
-			chooseFromLibraryButtonTitle: 'Elegir foto desde el teléfono ...',
+			title: 'Upload a photo',
+			takePhotoButtonTitle: 'From camera...',
+			chooseFromLibraryButtonTitle: 'From files...',
 			customButtons: [],
 			storageOptions: {
 				skipBackup: true,

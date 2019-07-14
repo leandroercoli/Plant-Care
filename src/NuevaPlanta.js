@@ -8,16 +8,6 @@ import TimePickerComponent from './TimePickerComponent'
 import NativeAlarmSetter from './NativeAlarmSetter'
 import { Colors, Labels } from './Const'
 
-const options = {
-	title: 'Elija una foto para la nueva planta',
-	takePhotoButtonTitle: 'Tomar una foto',
-	chooseFromLibraryButtonTitle: 'Elegir foto desde el teléfono ...',
-	customButtons: [],
-	storageOptions: {
-		skipBackup: true,
-		path: 'images',
-	},
-};
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -69,7 +59,7 @@ export default class NuevaPlanta extends React.Component {
 	onChooseNuevaPlantaFotoCamara =async  () => {
 		const {idioma} = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
-		if(permisoGranted) ImagePicker.launchCamera(options, (response) => {
+		if(permisoGranted) ImagePicker.launchCamera(Labels[idioma].permisoCamera, (response) => {
 			if (response.didCancel) {
 				console.log('User cancelled image picker');
 			} else if (response.error) {
@@ -96,7 +86,7 @@ export default class NuevaPlanta extends React.Component {
 	onChooseNuevaPlantaFotoGaleria = async() => {
 		const {idioma} = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
-		if(permisoGranted) ImagePicker.launchImageLibrary(options, (response) => {
+		if(permisoGranted) ImagePicker.launchImageLibrary(Labels[idioma].permisoGaleria, (response) => {
 			if (response.didCancel) {
 				console.log('User cancelled image picker');
 			} else if (response.error) {
@@ -196,7 +186,6 @@ export default class NuevaPlanta extends React.Component {
 			const { nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 			var planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante)
 			planta = await this.setPlantAlarms(planta)
-			console.log("onsubmitplanta planta", planta)
 			var data = await AsyncStorage.getItem('Plantas');
 			if (data != null) {
 				data = JSON.parse(data)
