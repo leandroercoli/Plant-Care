@@ -3,6 +3,7 @@ import { Dimensions, Text, View, TouchableOpacity, Modal, TextInput, Alert } fro
 import { Icon } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Colors } from './Const'
+import NativeAlarmSetter from './NativeAlarmSetter'
 
 export default class ElegirIdioma extends React.Component {
 	constructor(props) {
@@ -23,11 +24,13 @@ export default class ElegirIdioma extends React.Component {
 
 	onPressEspaniol = () => {
 		AsyncStorage.setItem('Idioma', 'es')
+		NativeAlarmSetter.setLanguage('es') 
 		this.props.onSelectIdioma('es')
 	}
 
 	onPressEnglish = () => {
 		AsyncStorage.setItem('Idioma', 'en')
+		NativeAlarmSetter.setLanguage('en') 
 		this.props.onSelectIdioma('en')
 	}
 

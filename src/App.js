@@ -293,7 +293,7 @@ export default class App extends React.Component {
 							{
 								data.length == 0 ?
 									<TouchableOpacity onPress={this.onNewPlantPress} style={{ margin: 15 }}>
-										<Icon type="EvilIcons" name="plus" style={{ fontSize: 82, color: Colors.accentColor, opacity: 0.8, }} />
+										<Icon type="EvilIcons" name="plus" style={{ fontSize: 102, color: Colors.accentColor, opacity: 0.8, }} />
 									</TouchableOpacity>
 									:
 									<View style={{ width: screenWidth, height: '100%', }}>

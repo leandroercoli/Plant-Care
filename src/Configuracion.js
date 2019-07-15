@@ -127,11 +127,11 @@ export default class Configuracion extends React.Component {
 	}
 
 	onSelectIdiomaPress = () => {
-		this.ElegirIdiomaModal.show()
+		if(this.ElegirIdiomaModal)this.ElegirIdiomaModal.show()
 	}
 
 	onSelectIdioma = (idioma) => {
-		this.ElegirIdiomaModal.hide()
+		if(this.ElegirIdiomaModal)this.ElegirIdiomaModal.hide()
 		this.props.onSelectIdioma(idioma)
 	}
 
