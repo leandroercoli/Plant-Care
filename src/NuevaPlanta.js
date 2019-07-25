@@ -1,6 +1,6 @@
 import React from 'react';
-import { PermissionsAndroid,  Dimensions, Text, View, ScrollView, Image, TouchableOpacity,  Modal, TextInput, Alert } from 'react-native';
-import { Container, Header,  Body, Right, Spinner, Icon,  } from 'native-base';
+import { PermissionsAndroid, Dimensions, Text, View, ScrollView, Image, TouchableOpacity, Modal, TextInput, Alert } from 'react-native';
+import { Container, Header, Body, Right, Spinner, Icon, } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
 import CalendarioComponent from './CalendarioComponent'
@@ -34,7 +34,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	show = () => {
-		this.setState({show: true, step: 0 }, () => this.NewPlantStepsList.scrollTo({ x: 0, animated: true }))
+		this.setState({ show: true, step: 0 }, () => this.NewPlantStepsList.scrollTo({ x: 0, animated: true }))
 	}
 
 	hide = () => {
@@ -48,18 +48,18 @@ export default class NuevaPlanta extends React.Component {
 			nuevaPlantaFoto: null,
 			diasRiego: [],
 			diasAlimento: [],
-			selectedHour: null,
-			selectedMinutes: null,
+			selectedHour: 0,
+			selectedMinutes: 0,
 			alarmOn: true,
 			selectedVasosAgua: 0,
 			selectedVasosFertilizante: 0
 		})
 	}
 
-	onChooseNuevaPlantaFotoCamara =async  () => {
-		const {idioma} = this.props
+	onChooseNuevaPlantaFotoCamara = async () => {
+		const { idioma } = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
-		if(permisoGranted) ImagePicker.launchCamera(Labels[idioma].permisoCamera, (response) => {
+		if (permisoGranted) ImagePicker.launchCamera(Labels[idioma].permisoCamera, (response) => {
 			if (response.didCancel) {
 				console.log('User cancelled image picker');
 			} else if (response.error) {
@@ -83,10 +83,10 @@ export default class NuevaPlanta extends React.Component {
 		)
 	}
 
-	onChooseNuevaPlantaFotoGaleria = async() => {
-		const {idioma} = this.props
+	onChooseNuevaPlantaFotoGaleria = async () => {
+		const { idioma } = this.props
 		const permisoGranted = await this.requestCameraPermission() && await this.requestGaleriaPermission()
-		if(permisoGranted) ImagePicker.launchImageLibrary(Labels[idioma].permisoGaleria, (response) => {
+		if (permisoGranted) ImagePicker.launchImageLibrary(Labels[idioma].permisoGaleria, (response) => {
 			if (response.didCancel) {
 				console.log('User cancelled image picker');
 			} else if (response.error) {
@@ -155,12 +155,12 @@ export default class NuevaPlanta extends React.Component {
 		this.setState({ selectedVasosFertilizante: value })
 	}
 
-	crearNuevaPlanta = (nombre, foto, diasRiego,diasAlimento, hora, minutos, alarmOn, vasosAgua, vasosAlimento, ) => {
+	crearNuevaPlanta = (nombre, foto, diasRiego, diasAlimento, hora, minutos, alarmOn, vasosAgua, vasosAlimento, ) => {
 		return {
 			name: nombre,
 			image: foto,
 			diasRiego: diasRiego,
-			diasAlimento:diasAlimento,
+			diasAlimento: diasAlimento,
 			hora: hora,
 			minutos: minutos,
 			alarma: alarmOn,
@@ -182,9 +182,30 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	onSubmitPlanta = () => {
+		const { idioma } = this.props
+		const { nuevaPlantaName, diasRiego, diasAlimento } = this.state
+		// Mostrar un alerta si no se seleccionaron dias de riego y alimento para la nueva planta
+		if (diasRiego.length == 0 && diasAlimento.length == 0)
+			Alert.alert(
+				Labels[idioma].onSubmitPlantaSinDias.title,
+				Labels[idioma].onSubmitPlantaSinDias.descripcion + nuevaPlantaName,
+				[
+					{
+						text: Labels[idioma].onSubmitPlantaSinDias.btnCancelar, onPress: () => null
+					},
+					{
+						text: Labels[idioma].onSubmitPlantaSinDias.btnOk, onPress: () => this.submitPlanta()
+					},
+				],
+				{ cancelable: true }
+			)
+		else this.submitPlanta()
+	}
+
+	submitPlanta = () => {
+		const { nuevaPlantaName, nuevaPlantaFoto, diasRiego, diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		this.setState({ isRefreshing: true }, async () => {
-			const { nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
-			var planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto,diasRiego,diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante)
+			var planta = this.crearNuevaPlanta(nuevaPlantaName, nuevaPlantaFoto, diasRiego, diasAlimento, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante)
 			planta = await this.setPlantAlarms(planta)
 			var data = await AsyncStorage.getItem('Plantas');
 			if (data != null) {
@@ -222,7 +243,7 @@ export default class NuevaPlanta extends React.Component {
 	}
 
 	render = () => {
-		const {idioma} = this.props
+		const { idioma } = this.props
 		const { show, step, nuevaPlantaName, nuevaPlantaFoto, isRefreshing, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const nuevaPlantaReadyToAdd = nuevaPlantaName != '' // && nuevaPlantaFoto 
 		const viewableScreen = screenHeight * 0.9 // pantalla sin header
@@ -325,7 +346,7 @@ export default class NuevaPlanta extends React.Component {
 											autoCapitalize={'words'}
 											underlineColorAndroid={Colors.accentColor}
 										/>
-										<View style={{ marginBottom: 30 }}><CalendarioComponent color={"#2b2b2b"} onDiaPress={this.onDiaPress} idioma={idioma}  /></View>
+										<View style={{ marginBottom: 30 }}><CalendarioComponent color={"#2b2b2b"} onDiaPress={this.onDiaPress} idioma={idioma} /></View>
 										<View style={{
 											width: '100%',
 											flexDirection: 'row',
@@ -416,7 +437,7 @@ export default class NuevaPlanta extends React.Component {
 								</TouchableOpacity>
 							}
 							{
-								step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' ,  opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1}} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
+								step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1 }} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
 									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b', }}>{Labels[idioma].nuevaPlanta.btnListo}</Text>
 									{isRefreshing ? <Spinner color={Colors.accentColor} style={{ marginLeft: 10 }} /> : <Icon style={{ fontSize: 34, color: '#2b2b2b', paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />}
 								</TouchableOpacity>

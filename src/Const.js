@@ -39,6 +39,12 @@ export const Labels = {
 			lblVasosAgua:'Vasos de agua',
 			lblVasosFertilizante:'Vasos de fertilizante',
 		},
+		onSubmitPlantaSinDias:{
+			title:'¿Olvidaste algo?',
+			descripcion:'Parece que no agendaste ningún día de cuidado para ',
+			btnCancelar:'Volver',
+			btnOk:'Agendar después'
+		},
 		editarPlanta:{
 			lblPlaceholderNombre:'Nombre',
 			lblHoraAlarma:'Hora de alarma',
@@ -112,6 +118,12 @@ export const Labels = {
 			lblNotificaciones:'Notifications',
 			lblVasosAgua:'Water cups',
 			lblVasosFertilizante:'Fertilizer cups',
+		},
+		onSubmitPlantaSinDias:{
+			title:'Forgetting something?',
+			descripcion:'It looks like you haven\'t scheduled any care days for ',
+			btnCancelar:'Go back',
+			btnOk:'Do it later'
 		},
 		editarPlanta:{
 			lblPlaceholderNombre:'Name',

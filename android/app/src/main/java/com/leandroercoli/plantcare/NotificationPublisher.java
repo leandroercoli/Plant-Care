@@ -62,7 +62,7 @@ public class NotificationPublisher extends BroadcastReceiver {
         
         Intent intentNotification = null;
         try {
-                intentNotification = new Intent(context, Class.forName("com.plants.MainActivity"));
+                intentNotification = new Intent(context, Class.forName("com.leandroercoli.plantcare.MainActivity"));
                 intentNotification.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -72,7 +72,7 @@ public class NotificationPublisher extends BroadcastReceiver {
         //Notification Channel ID passed as a parameter here will be ignored for all the Android versions below 8.0
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle("Plants");
-        if(lang == "es")
+        if(lang.equals("es"))
             builder.setContentText("Hora de cuidar tu " + intent.getStringExtra("planta") + "!");
         else
             builder.setContentText("Time to take care of your " + intent.getStringExtra("planta") + "!");
