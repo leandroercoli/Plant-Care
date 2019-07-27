@@ -1,5 +1,6 @@
 export const Colors = {
-	accentColor: '#2e7d32'
+	accentColor: '#2e7d32',
+	accentColorOpacity:'rgba(0, 0, 0,0.7)'// 'rgba(46, 125, 50,0.5)'
 };
 export const Img = {
 	logo: require("./img/logo-leaf.png"),
@@ -61,6 +62,12 @@ export const Labels = {
 		eliminarPlantaAlert:{
 			title:'Eliminar planta',
 			descripcion:'¿Está seguro que desea eliminar la planta de su colección?',
+			btnCancelar:'Cancelar',
+			btnOk:'Sí'
+		},
+		eliminarFotoAlert:{
+			title:'Eliminar foto',
+			descripcion:'¿Está seguro que desea eliminar esta foto?',
 			btnCancelar:'Cancelar',
 			btnOk:'Sí'
 		},
@@ -135,6 +142,12 @@ export const Labels = {
 		eliminarPlantaAlert:{
 			title:'Delete plant',
 			descripcion:'Are you sure you want to delete the plant from your collection?',
+			btnCancelar:'Cancel',
+			btnOk:'Yes'
+		},
+		eliminarFotoAlert:{
+			title:'Delete picture',
+			descripcion:'Are you sure you want to delete this picture?',
 			btnCancelar:'Cancel',
 			btnOk:'Yes'
 		},

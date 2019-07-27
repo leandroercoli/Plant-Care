@@ -158,7 +158,7 @@ export default class NuevaPlanta extends React.Component {
 	crearNuevaPlanta = (nombre, foto, diasRiego, diasAlimento, hora, minutos, alarmOn, vasosAgua, vasosAlimento, ) => {
 		return {
 			name: nombre,
-			image: foto,
+			images: [foto],
 			diasRiego: diasRiego,
 			diasAlimento: diasAlimento,
 			hora: hora,

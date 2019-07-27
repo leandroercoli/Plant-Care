@@ -41,29 +41,32 @@ export default class CalendarioComponent extends React.Component {
 
 	render = () => {
 		const { diasRiego, diasAlimento } = this.state
-		const { color, idioma } = this.props
+		const { color, idioma, thumb } = this.props
 		const dias = Labels[idioma].dias
+		const dropFontSize = thumb ? 15 : 18
+		const chevronFontSize = thumb ? 15 : 18
+		const daysFontSize = thumb ? 15 : 16 
 		return (
 			<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-				<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: color, paddingTop: 10 }} />
+				{!thumb &&<Icon type="EvilIcons" name="calendar" style={{ fontSize: 32, color: color, paddingTop: 10 }} />}
 				{
 					dias.map((dia, index) =>
-						<TouchableOpacity key={"dia" + index} onPress={() => this.onDiaPress(index)}
+						<TouchableOpacity key={"dia" + index} onPress={() => !thumb ? this.onDiaPress(index) : null}
 							style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 							<View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
 								{
 									(diasRiego.includes(index) || !diasRiego.includes(index) && !diasAlimento.includes(index)) ?
-										<Icon type="Entypo" name="drop" style={{ fontSize: 22, color: color, opacity: diasRiego.includes(index) ? 1 : 0 }} />
+										<Icon type="Entypo" name="drop" style={{ fontSize: dropFontSize, color: color, opacity: diasRiego.includes(index) ? 1 : 0 }} />
 										: null
 								}
 								{
 									diasAlimento.includes(index) ?
-										<Icon type="Entypo" name="flash" style={{ fontSize: 22, color: color }} />
+										<Icon type="Entypo" name="flash" style={{ fontSize: dropFontSize, color: color }} />
 										: null
 								}
 							</View>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 16, color: color, opacity: diasRiego.includes(index) ? 1 : 0.5 }}>{dia}</Text>
-							<Icon type="EvilIcons" name="chevron-up" style={{ fontSize: 18, color: color, opacity: (index === hoy) ? 1 : 0 }} />
+							<Text style={{ fontFamily: "DosisLight", fontSize: daysFontSize, color: color, opacity: diasRiego.includes(index) ? 1 : 0.5 }}>{dia}</Text>
+							<Icon type="EvilIcons" name="chevron-up" style={{ fontSize: chevronFontSize, color: color, opacity: (index === hoy) ? 1 : 0 }} />
 						</TouchableOpacity>
 					)
 				}

@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -35,7 +36,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new RNDeviceInfo(),
             new AsyncStoragePackage(),
-              new AlarmSetterPackage()
+              new AlarmSetterPackage(),
+              new LinearGradientPackage() 
       );
     }
 
