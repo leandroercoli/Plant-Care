@@ -91,7 +91,7 @@ export default class EditarPlanta extends React.Component {
 	}
 
 	render = () => {
-		const { idioma} = this.props
+		const { idioma, colores} = this.props
 		const { show, plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const readyToSubmit = plantaName != ''  // && nuevaPlantaFoto 
 		return (

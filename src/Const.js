@@ -1,6 +1,46 @@
 export const Colors = {
 	accentColor: '#2e7d32',
-	accentColorOpacity:'rgba(0, 0, 0,0.7)'// 'rgba(46, 125, 50,0.5)'
+	accentColorOpacity: 'rgba(0, 0, 0,0.7)',// 'rgba(46, 125, 50,0.5)',
+	darkTheme: {
+		statusBarColor: 'rgb(0,0,0)',
+		headerTitle: '#fff',
+		listViewHeaderBackground: '#2b2b2b',
+		listViewBackground: '#414141',
+		newPlantBigIcon: '#fff',
+		icons: '#fff',
+		text: '#fff',
+		placeholderText:'#f1f1f1',
+		defaultBackground: "#2b2b2b",
+		configuracion: {
+			headerBackground: '#2b2b2b',
+			background: '#414141',
+			itemBackground:'#2b2b2b'
+		},
+		nuevaPlanta: {
+			headerBackground: '#2b2b2b',
+			background: '#414141',
+		},
+	},
+	lightTheme: {
+		statusBarColor: 'rgb(0,0,0)',
+		headerTitle: '#2b2b2b',
+		listViewHeaderBackground: '#fff',
+		listViewBackground: '#f1f1f1',
+		newPlantBigIcon: '#2e7d32',
+		icons: '#2b2b2b',
+		text: '#2b2b2b',
+		placeholderText:'#616161',
+		defaultBackground: "#fff",
+		configuracion: {
+			headerBackground: '#fff',
+			background: '#f1f1f1',
+			itemBackground:'#fff'
+		},
+		nuevaPlanta: {
+			headerBackground: '#fff',
+			background: '#f1f1f1',
+		},
+	}
 };
 export const Img = {
 	logo: require("./img/logo-leaf.png"),
@@ -16,60 +56,61 @@ export const plantasDebug = [
 ]
 export const Labels = {
 	'es': {
-		test:'espaniol',
-		configuracion:{
-			title:'Configuración',
-			lblLimpiar:'Limpiar',
-			lblIdioma:'Idioma',
-			lblVersion:'Versión',
-			alertLimpiar:{
-				title:'Eliminar todo',
-				descripcion:'¿Está seguro que desea eliminar todas las plantas? Esta operación no se puede revertir',
-				btnCancelar:'Cancelar',
-				btnOk:'Sí'
+		test: 'espaniol',
+		configuracion: {
+			title: 'Configuración',
+			lblLimpiar: 'Limpiar',
+			lblIdioma: 'Idioma',
+			lblTemaOscuro: 'Tema oscuro',
+			lblVersion: 'Versión',
+			alertLimpiar: {
+				title: 'Eliminar todo',
+				descripcion: '¿Está seguro que desea eliminar todas las plantas? Esta operación no se puede revertir',
+				btnCancelar: 'Cancelar',
+				btnOk: 'Sí'
 			}
 		},
-		nuevaPlanta:{
-			title:'Nueva planta',
-			btnSiguiente:'Siguiente',
-			btnVolver:'Volver',
-			btnListo:'Listo',
-			lblPlaceholderNombre:'Nombre',
-			lblHoraAlarma:'Hora de alarma',
-			lblNotificaciones:'Notificaciones',
-			lblVasosAgua:'Vasos de agua',
-			lblVasosFertilizante:'Vasos de fertilizante',
+		nuevaPlanta: {
+			title: 'Nueva planta',
+			btnSiguiente: 'Siguiente',
+			btnVolver: 'Volver',
+			btnListo: 'Listo',
+			lblPlaceholderNombre: 'Nombre',
+			lblHoraAlarma: 'Hora de alarma',
+			lblNotificaciones: 'Notificaciones',
+			lblVasosAgua: 'Vasos de agua',
+			lblVasosFertilizante: 'Vasos de fertilizante',
 		},
-		onSubmitPlantaSinDias:{
-			title:'¿Olvidaste algo?',
-			descripcion:'Parece que no agendaste ningún día de cuidado para ',
-			btnCancelar:'Volver',
-			btnOk:'Agendar después'
+		onSubmitPlantaSinDias: {
+			title: '¿Olvidaste algo?',
+			descripcion: 'Parece que no agendaste ningún día de cuidado para ',
+			btnCancelar: 'Volver',
+			btnOk: 'Agendar después'
 		},
-		editarPlanta:{
-			lblPlaceholderNombre:'Nombre',
-			lblHoraAlarma:'Hora de alarma',
-			lblNotificaciones:'Notificaciones',
-			lblVasosAgua:'Vasos de agua',
-			lblVasosFertilizante:'Vasos de fertilizante',
+		editarPlanta: {
+			lblPlaceholderNombre: 'Nombre',
+			lblHoraAlarma: 'Hora de alarma',
+			lblNotificaciones: 'Notificaciones',
+			lblVasosAgua: 'Vasos de agua',
+			lblVasosFertilizante: 'Vasos de fertilizante',
 		},
-		editarPlantaDoneAlert:{
-			title:'Editar planta',
-			descripcion:'¿Está seguro que desea aplicar los cambios?',
-			btnCancelar:'Cancelar',
-			btnOk:'Sí'
+		editarPlantaDoneAlert: {
+			title: 'Editar planta',
+			descripcion: '¿Está seguro que desea aplicar los cambios?',
+			btnCancelar: 'Cancelar',
+			btnOk: 'Sí'
 		},
-		eliminarPlantaAlert:{
-			title:'Eliminar planta',
-			descripcion:'¿Está seguro que desea eliminar la planta de su colección?',
-			btnCancelar:'Cancelar',
-			btnOk:'Sí'
+		eliminarPlantaAlert: {
+			title: 'Eliminar planta',
+			descripcion: '¿Está seguro que desea eliminar la planta de su colección?',
+			btnCancelar: 'Cancelar',
+			btnOk: 'Sí'
 		},
-		eliminarFotoAlert:{
-			title:'Eliminar foto',
-			descripcion:'¿Está seguro que desea eliminar esta foto?',
-			btnCancelar:'Cancelar',
-			btnOk:'Sí'
+		eliminarFotoAlert: {
+			title: 'Eliminar foto',
+			descripcion: '¿Está seguro que desea eliminar esta foto?',
+			btnCancelar: 'Cancelar',
+			btnOk: 'Sí'
 		},
 		dias: ["D", "L", "M", "M", "J", "V", "S"],
 		permisoCamera: {
@@ -102,61 +143,62 @@ export const Labels = {
 		}
 	},
 	'en': {
-		test:'english',
-		configuracion:{
-			title:'Settings',
-			lblLimpiar:'Reset',
-			lblIdioma:'Language',
-			lblVersion:'Version',
-			alertLimpiar:{
-				title:'Reset',
-				descripcion:'Are you sure you want to delete every plant? This action cannot be reversed.',
-				btnCancelar:'Cancel',
-				btnOk:'Yes'
+		test: 'english',
+		configuracion: {
+			title: 'Settings',
+			lblLimpiar: 'Reset',
+			lblIdioma: 'Language',
+			lblTemaOscuro: 'Dark theme',
+			lblVersion: 'Version',
+			alertLimpiar: {
+				title: 'Reset',
+				descripcion: 'Are you sure you want to delete every plant? This action cannot be reversed.',
+				btnCancelar: 'Cancel',
+				btnOk: 'Yes'
 			}
 		},
-		nuevaPlanta:{
-			title:'New plant',
-			btnSiguiente:'Next',
-			btnVolver:'Back',
-			btnListo:'Done',
-			lblPlaceholderNombre:'Name',
-			lblHoraAlarma:'Alarm',
-			lblNotificaciones:'Notifications',
-			lblVasosAgua:'Water cups',
-			lblVasosFertilizante:'Fertilizer cups',
+		nuevaPlanta: {
+			title: 'New plant',
+			btnSiguiente: 'Next',
+			btnVolver: 'Back',
+			btnListo: 'Done',
+			lblPlaceholderNombre: 'Name',
+			lblHoraAlarma: 'Alarm',
+			lblNotificaciones: 'Notifications',
+			lblVasosAgua: 'Water cups',
+			lblVasosFertilizante: 'Fertilizer cups',
 		},
-		onSubmitPlantaSinDias:{
-			title:'Forgetting something?',
-			descripcion:'It looks like you haven\'t scheduled any care days for ',
-			btnCancelar:'Go back',
-			btnOk:'Do it later'
+		onSubmitPlantaSinDias: {
+			title: 'Forgetting something?',
+			descripcion: 'It looks like you haven\'t scheduled any care days for ',
+			btnCancelar: 'Go back',
+			btnOk: 'Do it later'
 		},
-		editarPlanta:{
-			lblPlaceholderNombre:'Name',
-			lblHoraAlarma:'Alarm',
-			lblNotificaciones:'Notifications',
-			lblVasosAgua:'Water cups',
-			lblVasosFertilizante:'Fertilizer cups',
+		editarPlanta: {
+			lblPlaceholderNombre: 'Name',
+			lblHoraAlarma: 'Alarm',
+			lblNotificaciones: 'Notifications',
+			lblVasosAgua: 'Water cups',
+			lblVasosFertilizante: 'Fertilizer cups',
 		},
-		eliminarPlantaAlert:{
-			title:'Delete plant',
-			descripcion:'Are you sure you want to delete the plant from your collection?',
-			btnCancelar:'Cancel',
-			btnOk:'Yes'
+		eliminarPlantaAlert: {
+			title: 'Delete plant',
+			descripcion: 'Are you sure you want to delete the plant from your collection?',
+			btnCancelar: 'Cancel',
+			btnOk: 'Yes'
 		},
-		eliminarFotoAlert:{
-			title:'Delete picture',
-			descripcion:'Are you sure you want to delete this picture?',
-			btnCancelar:'Cancel',
-			btnOk:'Yes'
+		eliminarFotoAlert: {
+			title: 'Delete picture',
+			descripcion: 'Are you sure you want to delete this picture?',
+			btnCancelar: 'Cancel',
+			btnOk: 'Yes'
 		},
 		dias: ["S", "M", "T", "W", "T", "F", "S"],
-		editarPlantaDoneAlert:{
-			title:'Edit plant',
-			descripcion:'Are you sure you want to apply the changes?',
-			btnCancelar:'Cancel',
-			btnOk:'Yes'
+		editarPlantaDoneAlert: {
+			title: 'Edit plant',
+			descripcion: 'Are you sure you want to apply the changes?',
+			btnCancelar: 'Cancel',
+			btnOk: 'Yes'
 		},
 		permisoCamera: {
 			title: 'Plant Care camera permission',

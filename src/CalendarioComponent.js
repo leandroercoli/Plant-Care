@@ -52,7 +52,7 @@ export default class CalendarioComponent extends React.Component {
 				{
 					dias.map((dia, index) =>
 						<TouchableOpacity key={"dia" + index} onPress={() => !thumb ? this.onDiaPress(index) : null}
-							style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+							style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} disabled={thumb}>
 							<View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
 								{
 									(diasRiego.includes(index) || !diasRiego.includes(index) && !diasAlimento.includes(index)) ?

@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import App from './src/App';
 import Loading from './src/Loading';
 import ElegirIdioma from './src/ElegirIdioma';
+import { Labels, Colors, Img } from './src/Const'
 
 class Main extends Component {
     constructor(props) {
@@ -14,16 +15,18 @@ class Main extends Component {
         this.ElegirIdiomaModal = React.createRef()
         this.state = {
             isLoading: true,
-            idioma: null
+            idioma: null,
+            temaOscuro: false
         }
     }
 
     componentDidMount = async () => {
         const idioma = await AsyncStorage.getItem('Idioma');
+        const temaOscuro = await AsyncStorage.getItem('temaOscuro');
         if (idioma == null) {
             if (this.ElegirIdiomaModal) this.ElegirIdiomaModal.show()
         } else {
-            this.setState({ idioma: idioma })
+            this.setState({ idioma: idioma, temaOscuro: temaOscuro !== null ? JSON.parse(temaOscuro) : false  })
         }
     }
 
@@ -41,12 +44,20 @@ class Main extends Component {
         this.setState({ idioma: idioma })
     }
 
+    onTemaOscuroToggle = () => {
+        const { temaOscuro } = this.state
+        this.setState({ temaOscuro: !temaOscuro }, () => {
+            AsyncStorage.setItem('temaOscuro', JSON.stringify(!temaOscuro));
+        })
+    }
+
 
     render() {
-        const { idioma, isLoading } = this.state
+        const { idioma, temaOscuro, isLoading } = this.state
         return (
             <View style={{ flex: 1 }}>
-                {isLoading || !idioma? <Loading onAnimationDone={this.onAnimationDone}/> : <App idioma={idioma} onSelectIdioma={this.onChangeIdioma} />}
+                {isLoading || !idioma ? <Loading onAnimationDone={this.onAnimationDone} />
+                    : <App idioma={idioma} colores={temaOscuro ? Colors.darkTheme : Colors.lightTheme } onSelectIdioma={this.onChangeIdioma} onTemaOscuroToggle={this.onTemaOscuroToggle} />}
                 <ElegirIdioma ref={(r) => this.ElegirIdiomaModal = r} onSelectIdioma={this.onSelectIdioma} canCancel={false} />
             </View>
 

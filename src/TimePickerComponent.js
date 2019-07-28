@@ -75,10 +75,10 @@ export default class TimePickerComponent extends React.Component {
 
 	render = () => {
 		const { selectedHour, selectedMinutes } = this.state
-		const { fontSize } = this.props
+		const { fontSize ,colores} = this.props
 		return (
 			<TouchableOpacity onPress={this.onSelectTimePress} >
-				<Text style={{ fontFamily: "DosisLight", fontSize: fontSize, color: '#2b2b2b' }}>{selectedHour < 10 ? "0" + selectedHour : selectedHour}:{selectedMinutes < 10 ? "0" + selectedMinutes : selectedMinutes} hs</Text>
+				<Text style={{ fontFamily: "DosisLight", fontSize: fontSize, color: colores? colores.text : '#2b2b2b' }}>{selectedHour < 10 ? "0" + selectedHour : selectedHour}:{selectedMinutes < 10 ? "0" + selectedMinutes : selectedMinutes} hs</Text>
 			</TouchableOpacity>
 		);
 	}
