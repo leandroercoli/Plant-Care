@@ -11,7 +11,7 @@ import CalendarioComponent from './CalendarioComponent'
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-picker';
 import NativeAlarmSetter from './NativeAlarmSetter'
-import { Labels,  Img } from './Const'
+import { Labels, Img } from './Const'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
@@ -26,7 +26,6 @@ export default class App extends React.Component {
 		this.PlantsListView = React.createRef()
 
 		this.state = {
-			isLoading: true,
 			isRefreshing: true,
 			data: [], // dummy plant para agregar una nueva
 			currentIndex: 0,
@@ -45,8 +44,19 @@ export default class App extends React.Component {
 			} catch (error) {
 				// Error retrieving data
 			}
-			this.setState({ isRefreshing: false, isLoading: false })
+			this.setState({ isRefreshing: false })
 		})
+	}
+
+	reloadPlantasBackground = async () => {
+		try {
+			const data = await AsyncStorage.getItem('Plantas');
+			if (data !== null) {
+				this.setState({ data: JSON.parse(data) })
+			}
+		} catch (error) {
+			// Error retrieving data
+		}
 	}
 
 	onNewPlantPress = () => {
@@ -97,7 +107,7 @@ export default class App extends React.Component {
 	}
 
 	toCurrentPlantView = () => {
-		const {currentIndex} = this.state
+		const { currentIndex } = this.state
 		if (this.ViewsList) {
 			this.ViewsList.scrollTo({ x: screenWidth, animated: true })
 			if (this.PlantsListView) {
@@ -115,19 +125,21 @@ export default class App extends React.Component {
 	onCurrentPlantChange = (currentPlanta, currentPlantaIndex) => {
 		var { data } = this.state
 		data[currentPlantaIndex] = currentPlanta
-		this.setState({ data: data, }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); this.reloadPlantas() })
+		this.setState({ data: data, }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); this.reloadPlantasBackground() })
 	}
 
-	onCurrentPlantDelete = async(currentPlantaIndex) => {
+	onCurrentPlantDelete = async (currentPlantaIndex) => {
 		var { data, currentIndex } = this.state
-		this.cancelAlarmsCurrentPlant()
-			data.splice(currentIndex, 1)
-			try {
-				await AsyncStorage.setItem('Plantas', JSON.stringify(data));
-			} catch (error) {
-				// Error retrieving data
-			}
-			this.setState({ data: data, currentIndex: this.state.currentIndex > 0 ? this.state.currentIndex - 1 : 0, isRefreshing: false })
+		data.splice(currentPlantaIndex, 1)
+		try {
+			await AsyncStorage.setItem('Plantas', JSON.stringify(data));
+		} catch (error) {
+			// Error retrieving data
+		}
+		this.setState({ data: data, currentIndex: currentIndex > 0 ? (currentIndex - 1) : 0, isRefreshing: false }, () => {
+			if (data.length == 0) this.toGridView()
+			else this.toCurrentPlantView()
+		})
 	}
 
 	onPlantListPageChange = ({ viewableItems }) => {
@@ -149,46 +161,47 @@ export default class App extends React.Component {
 	}
 
 	render = () => {
-		const { idioma , colores} = this.props
+		const { idioma, colores } = this.props
 		const { data, currentIndex, isRefreshing } = this.state
 		return (
 			<Container>
 				<StatusBar backgroundColor={colores.statusBarColor}></StatusBar>
 				<NuevaPlanta ref={(r) => this.NuevaPlantaModal = r} idioma={idioma} colores={colores} onFinishSubmitting={this.onFinishSubmitting} />
-				<Configuracion ref={(r) => this.ConfiguracionModal = r} idioma={idioma} colores={colores}  onReset={this.onReset} onSelectIdioma={this.props.onSelectIdioma} onTemaOscuroToggle={this.props.onTemaOscuroToggle} />
+				<Configuracion ref={(r) => this.ConfiguracionModal = r} idioma={idioma} colores={colores} onReset={this.onReset} onSelectIdioma={this.props.onSelectIdioma} onTemaOscuroToggle={this.props.onTemaOscuroToggle} />
 				<View style={{ flex: 1 }}>
-							<ScrollView
-								ref={(r) => this.ViewsList = r}
-								horizontal
-								scrollEnabled={false}
-								bounces={false}
-								pagingEnabled={true}
-								showsHorizontalScrollIndicator={false}
-								keyExtractor={(item, index) => "" + index}
-								style={{ flex: 1 }}>
-								<View style={{width:screenWidth}}>
-								<GridView
-									idioma={idioma}
-									colores={colores} 
-									data={data}
-									onPlantaThumbPress={this.onPlantaThumbPress}
-									onCurrentPlantChange={this.onCurrentPlantChange} 
-									onNewPlantPress={this.onNewPlantPress}
-									onConfiguracionPress={this.onConfiguracionPress}/>
-								</View>
-								<View style={{width:screenWidth}}>
-								<ListView
+					<ScrollView
+						ref={(r) => this.ViewsList = r}
+						horizontal
+						scrollEnabled={false}
+						bounces={false}
+						pagingEnabled={true}
+						showsHorizontalScrollIndicator={false}
+						keyExtractor={(item, index) => "" + index}
+						style={{ flex: 1, }}>
+						<View style={{ width: screenWidth }}>
+							<GridView
+								idioma={idioma}
+								colores={colores}
+								data={data}
+								onPlantaThumbPress={this.onPlantaThumbPress}
+								onCurrentPlantChange={this.onCurrentPlantChange}
+								onNewPlantPress={this.onNewPlantPress}
+								onConfiguracionPress={this.onConfiguracionPress} />
+						</View>
+						<View style={{ width: screenWidth }}>
+							<ListView
 								ref={(r) => this.PlantsListView = r}
-									idioma={idioma}
-									colores={colores} 
-									data={data}
-									currentPlantaIndex={currentIndex}
-									goBack={this.toGridView}
-								onCurrentPlantChange={this.onCurrentPlantChange} />
-								</View>								
-							</ScrollView>
+								idioma={idioma}
+								colores={colores}
+								data={data}
+								currentPlantaIndex={currentIndex}
+								goBack={this.toGridView}
+								onCurrentPlantChange={this.onCurrentPlantChange}
+								onCurrentPlantDelete={this.onCurrentPlantDelete} />
+						</View>
+					</ScrollView>
 					{isRefreshing && <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: colores.defaultBackground, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-						<Spinner color={colores.accentColor}/></View>}
+						<Spinner color={colores.accentColor} /></View>}
 				</View>
 			</Container>
 		);

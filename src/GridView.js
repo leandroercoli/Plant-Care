@@ -32,9 +32,9 @@ export default class GridView extends React.Component {
 	}
 
 	render = () => {
-		const { idioma,colores, data } = this.props
+		const { idioma, colores, data } = this.props
 		return (
-			<View style={{ width: '100%', height: '100%' }}>
+			<View style={{ flex: 1, backgroundColor: 'violet' }}>
 				<View style={{ width: '100%', height: 60, backgroundColor: colores.listViewHeaderBackground, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
 					<View style={{
 						height: '100%',
@@ -65,7 +65,9 @@ export default class GridView extends React.Component {
 						</TouchableOpacity>
 					</View>
 				</View>
-				<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: colores.listViewBackground }}>
+				<View style={{
+					flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: colores.listViewBackground
+				}}>
 					{
 						data.length == 0 ?
 							<TouchableOpacity onPress={this.props.onNewPlantPress}>
@@ -77,19 +79,20 @@ export default class GridView extends React.Component {
 								horizontal={false}
 								numColumns={2}
 								columnWrapperStyle={{ justifyContent: 'space-between', }}
-								showsHorizontalScrollIndicator={false}
 								data={data}
 								initialScrollIndex={0}
 								//extraData={[data]}
-								style={{ width: '100%', height: '100%' }}
+								style={{ width: '100%', height: '100%', backgroundColor: colores.listViewBackground }}
+								contentContainerStyle={{backgroundColor: colores.listViewBackground}}
 								keyExtractor={(item, index) => "" + index}
-								contentContainerStyle={{ width: '100%', height: '100%' }}
+								//contentContainerStyle={{ width: '100%', height: '100%' }}
 								renderItem={({ item, index }) => (
 									<View style={{
 										flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
 										width: screenWidth * 0.5,
 										height: screenHeight * 0.5,
 										padding: 10,
+										elevation:5
 									}}>
 										<TouchableOpacity onPress={() => this.onPlantaThumbPress(index)} style={{ height: '100%', width: '100%' }}>
 											<View style={{
@@ -97,7 +100,11 @@ export default class GridView extends React.Component {
 												overflow: 'hidden',
 												justifyContent: 'center',
 												alignItems: 'center',
-												borderRadius: 15
+												borderRadius: 15,
+												shadowOffset: { width: 10, height: 10, },
+												shadowColor: 'black',
+												shadowOpacity: 1.0,
+												elevation:5
 											}}>
 												{
 													item.images && item.images.length > 0 ?
@@ -118,21 +125,21 @@ export default class GridView extends React.Component {
 														}}>
 															<Text style={{ fontFamily: "DosisLight", fontSize: 24, borderColor: 'transparent', color: '#f1f1f1' }}>{item.name}</Text>
 														</View>
-														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3, marginBottom: 5 }}>
+														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3, marginTop: 15 }}>
 															<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
 																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAgua} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
-																<Icon type="Entypo" name="drop" style={{ fontSize: 15, color: '#f1f1f1', marginLeft: 3 }} />
+																<Icon type="Entypo" name="drop" style={{ fontSize: 15, color: '#f1f1f1' }} />
 															</View>
 															<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
 																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAlimento} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
-																<Icon type="Entypo" name="flash" style={{ fontSize: 15, color: '#f1f1f1', marginLeft: 3 }} />
+																<Icon type="Entypo" name="flash" style={{ fontSize: 15, color: '#f1f1f1' }} />
 															</View>
 															<View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: '50%' }}>
-																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1' }}>{item.hora < 10 ? "0" + item.hora : item.hora}:{item.minutos < 10 ? "0" + item.minutos : item.minutos}</Text>
-																<Icon type="EvilIcons" name={"bell"} style={{ fontSize: 20, color: item.alarma ? '#f1f1f1' : '#a1a1a1' }} />
+																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.hora < 10 ? "0" + item.hora : item.hora}:{item.minutos < 10 ? "0" + item.minutos : item.minutos}</Text>
+																<Icon type={"MaterialCommunityIcons"} name={item.alarma ? "alarm-check" : "alarm-off"} style={{ fontSize: 20, color: item.alarma ? '#f1f1f1' : '#a1a1a1' }} />
 															</View>
 														</View>
-														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop: 15 }}>
 															<CalendarioComponent thumb color={"#f1f1f1"} idioma={idioma} diasRiego={item.diasRiego} diasAlimento={item.diasAlimento} />
 														</View>
 													</LinearGradient>

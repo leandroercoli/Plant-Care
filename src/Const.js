@@ -1,6 +1,5 @@
 export const Colors = {
 	accentColor: '#2e7d32',
-	accentColorOpacity: 'rgba(0, 0, 0,0.7)',// 'rgba(46, 125, 50,0.5)',
 	darkTheme: {
 		statusBarColor: 'rgb(0,0,0)',
 		headerTitle: '#fff',

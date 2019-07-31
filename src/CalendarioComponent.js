@@ -41,7 +41,7 @@ export default class CalendarioComponent extends React.Component {
 
 	render = () => {
 		const { diasRiego, diasAlimento } = this.state
-		const { color, idioma, thumb } = this.props
+		const { color, idioma, thumb, notClickable } = this.props
 		const dias = Labels[idioma].dias
 		const dropFontSize = thumb ? 15 : 18
 		const chevronFontSize = thumb ? 15 : 18
@@ -52,7 +52,7 @@ export default class CalendarioComponent extends React.Component {
 				{
 					dias.map((dia, index) =>
 						<TouchableOpacity key={"dia" + index} onPress={() => !thumb ? this.onDiaPress(index) : null}
-							style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} disabled={thumb}>
+							style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} disabled={thumb || notClickable}>
 							<View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
 								{
 									(diasRiego.includes(index) || !diasRiego.includes(index) && !diasAlimento.includes(index)) ?

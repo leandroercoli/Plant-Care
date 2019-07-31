@@ -25,7 +25,7 @@ export default class CurrentPlant extends React.Component {
 		this.state = {
 			show: false,
 			isLoading: true,
-			isRefreshing: true,
+			isRefreshing: false,
 			data: [], // dummy plant para agregar una nueva
 			currentIndex: 0,
 			viewableItem: 0,
@@ -45,14 +45,14 @@ export default class CurrentPlant extends React.Component {
 		this.EditarPlantaModal.show()
 	}
 
-	setAlarmsCurrentPlant = async () => {
+	setAlarmsCurrentPlant = async (selectedHour, selectedMinutes, diasRiego, diasAlimento) => {
 		var { currentPlanta, currentPlantaIndex } = this.props
 		this.cancelAlarmsCurrentPlant() // cancelar todas las alarmas de la planta antes de agregar nuevas (para que no queden repetidas)
-		var diasAlarma = currentPlanta.diasRiego.concat(currentPlanta.diasAlimento);
+		var diasAlarma = diasRiego.concat(diasAlimento);
 		var diasUnique = diasAlarma.filter(function (item, pos) { return diasAlarma.indexOf(item) == pos });
 
 		diasUnique.map(async (dia) => {
-			const idAlarmaRiego = await NativeAlarmSetter.setAlarm(currentPlanta.name, 0, (dia + 1), currentPlanta.hora, currentPlanta.minutos)
+			const idAlarmaRiego = await NativeAlarmSetter.setAlarm(currentPlanta.name, 0, (dia + 1), selectedHour, selectedMinutes)
 			currentPlanta.alarmasID.push(idAlarmaRiego.alarmId)
 		})
 		this.props.onCurrentPlantChange(currentPlanta, currentPlantaIndex)
@@ -68,27 +68,23 @@ export default class CurrentPlant extends React.Component {
 		this.props.onCurrentPlantChange(currentPlanta, currentPlantaIndex)
 	}
 
-	onDiaPress = (diasRiego, diasAlimento) => {
-		var { currentPlanta, currentPlantaIndex } = this.props
-		currentPlanta.diasRiego = diasRiego
-		currentPlanta.diasAlimento = diasAlimento
-		this.props.onCurrentPlantChange(currentPlanta, currentPlantaIndex)
-	}
 
-	onFinishEditar = (plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante) => {
+	onFinishEditar = (plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante, diasRiego, diasAlimento) => {
 		if (plantaName != "")
 			this.setState({ isRefreshing: true }, async () => {
 				var { currentPlanta, currentPlantaIndex } = this.props
+				this.cancelAlarmsCurrentPlant()	
 				currentPlanta.name = plantaName
 				currentPlanta.hora = selectedHour
 				currentPlanta.minutos = selectedMinutes
 				currentPlanta.alarma = alarmOn
 				currentPlanta.vasosAgua = selectedVasosAgua,
-					currentPlanta.vasosAlimento = selectedVasosFertilizante
+				currentPlanta.vasosAlimento = selectedVasosFertilizante					
+				currentPlanta.diasRiego = diasRiego
+				currentPlanta.diasAlimento = diasAlimento
+				if (alarmOn) this.setAlarmsCurrentPlant(selectedHour, selectedMinutes, diasRiego, diasAlimento)		
 
 				this.props.onCurrentPlantChange(currentPlanta, currentPlantaIndex)
-				if (alarmOn) this.setAlarmsCurrentPlant()
-				else this.cancelAlarmsCurrentPlant()
 			})
 	}
 
@@ -113,7 +109,7 @@ export default class CurrentPlant extends React.Component {
 	}
 
 	deleteCurrentPlant = () => {
-		const { idioma } = this.props
+		const { idioma, currentPlantaIndex } = this.props
 		Alert.alert(
 			Labels[idioma].eliminarPlantaAlert.title,
 			Labels[idioma].eliminarPlantaAlert.descripcion,
@@ -122,58 +118,14 @@ export default class CurrentPlant extends React.Component {
 				{
 					text: Labels[idioma].eliminarPlantaAlert.btnOk, onPress: () => {
 						this.setState({ isRefreshing: true }, async () => {
-							var { data, currentIndex } = this.state
 							this.cancelAlarmsCurrentPlant()
-							data.splice(currentIndex, 1)
-							try {
-								await AsyncStorage.setItem('Plantas', JSON.stringify(data));
-							} catch (error) {
-								// Error retrieving data
-							}
-							this.setState({ data: data, currentIndex: this.state.currentIndex > 0 ? this.state.currentIndex - 1 : 0, isRefreshing: false })
+							this.props.onCurrentPlantDelete(currentPlantaIndex)
 						})
 					}
 				},
 			],
 			{ cancelable: true }
 		)
-	}
-
-	reloadPlantas = async () => {
-		this.setState({ isRefreshing: true }, async () => {
-			try {
-				const data = await AsyncStorage.getItem('Plantas');
-				if (data !== null) {
-					this.setState({ data: JSON.parse(data) })
-				}
-			} catch (error) {
-				// Error retrieving data
-			}
-			this.setState({ isRefreshing: false, isLoading: false })
-		})
-	}
-
-	cancelAllAlarms = async () => {
-		var { data } = this.state
-		var currentPlanta, alarmasID
-		for (var i = 0; i < data.length; i++) {
-			currentPlanta = data[i]
-			alarmasID = currentPlanta.alarmasID
-			for (var j = 0; j < alarmasID.length; j++) {
-				await NativeAlarmSetter.cancelAlarm("" + alarmasID[j])
-			}
-			data.alarmOn = false
-		}
-		this.setState({ data: data, currentIndex: 0 }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); this.reloadPlantas() })
-	}
-
-	onReset = () => {
-		var { data } = this.state
-		this.setState({ isRefreshing: true }, async () => {
-			await this.cancelAllAlarms()
-			data = []
-			this.setState({ data: data, currentIndex: 0 }, () => { AsyncStorage.setItem('Plantas', JSON.stringify(data)); this.reloadPlantas() })
-		})
 	}
 
 	onPlantListPageChange = ({ viewableItems }) => {
@@ -236,6 +188,8 @@ export default class CurrentPlant extends React.Component {
 					alarmOn={currentPlanta ? currentPlanta.alarma : null}
 					selectedVasosAgua={currentPlanta ? currentPlanta.vasosAgua : null}
 					selectedVasosFertilizante={currentPlanta ? currentPlanta.vasosAlimento : null}
+					diasRiego={currentPlanta.diasRiego}
+					diasAlimento={currentPlanta.diasAlimento}
 					onFinishEditar={this.onFinishEditar} />
 				<CurrentPlantFoto ref={(r) => this.CurrentPlantFoto = r}
 					idioma={idioma}
@@ -292,43 +246,6 @@ export default class CurrentPlant extends React.Component {
 									</View>
 								</View>
 							</View>
-							{/*
-									currentPlanta && currentPlanta.images.length > 0 &&
-									<View style={{ width: '100%', height: 65, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor:'red' }}>
-										<FlatList			
-											ref={(r) => this.ThumbPlantList = r}
-											horizontal
-											scrollEnabled={true}
-											showsHorizontalScrollIndicator={false}
-											contentContainerStyle={{ paddingHorizontal: 10, }}
-											style={{ height: '100%', width: '100%', backgroundColor:'blue'}}
-											data={currentPlanta.images}
-											initialScrollIndex={0}
-											extraData={[currentIndex, isRefreshing, nuevaPlantaFoto]}
-											listKey={(item, index) => 'currthumb' + index.toString()}
-											keyExtractor={(item, index) => "" + index}
-											renderItem={({ item, index }) => (
-												<View style={{ width: screenWidth * 0.15, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' , backgroundColor:'violet'}}>
-													<TouchableOpacity onPress={() => this.onThumbPress(index)}>
-														<View style={{
-															width: 50, height: 50,
-															borderRadius: 25,
-															borderWidth: 2,
-															borderColor: Colors.accentColor,
-															overflow: 'hidden',
-															justifyContent: 'center',
-															alignItems: 'center',
-															backgroundColor: 'rgba(255,255,255,0)',
-														}}>
-															<Image source={item}
-																style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-														</View>
-													</TouchableOpacity>
-												</View>
-											)}
-										/>
-									</View>
-								*/}
 						</LinearGradient>
 					</View>
 					{currentPlanta && <View style={{
@@ -346,7 +263,7 @@ export default class CurrentPlant extends React.Component {
 								<Text style={{ fontFamily: "DosisLight", fontSize: 24, borderColor: 'transparent', color: '#f1f1f1' }}>{currentPlanta.name}</Text>
 							</View>
 							<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', marginBottom: 10 }}>
-								<CalendarioComponent color={"#f1f1f1"} idioma={idioma} onDiaPress={this.onDiaPress} diasRiego={currentPlanta.diasRiego} diasAlimento={currentPlanta.diasAlimento} />
+								<CalendarioComponent color={"#f1f1f1"} idioma={idioma} notClickable onDiaPress={this.onDiaPress} diasRiego={currentPlanta.diasRiego} diasAlimento={currentPlanta.diasAlimento} />
 							</View>
 							<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3 }}>
 								<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
@@ -359,7 +276,7 @@ export default class CurrentPlant extends React.Component {
 								</View>
 								<View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: '50%' }}>
 									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#f1f1f1' }}>{currentPlanta.hora < 10 ? "0" + currentPlanta.hora : currentPlanta.hora}:{currentPlanta.minutos < 10 ? "0" + currentPlanta.minutos : currentPlanta.minutos}</Text>
-									<Icon type="EvilIcons" name={"bell"} style={{ fontSize: 27, color: currentPlanta.alarma ? '#f1f1f1' : '#a1a1a1' }} />
+									<Icon type={"MaterialCommunityIcons"} name={currentPlanta.alarma ? "alarm-check" : "alarm-off"} style={{ fontSize: 27, color: currentPlanta.alarma ? '#f1f1f1' : '#a1a1a1' }} />
 								</View>
 							</View>
 						</LinearGradient>
