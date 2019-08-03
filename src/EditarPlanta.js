@@ -66,8 +66,8 @@ export default class EditarPlanta extends React.Component {
 			alarmOn: alarmOn,
 			selectedVasosAgua: selectedVasosAgua ? String(selectedVasosAgua) : '0',
 			selectedVasosFertilizante: selectedVasosFertilizante ? String(selectedVasosFertilizante) : '0',
-			diasRiego:diasRiego ? diasRiego : [],
-			diasAlimento:diasAlimento ? diasAlimento : []
+			diasRiego: diasRiego ? diasRiego : [],
+			diasAlimento: diasAlimento ? diasAlimento : []
 		})
 	}
 
@@ -92,12 +92,28 @@ export default class EditarPlanta extends React.Component {
 	}
 
 	onDiaPress = (diasRiego, diasAlimento) => {
-		this.setState({ diasRiego: diasRiego, diasAlimento:diasAlimento })
+		this.setState({ diasRiego: diasRiego, diasAlimento: diasAlimento })
+	}
+
+	onDeletePicture = () => {
+		const { idioma } = this.props
+		Alert.alert(
+			Labels[idioma].editarPlantaEliminarFotoAlert.title,
+			Labels[idioma].editarPlantaEliminarFotoAlert.descripcion,
+			[
+				{ text: Labels[idioma].editarPlantaEliminarFotoAlert.btnCancelar, onPress: this.hide },
+				{
+					text: Labels[idioma].editarPlantaEliminarFotoAlert.btnOk, onPress: () => {
+						this.props.onDeletePicture(); this.hide()
+					}
+				},
+			],
+			{ cancelable: true })
 	}
 
 	onDonePress = () => {
 		const { idioma } = this.props
-		const { plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante , diasRiego, diasAlimento} = this.state
+		const { plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante, diasRiego, diasAlimento } = this.state
 		const vasosAgua = selectedVasosAgua != '' ? selectedVasosAgua : 0
 		const vasosFertilizante = selectedVasosFertilizante != '' ? selectedVasosFertilizante : 0
 		Alert.alert(
@@ -115,7 +131,7 @@ export default class EditarPlanta extends React.Component {
 	}
 
 	render = () => {
-		const { idioma, colores } = this.props
+		const { idioma, colores , hasImage} = this.props
 		const { show, plantaName, selectedHour, selectedMinutes, alarmOn, selectedVasosAgua, selectedVasosFertilizante, diasRiego, diasAlimento } = this.state
 		const readyToSubmit = plantaName != ''  // && nuevaPlantaFoto 
 		return (
@@ -125,11 +141,11 @@ export default class EditarPlanta extends React.Component {
 				visible={show}
 				onRequestClose={this.hide}>
 				<View style={{
-					flex: 1, backgroundColor: 'rgba(0,0,0,0.8)',  flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+					flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
 				}}>
 					<ScrollView >
 						<View style={{
-							width:screenWidth, paddingTop:25, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+							width: screenWidth, paddingTop: 25, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
 						}}>
 							<View style={{
 								width: '85%',
@@ -166,7 +182,7 @@ export default class EditarPlanta extends React.Component {
 								flexDirection: 'row',
 								justifyContent: 'space-between',
 								alignItems: 'center',
-								paddingTop: '4%', paddingLeft: '4%', paddingRight: '4%',paddingBottom:10,
+								paddingTop: '4%', paddingLeft: '4%', paddingRight: '4%', paddingBottom: 10,
 								borderRadius: 20,
 								marginBottom: 30,
 							}}>
@@ -179,12 +195,12 @@ export default class EditarPlanta extends React.Component {
 								flexDirection: 'row',
 								justifyContent: 'space-between',
 								alignItems: 'center',
-								paddingTop: '4%', paddingLeft: '4%', paddingRight: '4%',paddingBottom:10,
+								paddingTop: '4%', paddingLeft: '4%', paddingRight: '4%', paddingBottom: 10,
 								borderRadius: 20,
 								marginBottom: 30,
 							}}>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].editarPlanta.lblNotificaciones}</Text>
-								<TouchableOpacity onPress={this.onAlarmSwitch}>
+								<TouchableOpacity onPress={this.onAlarmSwitch} style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].editarPlanta.lblNotificaciones}</Text>
 									<Icon type={"MaterialCommunityIcons"} name={alarmOn ? "alarm-check" : "alarm-off"} style={{ fontSize: 25, color: alarmOn ? Colors.accentColor : '#616161' }} />
 								</TouchableOpacity>
 							</View>
@@ -246,20 +262,38 @@ export default class EditarPlanta extends React.Component {
 								/>
 								<Icon type="Entypo" name="flash" style={{ position: 'absolute', right: 10, fontSize: 22, color: selectedVasosFertilizante > 0 ? Colors.accentColor : '#616161', padding: 10 }} />
 							</View>
-							<View style={{ 			width: '85%',
+							<View style={{
+								width: '85%',
 								flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
 								paddingLeft: '4%', paddingRight: '4%',
-								paddingTop:15,
+								paddingTop: 15,
 								backgroundColor: 'rgba(255,255,255,0.9)',
 								borderRadius: 20,
-								marginBottom: 30, }}>
+								marginBottom: 30,
+							}}>
 								<CalendarioComponent color={"#2b2b2b"} idioma={idioma} onDiaPress={this.onDiaPress} diasRiego={diasRiego} diasAlimento={diasAlimento} />
+							</View>
+							<View style={{
+								width: '85%',
+								backgroundColor: 'rgba(255,255,255,0.9)',
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								paddingTop: '4%', paddingLeft: '4%', paddingRight: '4%', paddingBottom: 10,
+								borderRadius: 20,
+								marginBottom: 30,
+							}}>
+								<TouchableOpacity onPress={this.onDeletePicture} disabled={!hasImage} style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', opacity:hasImage?1:0.5 }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>{Labels[idioma].editarPlanta.lblEliminarFoto}</Text>
+									<Icon type="EvilIcons" name="trash" style={{ fontSize: 34, color: colores.icons }} />
+								</TouchableOpacity>
 							</View>
 						</View>
 					</ScrollView>
 
 					<View style={{
 						width: '85%',
+						paddingTop: 15, paddingBottom: 15,
 						flexDirection: 'row',
 						justifyContent: 'space-evenly',
 						alignItems: 'center',

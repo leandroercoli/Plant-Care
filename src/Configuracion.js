@@ -126,11 +126,11 @@ export default class Configuracion extends React.Component {
 	}
 
 	onSelectIdiomaPress = () => {
-		if(this.ElegirIdiomaModal)this.ElegirIdiomaModal.show()
+		if (this.ElegirIdiomaModal) this.ElegirIdiomaModal.show()
 	}
 
 	onSelectIdioma = (idioma) => {
-		if(this.ElegirIdiomaModal)this.ElegirIdiomaModal.hide()
+		if (this.ElegirIdiomaModal) this.ElegirIdiomaModal.hide()
 		this.props.onSelectIdioma(idioma)
 	}
 
@@ -142,7 +142,7 @@ export default class Configuracion extends React.Component {
 		const screenWidth = Dimensions.get('window').width
 		const screenHeight = Dimensions.get('window').height
 		const { show, config } = this.state
-		const { idioma, colores } = this.props
+		const { idioma, colores, temaOscuro } = this.props
 		return (
 			<Modal
 				animationType="slide"
@@ -153,7 +153,7 @@ export default class Configuracion extends React.Component {
 				<View style={{
 					flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'
 				}}>
-					<View style={{ width: '100%', height: 60, backgroundColor:colores.configuracion.headerBackground, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+					<View style={{ width: '100%', height: 60, backgroundColor: colores.configuracion.headerBackground, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
 						<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: colores.text, paddingRight: 10 }}>{Labels[idioma].configuracion.title}</Text>
 						<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 							<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: colores.icons }} />
@@ -178,7 +178,7 @@ export default class Configuracion extends React.Component {
 						</ConfiguracionItem> 
 					*/}
 							<ConfiguracionItem style={{
-								backgroundColor:colores.configuracion.itemBackground,
+								backgroundColor: colores.configuracion.itemBackground,
 								shadowColor: "#fff",
 								shadowOffset: {
 									width: 1,
@@ -193,7 +193,7 @@ export default class Configuracion extends React.Component {
 								</TouchableOpacity>
 							</ConfiguracionItem>
 							<ConfiguracionItem style={{
-								backgroundColor:colores.configuracion.itemBackground,
+								backgroundColor: colores.configuracion.itemBackground,
 								shadowColor: "#fff",
 								shadowOffset: {
 									width: 1,
@@ -203,12 +203,13 @@ export default class Configuracion extends React.Component {
 								shadowRadius: 1,
 								elevation: 3
 							}}>
-								<TouchableOpacity onPress={this.props.onTemaOscuroToggle} style={{ flex: 1 }}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].configuracion.lblTemaOscuro}</Text>
+								<TouchableOpacity onPress={this.props.onTemaOscuroToggle} style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{temaOscuro ? Labels[idioma].configuracion.lblTemaClaro : Labels[idioma].configuracion.lblTemaOscuro}</Text>
+									<Icon type="Entypo" name={temaOscuro ? "light-down" : "moon"} style={{ fontSize: temaOscuro ? 34 : 28, color: colores.icons }} />
 								</TouchableOpacity>
 							</ConfiguracionItem>
 							<ConfiguracionItem style={{
-								backgroundColor:colores.configuracion.itemBackground,
+								backgroundColor: colores.configuracion.itemBackground,
 								shadowColor: "#fff",
 								shadowOffset: {
 									width: 1,
@@ -227,7 +228,7 @@ export default class Configuracion extends React.Component {
 
 						<ConfiguracionSection>
 							<ConfiguracionItem style={{
-								backgroundColor:colores.configuracion.itemBackground,
+								backgroundColor: colores.configuracion.itemBackground,
 								shadowColor: "#fff",
 								shadowOffset: {
 									width: 1,
@@ -237,11 +238,11 @@ export default class Configuracion extends React.Component {
 								shadowRadius: 1,
 								elevation: 3
 							}}>
-								<View  style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].configuracion.lblVersion}</Text>
-								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text, paddingRight:10 }}>{version}</Text>
-							</View>
-								</ConfiguracionItem>
+								<View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].configuracion.lblVersion}</Text>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text, paddingRight: 10 }}>{version}</Text>
+								</View>
+							</ConfiguracionItem>
 						</ConfiguracionSection>
 					</ScrollView>
 				</View>

@@ -100,7 +100,8 @@ export default class CurrentPlant extends React.Component {
 				console.log('User tapped custom button: ', response.customButton);
 			} else {
 				const source = { uri: response.uri };
-				currentPlanta.images.unshift(source)
+				currentPlanta.images = [source]
+				//currentPlanta.images.unshift(source)
 				//	this.setState({ currentPlanta: currentPlanta }, () => {
 				this.props.onCurrentPlantChange(currentPlanta, currentPlantaIndex)
 				//	});
@@ -190,6 +191,8 @@ export default class CurrentPlant extends React.Component {
 					selectedVasosFertilizante={currentPlanta ? currentPlanta.vasosAlimento : null}
 					diasRiego={currentPlanta.diasRiego}
 					diasAlimento={currentPlanta.diasAlimento}
+					hasImage={currentPlanta && currentPlanta.images.length > 0}
+					onDeletePicture={this.onCurrentFotoDelete}
 					onFinishEditar={this.onFinishEditar} />
 				<CurrentPlantFoto ref={(r) => this.CurrentPlantFoto = r}
 					idioma={idioma}

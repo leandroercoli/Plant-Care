@@ -60,7 +60,8 @@ export const Labels = {
 			title: 'Configuración',
 			lblLimpiar: 'Limpiar',
 			lblIdioma: 'Idioma',
-			lblTemaOscuro: 'Tema oscuro',
+			lblTemaOscuro: 'Modo noche',
+			lblTemaClaro: 'Modo día',
 			lblVersion: 'Versión',
 			alertLimpiar: {
 				title: 'Eliminar todo',
@@ -92,10 +93,17 @@ export const Labels = {
 			lblNotificaciones: 'Notificaciones',
 			lblVasosAgua: 'Vasos de agua',
 			lblVasosFertilizante: 'Vasos de fertilizante',
+			lblEliminarFoto: "Eliminar foto"
 		},
 		editarPlantaDoneAlert: {
 			title: 'Editar planta',
 			descripcion: '¿Está seguro que desea aplicar los cambios?',
+			btnCancelar: 'Cancelar',
+			btnOk: 'Sí'
+		},
+		editarPlantaEliminarFotoAlert:{
+			title: 'Eliminar foto',
+			descripcion:'¿Está seguro que desea eliminar la foto de su planta?',
 			btnCancelar: 'Cancelar',
 			btnOk: 'Sí'
 		},
@@ -147,7 +155,8 @@ export const Labels = {
 			title: 'Settings',
 			lblLimpiar: 'Reset',
 			lblIdioma: 'Language',
-			lblTemaOscuro: 'Dark theme',
+			lblTemaOscuro: 'Night mode',
+			lblTemaClaro: 'Day mode',
 			lblVersion: 'Version',
 			alertLimpiar: {
 				title: 'Reset',
@@ -179,6 +188,13 @@ export const Labels = {
 			lblNotificaciones: 'Notifications',
 			lblVasosAgua: 'Water cups',
 			lblVasosFertilizante: 'Fertilizer cups',
+			lblEliminarFoto: "Delete photo"
+		},
+		editarPlantaEliminarFotoAlert:{
+			title: 'Delete photo',
+			descripcion: 'Are you sure you want to delete your plant\'s foto?',
+			btnCancelar: 'Cancel',
+			btnOk: 'Yes'
 		},
 		eliminarPlantaAlert: {
 			title: 'Delete plant',

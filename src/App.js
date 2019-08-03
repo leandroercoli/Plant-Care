@@ -161,13 +161,13 @@ export default class App extends React.Component {
 	}
 
 	render = () => {
-		const { idioma, colores } = this.props
+		const { idioma, colores, temaOscuro } = this.props
 		const { data, currentIndex, isRefreshing } = this.state
 		return (
 			<Container>
 				<StatusBar backgroundColor={colores.statusBarColor}></StatusBar>
 				<NuevaPlanta ref={(r) => this.NuevaPlantaModal = r} idioma={idioma} colores={colores} onFinishSubmitting={this.onFinishSubmitting} />
-				<Configuracion ref={(r) => this.ConfiguracionModal = r} idioma={idioma} colores={colores} onReset={this.onReset} onSelectIdioma={this.props.onSelectIdioma} onTemaOscuroToggle={this.props.onTemaOscuroToggle} />
+				<Configuracion ref={(r) => this.ConfiguracionModal = r} idioma={idioma} colores={colores} temaOscuro={temaOscuro} onReset={this.onReset} onSelectIdioma={this.props.onSelectIdioma} onTemaOscuroToggle={this.props.onTemaOscuroToggle} />
 				<View style={{ flex: 1 }}>
 					<ScrollView
 						ref={(r) => this.ViewsList = r}
@@ -200,8 +200,14 @@ export default class App extends React.Component {
 								onCurrentPlantDelete={this.onCurrentPlantDelete} />
 						</View>
 					</ScrollView>
-					{isRefreshing && <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: colores.defaultBackground, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-						<Spinner color={colores.accentColor} /></View>}
+					{isRefreshing &&
+						<View style={{
+							position: 'absolute', top: 0, bottom: 0, left: 0, right: 0,
+							backgroundColor: colores.defaultBackground, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
+						}}>
+							<Spinner color={colores.accentColor} />
+						</View>
+					}
 				</View>
 			</Container>
 		);

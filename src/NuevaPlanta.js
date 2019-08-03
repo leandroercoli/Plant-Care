@@ -1,7 +1,8 @@
 import React from 'react';
-import {StatusBar, PermissionsAndroid, Dimensions, Text, View, ScrollView, Image, TouchableOpacity, Modal, TextInput, Alert } from 'react-native';
+import { StatusBar, PermissionsAndroid, Dimensions, Text, View, ScrollView, Image, TouchableOpacity, Modal, TextInput, Alert } from 'react-native';
 import { Container, Header, Body, Right, Spinner, Icon, } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
+import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-picker';
 import CalendarioComponent from './CalendarioComponent'
 import TimePickerComponent from './TimePickerComponent'
@@ -246,30 +247,22 @@ export default class NuevaPlanta extends React.Component {
 		const { idioma, colores } = this.props
 		const { show, step, nuevaPlantaName, nuevaPlantaFoto, isRefreshing, alarmOn, selectedVasosAgua, selectedVasosFertilizante } = this.state
 		const nuevaPlantaReadyToAdd = nuevaPlantaName != '' // && nuevaPlantaFoto 
-		const viewableScreen = screenHeight -60 // pantalla sin header
-		const stepFormScreen = viewableScreen * 0.85 // pantalla sin header y sin el control de abajo
+		const headerHeight = 60
+		//const viewableScreen = screenHeight - 60 // pantalla sin header
+		//const stepFormScreen = viewableScreen * 0.85 // pantalla sin header y sin el control de abajo
 		return (
 			<Modal
 				animationType="slide"
 				transparent={false}
 				visible={show}
 				onRequestClose={this.hide}>
-				<Container>
-				<StatusBar backgroundColor={colores.statusBarColor}></StatusBar>
-					<Header transparent style={{ paddingTop: 0 , height:60, backgroundColor: colores.nuevaPlanta.headerBackground}}>
-						<Body>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: colores.text }}>{Labels[idioma].nuevaPlanta.title}</Text>
-						</Body>
-						<Right>
-							<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-								<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: colores.icons }} />
-							</TouchableOpacity>
-						</Right>
-					</Header>
+				<View style={{
+					flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'
+				}}>
 					<View style={{
-						flex: 1, height: viewableScreen, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+						flex: 1, height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
 					}}>
-						<View style={{ width: screenWidth, height: stepFormScreen, backgroundColor: colores.nuevaPlanta.background }}>
+						<View style={{ width: screenWidth, height: '100%', backgroundColor: colores.nuevaPlanta.background }}>
 							<ScrollView
 								ref={(r) => this.NewPlantStepsList = r}
 								horizontal
@@ -280,52 +273,36 @@ export default class NuevaPlanta extends React.Component {
 								keyExtractor={(item, index) => "" + index}>
 								<View style={{
 									width: screenWidth,
-									height: stepFormScreen,
+									height: '100%',
 									overflow: 'hidden',
 									justifyContent: 'center',
 									alignItems: 'center'
 								}}>
 									{nuevaPlantaFoto && <Image source={nuevaPlantaFoto} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />}
 									{
-										nuevaPlantaFoto ?
-											<View style={{ position: 'absolute', bottom: 5, width: '100%', height: '10%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-												<View style={{ width: 50, height: 50, borderRadius: 25, borderColor: '#616161', backgroundColor: '#fff', borderWidth: 2, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoCamara}>
-														<Icon type="EvilIcons" name="camera" style={{ fontSize: 42, color: '#616161' }} />
-													</TouchableOpacity>
-												</View>
-												<View style={{ width: 50, height: 50, borderRadius: 25, borderColor: '#616161', backgroundColor: '#fff', borderWidth: 2, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoGaleria}>
-														<Icon type="EvilIcons" name="image" style={{ fontSize: 42, color: '#616161' }} />
-													</TouchableOpacity>
-												</View>
-												<View style={{ width: 50, height: 50, borderRadius: 25, borderColor: '#616161', backgroundColor: '#fff', borderWidth: 2, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoDelete}>
-														<Icon type="EvilIcons" name="trash" style={{ fontSize: 42, color: '#616161' }} />
-													</TouchableOpacity>
-												</View>
+										!nuevaPlantaFoto && <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+											<View style={{ width: 90, height: 90, borderRadius: 45, borderColor: Colors.accentColor, borderWidth: 4, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+												<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoCamara} style={{}}>
+													<Icon type="EvilIcons" name="camera" style={{ fontSize: 82, color: Colors.accentColor }} />
+												</TouchableOpacity>
 											</View>
-											: <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-												<View style={{ width: 90, height: 90, borderRadius: 45, borderColor: Colors.accentColor, borderWidth: 4, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoCamara} style={{}}>
-														<Icon type="EvilIcons" name="camera" style={{ fontSize: 82, color: Colors.accentColor }} />
-													</TouchableOpacity>
-												</View>
-												<View style={{ width: 90, height: 90, borderRadius: 45, borderColor: Colors.accentColor, borderWidth: 4, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoGaleria} style={{}}>
-														<Icon type="EvilIcons" name="image" style={{ fontSize: 82, color: Colors.accentColor }} />
-													</TouchableOpacity>
-												</View>
+											<View style={{ width: 90, height: 90, borderRadius: 45, borderColor: Colors.accentColor, borderWidth: 4, margin: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+												<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoGaleria} style={{}}>
+													<Icon type="EvilIcons" name="image" style={{ fontSize: 82, color: Colors.accentColor }} />
+												</TouchableOpacity>
 											</View>
+										</View>
 									}
 								</View>
 								<View style={{
 									width: screenWidth,
-									height: stepFormScreen,
+									height: '100%',
 									overflow: 'hidden',
 									flexDirection: 'column',
 									justifyContent: 'flex-start',
 									alignItems: 'flex-start',
+									paddingTop:headerHeight,
+									paddingBottom:headerHeight
 								}}>
 									<ScrollView contentContainerStyle={{ width: screenWidth, paddingLeft: 20, paddingRight: 20, }}>
 										<TextInput
@@ -427,32 +404,95 @@ export default class NuevaPlanta extends React.Component {
 								</View>
 							</ScrollView>
 						</View>
-						<View style={{
-							flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-							paddingLeft: 10, paddingRight: 10, backgroundColor: colores.nuevaPlanta.headerBackground
-						}}>
-							{
-								step == 1 && <TouchableOpacity onPress={this.onPrevStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
-									<Icon style={{ fontSize: 34, color: colores.icons, paddingRight: 5 }} type="EvilIcons" name="chevron-left" />
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].nuevaPlanta.btnVolver}</Text>
-								</TouchableOpacity>
-							}
-							{
-								step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1 }} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text, }}>{Labels[idioma].nuevaPlanta.btnListo}</Text>
-									{isRefreshing ? <Spinner color={Colors.accentColor} style={{ marginLeft: 10 }} />
-										: <Icon style={{ fontSize: 34, color: colores.icons, paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />}
-								</TouchableOpacity>
-							}
-							{
-								step == 0 && <TouchableOpacity onPress={this.onNextStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', }}>
-									<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].nuevaPlanta.btnSiguiente}</Text>
-									<Icon style={{ fontSize: 34, color: colores.icons, paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />
-								</TouchableOpacity>
-							}
-						</View>
 					</View>
-				</Container>
+					<View style={{ position: 'absolute', top: 0, width: '100%', height: headerHeight, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor:step == 0 &&nuevaPlantaFoto ?'transparent':colores.nuevaPlanta.headerBackground  }}>
+						{
+							step == 0 && nuevaPlantaFoto ?
+								<LinearGradient colors={['rgba(0,0,0,1)', 'transparent',]} style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', padding: 10 }}>
+									<View style={{ width: '100%', height: 65, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+										<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: '#fff' }}>{Labels[idioma].nuevaPlanta.title}</Text>
+										<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+											<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: '#fff' }} />
+										</TouchableOpacity>
+									</View>
+								</LinearGradient>
+								: <View style={{ width: '100%', height: 65, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', padding:10 }}>
+									<Text style={{ fontFamily: "DosisLight", fontSize: 28, color: colores.text }}>{Labels[idioma].nuevaPlanta.title}</Text>
+									<TouchableOpacity onPress={this.hide} style={{ width: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+										<Icon type="EvilIcons" name="chevron-down" style={{ fontSize: 42, color: colores.text }} />
+									</TouchableOpacity>
+								</View>
+						}
+					</View>
+					<View style={{ position: 'absolute', bottom: 0, width: '100%', height: headerHeight, flexDirection: 'column', justifyContent: 'flex-end',  backgroundColor:step == 0 && nuevaPlantaFoto ?'transparent':colores.nuevaPlanta.headerBackground }}>
+						{
+							step == 0 && nuevaPlantaFoto ?
+								<LinearGradient colors={['transparent', 'rgba(0,0,0,1)']} style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end' }}>
+									<View style={{ width: '100%', height: 65, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+										{
+											step == 1 && <TouchableOpacity onPress={this.onPrevStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
+												<Icon style={{ fontSize: 34, color: '#fff', paddingRight: 5 }} type="EvilIcons" name="chevron-left" />
+												<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#fff' }}>{Labels[idioma].nuevaPlanta.btnVolver}</Text>
+											</TouchableOpacity>
+										}
+										{
+											step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1 }} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
+												<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#fff', }}>{Labels[idioma].nuevaPlanta.btnListo}</Text>
+												{isRefreshing ? <Spinner color={Colors.accentColor} style={{ marginLeft: 10 }} />
+													: <Icon style={{ fontSize: 34, color: '#fff', paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />}
+											</TouchableOpacity>
+										}
+										{
+											step == 0 && <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+												<View style={{ width: 40, height: 40, marginLeft: 5, marginRight: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoCamara}>
+														<Icon type="EvilIcons" name="camera" style={{ fontSize: 42, color: '#fff' }} />
+													</TouchableOpacity>
+												</View>
+												<View style={{ width: 40, height: 40, marginLeft: 5, marginRight: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoGaleria}>
+														<Icon type="EvilIcons" name="image" style={{ fontSize: 42, color: '#fff' }} />
+													</TouchableOpacity>
+												</View>
+												<View style={{ width: 40, height: 40, marginLeft: 5, marginRight: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+													<TouchableOpacity onPress={this.onChooseNuevaPlantaFotoDelete}>
+														<Icon type="EvilIcons" name="trash" style={{ fontSize: 42, color: '#fff' }} />
+													</TouchableOpacity>
+												</View>
+											</View>
+										}
+										{
+											step == 0 && <TouchableOpacity onPress={this.onNextStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', }}>
+												<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#fff' }}>{Labels[idioma].nuevaPlanta.btnSiguiente}</Text>
+												<Icon style={{ fontSize: 34, color: '#fff', paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />
+											</TouchableOpacity>
+										}
+									</View>
+								</LinearGradient>
+								: <View style={{ width: '100%', height: 65, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+									{
+										step == 1 && <TouchableOpacity onPress={this.onPrevStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', }}>
+											<Icon style={{ fontSize: 34, color: colores.text, paddingRight: 5 }} type="EvilIcons" name="chevron-left" />
+											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].nuevaPlanta.btnVolver}</Text>
+										</TouchableOpacity>
+									}
+									{
+										step == 1 && <TouchableOpacity onPress={this.onSubmitPlanta} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', opacity: (!nuevaPlantaReadyToAdd || isRefreshing) ? 0.5 : 1 }} disabled={!nuevaPlantaReadyToAdd || isRefreshing}>
+											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text, }}>{Labels[idioma].nuevaPlanta.btnListo}</Text>
+											{isRefreshing ? <Spinner color={Colors.accentColor} style={{ marginLeft: 10 }} />
+												: <Icon style={{ fontSize: 34, color: colores.text, paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />}
+										</TouchableOpacity>
+									}
+									{
+										step == 0 && <TouchableOpacity onPress={this.onNextStep} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', }}>
+											<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: colores.text }}>{Labels[idioma].nuevaPlanta.btnSiguiente}</Text>
+											<Icon style={{ fontSize: 34, color: colores.text, paddingLeft: 5 }} type="EvilIcons" name="chevron-right" />
+										</TouchableOpacity>
+									}
+								</View>
+						}
+					</View>
+				</View>
 			</Modal >
 		);
 	}

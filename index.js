@@ -57,7 +57,7 @@ class Main extends Component {
         return (
             <View style={{ flex: 1 }}>
                 {isLoading || !idioma ? <Loading onAnimationDone={this.onAnimationDone} />
-                    : <App idioma={idioma} colores={temaOscuro ? Colors.darkTheme : Colors.lightTheme } onSelectIdioma={this.onChangeIdioma} onTemaOscuroToggle={this.onTemaOscuroToggle} />}
+                    : <App idioma={idioma} colores={temaOscuro ? Colors.darkTheme : Colors.lightTheme } temaOscuro={temaOscuro} onSelectIdioma={this.onChangeIdioma} onTemaOscuroToggle={this.onTemaOscuroToggle} />}
                 <ElegirIdioma ref={(r) => this.ElegirIdiomaModal = r} onSelectIdioma={this.onSelectIdioma} canCancel={false} />
             </View>
 

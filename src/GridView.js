@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar, Dimensions, Text, View, FlatList, Image, TouchableOpacity, TouchableHighlight, Alert, } from 'react-native';
-import { Container, Header, Body, Right, Spinner, Icon } from 'native-base';
+import { Container, Header, Body, Right, Spinner, Icon, Card, CardItem } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import NuevaPlanta from './NuevaPlanta'
 import Configuracion from './Configuracion'
@@ -78,21 +78,19 @@ export default class GridView extends React.Component {
 								scrollEnabled={true}
 								horizontal={false}
 								numColumns={2}
-								columnWrapperStyle={{ justifyContent: 'space-between', }}
+								columnWrapperStyle={{ justifyContent: 'space-between'}}
 								data={data}
 								initialScrollIndex={0}
 								//extraData={[data]}
-								style={{ width: '100%', height: '100%', backgroundColor: colores.listViewBackground }}
-								contentContainerStyle={{backgroundColor: colores.listViewBackground}}
+								style={{ width: '100%', height: '100%', backgroundColor: colores.listViewBackground,  }}
+								contentContainerStyle={{ backgroundColor: colores.listViewBackground, }}
 								keyExtractor={(item, index) => "" + index}
-								//contentContainerStyle={{ width: '100%', height: '100%' }}
 								renderItem={({ item, index }) => (
 									<View style={{
 										flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
 										width: screenWidth * 0.5,
 										height: screenHeight * 0.5,
-										padding: 10,
-										elevation:5
+										padding: 5,
 									}}>
 										<TouchableOpacity onPress={() => this.onPlantaThumbPress(index)} style={{ height: '100%', width: '100%' }}>
 											<View style={{
@@ -101,50 +99,48 @@ export default class GridView extends React.Component {
 												justifyContent: 'center',
 												alignItems: 'center',
 												borderRadius: 15,
-												shadowOffset: { width: 10, height: 10, },
-												shadowColor: 'black',
-												shadowOpacity: 1.0,
-												elevation:5
+												elevation: 2,
+												padding: 1,
 											}}>
 												{
 													item.images && item.images.length > 0 ?
-														<Image source={item.images[0]} style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
-														: <Image source={Img.logo} style={{ height: '100%', width: '100%', resizeMode: 'cover', opacity: 0.9 }} />
+														<Image source={item.images[0]} style={{ height: '100%', width: '100%', resizeMode: 'cover', borderRadius: 15 }} />
+														: <Image source={Img.logo} style={{ height: '100%', width: '100%', resizeMode: 'cover', opacity: 0.9, borderRadius: 15 }} />
 												}
-												<View style={{
-													position: 'absolute', bottom: 0
-												}}  >
-													<LinearGradient colors={['transparent', 'rgba(0,0,0,1)']}
-														style={{
-															paddingBottom: 5, paddingTop: 50, paddingLeft: '5%', paddingRight: '5%',
-															flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center',
-														}}>
-														<View style={{
-															width: '100%',
-															flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-														}}>
-															<Text style={{ fontFamily: "DosisLight", fontSize: 24, borderColor: 'transparent', color: '#f1f1f1' }}>{item.name}</Text>
-														</View>
-														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3, marginTop: 15 }}>
-															<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
-																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAgua} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
-																<Icon type="Entypo" name="drop" style={{ fontSize: 15, color: '#f1f1f1' }} />
+													<View style={{
+														position: 'absolute', bottom: 0, borderRadius:15,
+													}}  >
+														<LinearGradient colors={['transparent', 'rgba(0,0,0,1)']}
+															style={{
+																paddingBottom: 5, paddingTop: 50, paddingLeft: '5%', paddingRight: '5%', borderRadius:15,
+																flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center',
+															}}>
+															<View style={{
+																width: '100%',
+																flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
+															}}>
+																<Text style={{ fontFamily: "DosisLight", fontSize: 24, borderColor: 'transparent', color: '#f1f1f1' }}>{item.name}</Text>
 															</View>
-															<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
-																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAlimento} {/*currentPlanta.vasosAgua == 1 ? 'vaso' : 'vasos'*/}</Text>
-																<Icon type="Entypo" name="flash" style={{ fontSize: 15, color: '#f1f1f1' }} />
+															<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', paddingLeft: 3, marginTop: 5 }}>
+																<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
+																	<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAgua}</Text>
+																	<Icon type="Entypo" name="drop" style={{ fontSize: 15, color: '#f1f1f1' }} />
+																</View>
+																<View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '25%' }}>
+																	<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.vasosAlimento}</Text>
+																	<Icon type="Entypo" name="flash" style={{ fontSize: 15, color: '#f1f1f1' }} />
+																</View>
+																<View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: '50%' }}>
+																	<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.hora < 10 ? "0" + item.hora : item.hora}:{item.minutos < 10 ? "0" + item.minutos : item.minutos}</Text>
+																	<Icon type={"MaterialCommunityIcons"} name={item.alarma ? "alarm-check" : "alarm-off"} style={{ fontSize: 20, color: item.alarma ? '#f1f1f1' : '#a1a1a1' }} />
+																</View>
 															</View>
-															<View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', width: '50%' }}>
-																<Text style={{ fontFamily: "DosisLight", fontSize: 15, color: '#f1f1f1', marginRight: 1 }}>{item.hora < 10 ? "0" + item.hora : item.hora}:{item.minutos < 10 ? "0" + item.minutos : item.minutos}</Text>
-																<Icon type={"MaterialCommunityIcons"} name={item.alarma ? "alarm-check" : "alarm-off"} style={{ fontSize: 20, color: item.alarma ? '#f1f1f1' : '#a1a1a1' }} />
+															<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop: 5 }}>
+																<CalendarioComponent thumb color={"#f1f1f1"} idioma={idioma} diasRiego={item.diasRiego} diasAlimento={item.diasAlimento} />
 															</View>
-														</View>
-														<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop: 15 }}>
-															<CalendarioComponent thumb color={"#f1f1f1"} idioma={idioma} diasRiego={item.diasRiego} diasAlimento={item.diasAlimento} />
-														</View>
-													</LinearGradient>
+														</LinearGradient>
+													</View>
 												</View>
-											</View>
 										</TouchableOpacity>
 									</View>
 								)}

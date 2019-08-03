@@ -24,13 +24,13 @@ export default class ElegirIdioma extends React.Component {
 
 	onPressEspaniol = () => {
 		AsyncStorage.setItem('Idioma', 'es')
-		NativeAlarmSetter.setLanguage('es') 
+		NativeAlarmSetter.setLanguage('es')
 		this.props.onSelectIdioma('es')
 	}
 
 	onPressEnglish = () => {
 		AsyncStorage.setItem('Idioma', 'en')
-		NativeAlarmSetter.setLanguage('en') 
+		NativeAlarmSetter.setLanguage('en')
 		this.props.onSelectIdioma('en')
 	}
 
@@ -49,35 +49,38 @@ export default class ElegirIdioma extends React.Component {
 				visible={show}
 				onRequestClose={this.onRequestClose}>
 				<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)' }}>
-					<View style={{
-						width: '85%',
-						flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-						padding: 15,
-						backgroundColor: 'rgba(255,255,255,0.9)',
-						borderRadius: 20,
-						marginBottom: 30,
-						//	elevation: 15
-					}}>
-						<TouchableOpacity onPress={this.onPressEspaniol}>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Español</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={{
-						width: '85%',
-						flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
-						padding: 15,
-						backgroundColor: 'rgba(255,255,255,0.9)',
-						borderRadius: 20,
-						marginBottom: 30,
-						//	elevation: 15
-					}}>
-						<TouchableOpacity onPress={this.onPressEnglish}>
-							<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>English</Text>
-						</TouchableOpacity>
+					<View style={{ flex: 1,width:'100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+						<View style={{
+							width: '85%',
+							flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+							padding: 15,
+							backgroundColor: 'rgba(255,255,255,0.9)',
+							borderRadius: 20,
+							marginBottom: 30,
+							//	elevation: 15
+						}}>
+							<TouchableOpacity onPress={this.onPressEspaniol}>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Español</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={{
+							width: '85%',
+							flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+							padding: 15,
+							backgroundColor: 'rgba(255,255,255,0.9)',
+							borderRadius: 20,
+							marginBottom: 30,
+							//	elevation: 15
+						}}>
+							<TouchableOpacity onPress={this.onPressEnglish}>
+								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>English</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 					{
 						canCancel && <View style={{
-							width: '85%',
+							width: '85%',							
+						paddingTop:15, paddingBottom:15,
 							flexDirection: 'row',
 							justifyContent: 'space-evenly',
 							alignItems: 'center',
