@@ -59,7 +59,7 @@ export default class ElegirIdioma extends React.Component {
 							marginBottom: 30,
 							//	elevation: 15
 						}}>
-							<TouchableOpacity onPress={this.onPressEspaniol}>
+							<TouchableOpacity onPress={this.onPressEspaniol} style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
 								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>Español</Text>
 							</TouchableOpacity>
 						</View>
@@ -72,7 +72,7 @@ export default class ElegirIdioma extends React.Component {
 							marginBottom: 30,
 							//	elevation: 15
 						}}>
-							<TouchableOpacity onPress={this.onPressEnglish}>
+							<TouchableOpacity onPress={this.onPressEnglish}  style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
 								<Text style={{ fontFamily: "DosisLight", fontSize: 22, color: '#2b2b2b' }}>English</Text>
 							</TouchableOpacity>
 						</View>
